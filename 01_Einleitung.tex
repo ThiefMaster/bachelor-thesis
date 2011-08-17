@@ -1,15 +1,70 @@
 \chapter{Einleitung}
 \pagenumbering{arabic}
-\section{Ziel der Arbeit}
 
-\todotext{So ähnlich wie in der Beschreibung bei der Anmeldung}
+JavaScript ist aus einer modernen Webanwendung inzwischen aus vielerlei Gründen nicht mehr
+wegzudenken. Es ermöglicht sowohl eine bessere \em{User Experience} als auch erhöhte Performance.
+Beispielsweise kann ein Formular bereits vor dem Abschicken an den Server validiert werden, was dem
+Benutzer ein sofortiges Feedback gibt - möglicherweise sogar noch während der Eingabe - und
+gleichzeitig keine Server-Ressourcen beansprucht. Darüberhinaus ist es auch möglich, Aktionen
+auszuführen ohne dass die komplette Seite neu geladen werden muss. Dies erhöht zum einen das
+mögliche Arbeitstempo des Benutzers da er mehrere Aktionen parallel starten kann ohne jeweils darauf
+warten zu müssen dass eine Aktion beendet und die Seite neu geladen ist. Zum anderen spart es
+Bandbreite, was insbesondere im Zeitalter des mobilen Internets wichtig ist.
 
+Durch die Vielzahl an verschiedenen Browsern (Firefox, Internet Explorer, Chrome, Safari, \ldots) und ihren
+unterschiedlichen JavaScript-Engines gibt es allerdings teilweise deutliche Unterschiede darin, wie
+man bestimmte Aufgaben mittels JavaScript ausführt. Dazu kommen noch die unterschiedlichen Versionen
+die insbesondere beim Internet Explorer fast schon als verschiedene Browser betrachtet werden
+können. Um bei der Entwicklung auf die Eigenheiten der Browser keine Rücksicht nehmen zu müssen
+empfiehlt es sich, ein JavaScript-Framework bzw. eine JavaScript-Bibliothek zu nutzen, die die
+wichtigsten Funktionen browserunabhängig kapselt und dabei oftmals auch Fehler in Browsern umgeht.
+Die meisten JavaScript-Frameworks sind dabei sehr entwicklerfreundlich gehalten, sodass sie auch
+unabhängig von der Browserkompatibilität dabei helfen, Zeit und Arbeit bei der Entwicklung
+einzusparen.
+
+
+\section{Zielsetzung}
+
+Die \em{Indico}-Software nutzt JavaScript um Dialogfenster anzuzeigen, Daten automatisch zu
+aktualisieren und Formulare bereits vor dem Abschicken zu validieren. Dabei wird derzeit ein
+selbstentwickeltes JavaScript-Framework genutzt, welches größtenteils weder eine Dokumentation
+noch eine in sich schlüssige API besitzt. Dieses Framework soll durch ein verbreitetes und gut
+dokumentiertes OpenSource-Framework ersetzt werden. Sofern das alte Framework nicht vollständig
+ersetzt werden kann oder der Entwicklungsaufwand dafür zu hoch wäre, ist auf eine möglichst gute
+Integration zu achten, sodass kein Framework Konflikte mit dem jeweils anderen verursacht und
+bestehender Code weiterhin funktioniert und möglichst wenig angepasst werden muss.
+
+Dabei muss zuerst analysiert werden, welche Funktionalität das bestehende Framework zur Verfügung
+stellt und welche Probleme es gibt, sodass bei der Wahl des neuen Frameworks insbesondere darauf
+geachtet werden kann, dass diese Probleme dort nicht ebenfalls vorhanden sind. Sofern das Framework
+User-Interface-Elemente (\enquote{Widgets}) wie beispielsweise Buttons, Dialoge und Tableisten
+enthält, ist zu prüfen, ob diese sinnvoll genutzt und an das bestehende Design angepasst werden können.
+
+Nachdem ein Framework ausgewählt wurde, muss dieses in die Software integriert werden. Nachdem dies
+geschehen ist, müssen möglicherweise auftretende Konflikte mit bestehendem Code behoben werden.
+Ebenfalls kann nun analysiert werden, ob es sinnvoll ist, das alte Framework vollständig zu ersetzen
+oder nur durch das neue zu erweitern bzw. problematische Teile zu ersetzen und andere zu erweitern
+oder überhaupt nicht zu modifizieren.
 
 
 \section{Aufbau der Arbeit}
 
-\todotext{Wenn der Aufbau feststeht...}
+Im Einleitungskapitel wird kurz auf die Aufgabenstellung eingegangen und die groben Schritte zum
+Ziel beschrieben. Desweiteren wird kurz auf die Firma eingagangen, an der das Projekt durchgeführt.
+Ebenfalls wird die Software, die im Rahmen dieser Arbeit modifiziert wurde, kurz vorgestellt, sodass
+man sich einen Überblick darüber verschaffen kann.
 
+Im Grundlagenkapitel werden die genutzen Technologien und ihre Besonderheiten näher betrachtet und
+erläutert. Nach einem kurzen Überblick über die Scriptsprache JavaScript wird ihr Objektmodell
+vorgestellt und mit dem anderer objektorientierter Sprachen verglichen. Anhand einem Beispiel wird
+demonstriert, inwiefern sich die JavaScript-Programmierung für verschiedene Browser unterscheidet,
+sofern man kein Framework nutzt.
+
+Die Funktionen des bestehenden Frameworks werden im dritten Kapitel kurz vorgestellt. Desweiteren
+werden dort die in Frage kommenden Frameworks vorgestellt, anhand von diversen Gesichtspunkten
+analysiert und mit dem aktuellen Framework verglichen.
+
+\todotext{Der Rest.}
 
 
 \section{CERN}
