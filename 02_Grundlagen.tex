@@ -1,0 +1,56 @@
+\chapter{Grundlagen}
+
+\section{JavaScript}
+
+\subsection{Geschichte}
+
+JavaScript wurde 1995 von Brendan Eich für den \em{Netscape Navigator 2.0} entwickelt. Sie war auch
+in allen darauf folgenden Versionen enthalten und wurde von Microsoft unter dem Namen \em{JScript}
+im \em{Internet Explorer 3.0} implementiert.
+
+Ab 1996 begann die Standardisierung der Sprache im Rahmen eines ECMA-Standards, welcher im Juni 1997
+erschienen ist. Im April 1998 wurde dieser durch die ISO zum internationalen Standard \em{ISO/IEC
+16262} zugelassen.
+
+Im Laufe der Jahre wurde der ECMAScript-Standard immer erweitert und beispielsweise Reguläre
+Ausdrücke, Exception-Handling und verbesserte Stringfunktionen hinzugefügt. Die aktuelle Ausgabe 5.1
+des ECMAScript-Standards entspricht dem internationalen Standard \em{ISO/IEC 16262:2011}.
+\citep[S. vii]{ecmascript}
+
+Auch zum Zeitpunkt der Veröffentlichung dieser Arbeit wird der ECMAScript-Standard und damit die
+Sprache JavaScript weiterentwickelt. Jeder moderne Browser unterstützt die Sprache, allerdings
+nicht zwangsläufig alle Sprachelemente die in der aktuellsten Spezifikation enthalten sind.
+
+
+\subsection{Anwendungsgebiete}
+
+Der bekannteste und häufigste Verwendungszweck von JavaScript ist Web-Scripting innerhalb von
+Browsern, was auch nicht weiter verwunderlich ist, da die Sprache ursprünlich für diesen Zweck
+entwickelt wurde und lange Zeit ausschließlich in diesem Kontext benutzt wurde. Dabei stellt der
+Webbrowser die Host-Umgebung, also die Objekte und Funktionen zu Kommunikation mit der Applikation,
+in der die Scripts ausgeführt werden. Im Webbrowser sind solche Objekte beispielsweise das
+Browserfenster (\lstinline{window}), Popupfenster (Rückgabewert von \lstinline{window.open()}),
+die Browserhistory (\lstinline{history}), das aktuelle HTML-Dokument (\lstinline{document}).
+Ebenfalls vom Browser bereitgestellt werden Objekte, die die einzelnen HTML-Elemente repräsentieren,
+also beispielsweise Hpyerlinks, Formulare und Bilder. Darüberhinaus bietet der Browser Methoden, um
+über verschiedene Ereignisse wie Klicks, Mausbewegungen und Änderungen an Formularfeldern
+benachrichtigt zu werden.
+\citep[S. 2]{ecmascript}
+
+Ein weiteres Anwendungsgebiet ist \em{Server-Side JavaScript} (\em{SSJS}). Dabei wird JavaScript
+direkt auf den (Web-)Server ausgeführt und kann beispielsweise direkt auf Datenbanken und Dateien
+(des Servers) zugreifen. Während \em{SSJS} erstmalig 1996 im \em{Netscape Enterprise HTTP Server}
+zum Einsatz kam, erlebte es erst fast 15 Jahre danach seinen Durchbruch. Mit
+\em{node.js}\footnote{\href{http://nodejs.org}{http://nodejs.org}} existiert ein quelloffenes,
+plattformunabhängiges Framework welches leichtgewichtig ist und dank einer eventbasierten Architektur
+auch bei einer sehr großen Anzahl gleichzeitiger Clientverbindungen noch performant ist - eine
+Eigenschaft die in klassischen prozess- oder threadbasierten Webservern wie \em{Apache} oftmals
+nicht gegeben ist. Die serverseitige Host-Umgebung unterscheidet sich logischerweise stark von der
+eines Browsers, da ein Webserver weder mit Fenstern noch HTML-Dokumenten arbeitet - dafür kennt er
+beispielsweise HTTP-Requests und Formular\em{daten}. Die Ereignisse, auf die Scripte reagieren
+können, sind dabei primär netzwerkbezogen - beispielsweise die neue Verbindung eines Clients oder
+der vorzeitige Abbruch eines Seitenaufrufs. Es ist allerdings durchaus möglich, dass mit
+entsprechendem Code Teile der Browserumgebung serverseitig nachgebildet werden. So ist es denkbar,
+ein HTML-Dokument nicht als String darzustellen sondern als DOM-Tree. Dieser könnte dann dieselben
+Methoden wie der Browser zur Verfügung stellen, sodass Operationen die sowohl clientseitig als auch
+serverseitig sinnvoll sind, denselben Code nutzen können.
