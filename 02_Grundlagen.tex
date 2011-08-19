@@ -54,3 +54,60 @@ entsprechendem Code Teile der Browserumgebung serverseitig nachgebildet werden. 
 ein HTML-Dokument nicht als String darzustellen sondern als DOM-Tree. Dieser könnte dann dieselben
 Methoden wie der Browser zur Verfügung stellen, sodass Operationen die sowohl clientseitig als auch
 serverseitig sinnvoll sind, denselben Code nutzen können.
+
+
+\subsection{Programmierparadigmen}
+
+Das Programmierparadigma einer Programmiersprache ist "die Sichtweise auf und den Umgang mit den zu
+verarbeiteten Daten und Operationen". \citep[Kap. 1.3.1]{progsprachen}
+In JavaScript kann man man sich zwischen drei dieser Paradigmen entscheiden:
+
+\begin{description}
+\item[Imperative/prozedurale Programmierung] \hfill \\
+Bei der imperativen Programmierung wird eine Folge von Anweisungen sequentiell abgearbeitet. Zur
+Kapselung und Wiederverwendung von Funktionalität werden Funktionen genutzt.
+\citep[Kap. 1.3.1]{progsprachen}
+
+Da die Host-Umgebung in JavaScript Objekte zur Verfügung stellt und auch Datentypen wie Strings und
+Arrays Objekte sind, kann man jedoch nicht rein prozedural programmieren - man kann aber vollständig
+auf die Nutzung eigener Objekte verzichten. Da dadurch viel Komfort wie die Nutzung assoziativer
+Arrays - die in JavaScript simple Objekte sind - verloren geht ist dieses Paradigma nicht zu
+empfehlen. Es kann aber durchaus sinnvoll sein, Funktionen außerhalb von Objekten zu definieren,
+sofern sie alleinstehend sind und man keien Namespaces nutzen will: JavaScript unterstützt zwar
+keine Namespace, allerdings sind Funktionen sog. \em{First-Class Objects}, d.h. man kann sie in
+Variablen speichern und sie haben noch weitere Eigenschaften, auf die später näher eingegangen
+wird. Aufgrund der Möglichkeit, Funktionen in Variablen zu speichern, kann man Namespaces einfach
+durch assoziative Arrays simulieren, indem man die Funktionen in solchen Arrays speichert und sie
+daher nicht mehr im globalen Kontext liegen sondern nur über das Array aufrufbar sind.
+
+\item[Objektbasierte Programmierung] \hfill \\
+Eine objektbasierte Programmiersprache unterstützt Objekte, kennt im Gegensatz zu einer
+objekt\em{orientierten} Programmiersprache allerdings keine Klassen.
+\citep[Kap. 1.3.1]{progsprachen}
+
+Nachdem zuvor schon Objekte erwähnt wurden, die von der Host-Umgebung zur Verfügung gestellt werden,
+ist es nur logisch, dass der Entwickler auch selbst Objekte definieren kann. Dies geschieht
+allerdings anders als in klassischen objektorientierten Programmiersprachen wie Java oder C++ über
+Klassen sondern über Objekte und Konstruktoren (die wiederum ganz normale Funktionen sind).
+Da das Objektsystem von JavaScript einzigartig ist und einige Besonderheiten besitzt, wird im
+Verlauf dieses Kapitels näher darauf eingegangen.
+
+\item[Funktionale Programmierung] \hfill \\
+Eine rein funktionales Programmiersprache basiert nicht auf Wertzuweisungen sondern benutzt
+ausschließlich Funktionsdefinitionen, die eine Eingabe in eine Ausgabe transformieren.
+\citep[Kap. 1.3.1]{progsprachen}
+
+JavaScript ist allerdings nicht direkt eine funktionale Programmiersprache und damit erst recht
+keine rein funktionale Programmiersprache. Dadurch, dass Funktionen \em{First-Class Objects} sind
+und sowohl anonyme Funktionen als auch Closures unterstützt werden, kann man in JavaScript sehr
+einfach funktionale Elemente mit objektorientierten bzw. prozeduralen Elementen mischen. Die
+prominentesten aus anderen funktionalen Programmiersprachen bekannten Methoden sind
+\lstinline{forEach(list, func)} um die Funktion \lstinline{func} auf alle Elemente von
+\lstinline{list} anzuwenden, \lstinline{map(list, func)} um eine Liste mittels einer Funktion in
+eine neue Liste zu transformieren und \lstinline{filter(list, func)} um nur die Elemente aus
+einer Liste zu übernehmen, die von der Funktion durch die Rückgabe von \lstinline{true} akzeptiert
+wurden.
+\end{description}
+
+\subsection{First-Class-Objects}
+\todotext{Zeugs zu first-class Objekten}
