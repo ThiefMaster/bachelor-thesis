@@ -4,17 +4,17 @@
 
 \subsection{Geschichte}
 
-JavaScript wurde 1995 von Brendan Eich für den \em{Netscape Navigator 2.0} entwickelt. Sie war auch
-in allen darauf folgenden Versionen enthalten und wurde von Microsoft unter dem Namen \em{JScript}
-im \em{Internet Explorer 3.0} implementiert.
+JavaScript wurde 1995 von Brendan Eich für den \emph{Netscape Navigator 2.0} entwickelt. Sie war auch
+in allen darauf folgenden Versionen enthalten und wurde von Microsoft unter dem Namen \emph{JScript}
+im \emph{Internet Explorer 3.0} implementiert.
 
 Ab 1996 begann die Standardisierung der Sprache im Rahmen eines ECMA-Standards, welcher im Juni 1997
-erschienen ist. Im April 1998 wurde dieser durch die ISO zum internationalen Standard \em{ISO/IEC
+erschienen ist. Im April 1998 wurde dieser durch die ISO zum internationalen Standard \emph{ISO/IEC
 16262} zugelassen.
 
 Im Laufe der Jahre wurde der ECMAScript-Standard immer erweitert und beispielsweise Reguläre
 Ausdrücke, Exception-Handling und verbesserte Stringfunktionen hinzugefügt. Die aktuelle Ausgabe 5.1
-des ECMAScript-Standards entspricht dem internationalen Standard \em{ISO/IEC 16262:2011}.
+des ECMAScript-Standards entspricht dem internationalen Standard \emph{ISO/IEC 16262:2011}.
 \citep[S. vii]{ecmascript}
 
 Auch zum Zeitpunkt der Veröffentlichung dieser Arbeit wird der ECMAScript-Standard und damit die
@@ -37,17 +37,17 @@ also beispielsweise Hpyerlinks, Formulare und Bilder. Darüberhinaus bietet der 
 benachrichtigt zu werden.
 \citep[S. 2]{ecmascript}
 
-Ein weiteres Anwendungsgebiet ist \em{Server-Side JavaScript} (\em{SSJS}). Dabei wird JavaScript
+Ein weiteres Anwendungsgebiet ist \emph{Server-Side JavaScript} (\emph{SSJS}). Dabei wird JavaScript
 direkt auf den (Web-)Server ausgeführt und kann beispielsweise direkt auf Datenbanken und Dateien
-(des Servers) zugreifen. Während \em{SSJS} erstmalig 1996 im \em{Netscape Enterprise HTTP Server}
+(des Servers) zugreifen. Während \emph{SSJS} erstmalig 1996 im \emph{Netscape Enterprise HTTP Server}
 zum Einsatz kam, erlebte es erst fast 15 Jahre danach seinen Durchbruch. Mit
-\em{node.js}\footnote{\href{http://nodejs.org}{http://nodejs.org}} existiert ein quelloffenes,
+\emph{node.js}\footnote{\href{http://nodejs.org}{http://nodejs.org}} existiert ein quelloffenes,
 plattformunabhängiges Framework welches leichtgewichtig ist und dank einer eventbasierten Architektur
 auch bei einer sehr großen Anzahl gleichzeitiger Clientverbindungen noch performant ist - eine
-Eigenschaft die in klassischen prozess- oder threadbasierten Webservern wie \em{Apache} oftmals
+Eigenschaft die in klassischen prozess- oder threadbasierten Webservern wie \emph{Apache} oftmals
 nicht gegeben ist. Die serverseitige Host-Umgebung unterscheidet sich logischerweise stark von der
 eines Browsers, da ein Webserver weder mit Fenstern noch HTML-Dokumenten arbeitet - dafür kennt er
-beispielsweise HTTP-Requests und Formular\em{daten}. Die Ereignisse, auf die Scripte reagieren
+beispielsweise HTTP-Requests und Formular\emph{daten}. Die Ereignisse, auf die Scripte reagieren
 können, sind dabei primär netzwerkbezogen - beispielsweise die neue Verbindung eines Clients oder
 der vorzeitige Abbruch eines Seitenaufrufs. Es ist allerdings durchaus möglich, dass mit
 entsprechendem Code Teile der Browserumgebung serverseitig nachgebildet werden. So ist es denkbar,
@@ -74,7 +74,7 @@ auf die Nutzung eigener Objekte verzichten. Da dadurch viel Komfort wie die Nutz
 Arrays - die in JavaScript simple Objekte sind - verloren geht ist dieses Paradigma nicht zu
 empfehlen. Es kann aber durchaus sinnvoll sein, Funktionen außerhalb von Objekten zu definieren,
 sofern sie alleinstehend sind und man keien Namespaces nutzen will: JavaScript unterstützt zwar
-keine Namespace, allerdings sind Funktionen sog. \em{First-Class Objects}, d.h. man kann sie in
+keine Namespace, allerdings sind Funktionen sog. \emph{First-Class Objects}, d.h. man kann sie in
 Variablen speichern und sie haben noch weitere Eigenschaften, auf die später näher eingegangen
 wird. Aufgrund der Möglichkeit, Funktionen in Variablen zu speichern, kann man Namespaces einfach
 durch assoziative Arrays simulieren, indem man die Funktionen in solchen Arrays speichert und sie
@@ -82,7 +82,7 @@ daher nicht mehr im globalen Kontext liegen sondern nur über das Array aufrufba
 
 \item[Objektbasierte Programmierung] \hfill \\
 Eine objektbasierte Programmiersprache unterstützt Objekte, kennt im Gegensatz zu einer
-objekt\em{orientierten} Programmiersprache allerdings keine Klassen.
+objekt\emph{orientierten} Programmiersprache allerdings keine Klassen.
 \citep[Kap. 1.3.1]{progsprachen}
 
 Nachdem zuvor schon Objekte erwähnt wurden, die von der Host-Umgebung zur Verfügung gestellt werden,
@@ -98,7 +98,7 @@ ausschließlich Funktionsdefinitionen, die eine Eingabe in eine Ausgabe transfor
 \citep[Kap. 1.3.1]{progsprachen}
 
 JavaScript ist allerdings nicht direkt eine funktionale Programmiersprache und damit erst recht
-keine rein funktionale Programmiersprache. Dadurch, dass Funktionen \em{First-Class Objects} sind
+keine rein funktionale Programmiersprache. Dadurch, dass Funktionen \emph{First-Class Objects} sind
 und sowohl anonyme Funktionen als auch Closures unterstützt werden, kann man in JavaScript sehr
 einfach funktionale Elemente mit objektorientierten bzw. prozeduralen Elementen mischen. Die
 prominentesten aus anderen funktionalen Programmiersprachen bekannten Methoden sind
