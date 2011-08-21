@@ -148,3 +148,50 @@ function makeFunction() {
 }
 \end{lstlisting}
 \end{itemize}
+
+
+\subsection{Native Objekte}
+Wie zuvor erwähnt sind beispielsweise Strings und Arrays Objekte. Diese sind jedoch nicht in
+JavaScript selbst implementiert sondern in der Sprache der JavaScript-Engine, also beispielsweise C
+oder C++. Ihr Verhalten ist durch die ECMAScript-Spezifikation \citep{ecmascript} vollständig
+definiert. Dies bedeutet beispielsweise dass es prinzipiell sicher ist, gewisse Operationen mit
+diesen Objekten auszuführen - beispielsweise sie um eigene Methoden zu erweitern. Sofern ein natives
+Objekt eine Operation nicht unterstützt wird eine entsprechende Fehlermeldung ausgegeben.
+
+
+
+\subsection{Host-Objekte}
+
+Bei Host-Objekten handelt es sich um von der Host-Umgebung zur Verfügung gestellte Objekte die in
+der Regel nicht in JavaScript sondern in der Sprache der Host-Umgebung oder der JavaScript-Engine
+geschrieben sind. Diese Objekte sind auf die Umgebung zugeschnitten in der das Script läuft - im
+Browser werden beispielsweise die DOM-Elemente durch Host-Objekte repräsentiert.
+Während native Objekte durch die ECMAScript-Spezifikation definiert sind, gibt es für Host-Objekte
+lediglich einige Anforderungen und Einschränkungen, die notwendig sind, damit die JavaScript-Engine
+korrekt mit ihnen arbeiten und die Codeausführung optimieren kann: Alle internen Objekteigenschaften
+müssen definiert und gewisse Invarianten erfüllt sein.
+
+Das Verhalten dieser Objekte ist jedoch nicht
+spezifiziert: \enquote{Host objects may implement these internal methods in any manner unless specified
+otherwise} \citep[S. 33]{ecmascript}; die \enquote{internal methods} sind beispielsweise die Getter
+und Setter von Objekteigenschaften. Darüberhinaus dürfen auch die Auswirkungen von internen
+Eigenschaften erweitert werden: \enquote{Host objects may support these internal properties with any
+implementation-dependent behaviour as long as it is consistent with the specific host object
+restrictions stated in this document.} \citep[S. 31]{ecmascript}
+
+Ein Beispiel für das undefinierte Verhalten von Host-Objekten findet sich im
+Blog\footnote{\href{http://perfectionkills.com/whats-wrong-with-extending-the-dom}{http://perfectionkills.com/whats-wrong-with-extending-the-dom}}
+eines ehemaligen Entwicklers eines JavaScript-Frameworks, welches im dritten Kapitel noch näher
+betrachtet wird:
+
+\begin{lstlisting}[caption=Verhalten von Host-Objekten im Internet Explorer]
+document.createElement('p').offsetParent; // "Unspecified error."
+new ActiveXObject("MSXML2.XMLHTTP").send; // "Object doesn't support this property or method"
+\end{lstlisting}
+
+In diesem Beispiel wird auf nicht vorhandene Eigenschaften bzw. Methoden von zwei verschiedenen
+Host-Objekten lesend zugegriffen. Native und benutzerdefinierte Objekte würden in diesem Fall
+einfach \lstinline{undefined} zurückgeben statt eine Exception auszulösen.
+Es ist auch durchaus möglich, dass eine Wertzuweisung keine Fehlermeldung bzw. Exception auslöst,
+jedoch stillschweigend ignoriert wird und die Eigenschaft des betroffenen Objekts ihren alten Wert
+beibehält.
