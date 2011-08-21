@@ -74,7 +74,7 @@ auf die Nutzung eigener Objekte verzichten. Da dadurch viel Komfort wie die Nutz
 Arrays - die in JavaScript simple Objekte sind - verloren geht ist dieses Paradigma nicht zu
 empfehlen. Es kann aber durchaus sinnvoll sein, Funktionen außerhalb von Objekten zu definieren,
 sofern sie alleinstehend sind und man keien Namespaces nutzen will: JavaScript unterstützt zwar
-keine Namespace, allerdings sind Funktionen sog. \emph{First-Class Objects}, d.h. man kann sie in
+keine Namespace, allerdings sind Funktionen sog. \emph{First-Class-Objekte}, d.h. man kann sie in
 Variablen speichern und sie haben noch weitere Eigenschaften, auf die später näher eingegangen
 wird. Aufgrund der Möglichkeit, Funktionen in Variablen zu speichern, kann man Namespaces einfach
 durch assoziative Arrays simulieren, indem man die Funktionen in solchen Arrays speichert und sie
@@ -98,16 +98,53 @@ ausschließlich Funktionsdefinitionen, die eine Eingabe in eine Ausgabe transfor
 \citep[Kap. 1.3.1]{progsprachen}
 
 JavaScript ist allerdings nicht direkt eine funktionale Programmiersprache und damit erst recht
-keine rein funktionale Programmiersprache. Dadurch, dass Funktionen \emph{First-Class Objects} sind
+keine rein funktionale Programmiersprache. Dadurch, dass Funktionen \emph{First-Class-Objekte} sind
 und sowohl anonyme Funktionen als auch Closures unterstützt werden, kann man in JavaScript sehr
 einfach funktionale Elemente mit objektorientierten bzw. prozeduralen Elementen mischen. Die
 prominentesten aus anderen funktionalen Programmiersprachen bekannten Methoden sind
-\lstinline{forEach(list, func)} um die Funktion \lstinline{func} auf alle Elemente von
-\lstinline{list} anzuwenden, \lstinline{map(list, func)} um eine Liste mittels einer Funktion in
-eine neue Liste zu transformieren und \lstinline{filter(list, func)} um nur die Elemente aus
-einer Liste zu übernehmen, die von der Funktion durch die Rückgabe von \lstinline{true} akzeptiert
-wurden.
+\lstinline{forEach()} um eine Funktion alle Elemente einer Liste anzuwenden, \lstinline{map()} um
+eine Liste mittels einer Funktion in eine neue Liste zu transformieren und \lstinline{filter()} um
+nur die Elemente aus einer Liste zu übernehmen, die von der Filter-Funktion durch die Rückgabe vob
+\lstinline{true} akzeptiert wurden.
 \end{description}
 
-\subsection{First-Class-Objects}
-\todotext{Zeugs zu first-class Objekten}
+
+\subsection{First-Class-Objekte}
+In JavaScript handelt es sich bei Funktionen um sogenannte \emph{First-Class-Objekte}. Dies
+bedeutet an sich nur, dass es sich bei Funktionen um Objekte handelt - beispielsweise kann eine
+Funktion wie jedes andere Objekt Attribute und Methoden (die wiederum Funktionen sind) besitzen.
+Details zu den verschiedenen Objekt-Typen einschließlich Funktionsobjekten finden sich in
+\citep[S. 30ff]{ecmascript}.
+
+\emph{First-Class} beschreibt Eigenschaften die man bei Objekten im Allgemeinen erwartet, im
+Zusammenhang mit Funktionen allerdings durchaus ungewöhnlich sind:
+
+\begin{itemize}
+\item Sie können in Variablen und anderen Datenstrukturen (beispielsweise Arrays) gespeichert
+werden.
+\begin{lstlisting}[caption=Zuweisung einer Funktion an eine Variable]
+var foo = someFunction;
+\end{lstlisting}
+
+\item Sie können Funktionsparameter sein.
+\begin{lstlisting}[caption=Erstellen einer neuen Liste mittels einer Transformationsfunktion]
+var roots = [4, 9, 16].map(Math.sqrt);
+\end{lstlisting}
+
+\item Sie können Rückgabewert einer Funktion sein.
+
+\item Sie können zur Laufzeit erstellt werden.
+\begin{lstlisting}[caption=Eine Funktion\, die eine neue Funktion erstellt und zurückgibt]
+function makeFunction() {
+    function newFunction() {}
+    return newFunction;
+}
+\end{lstlisting}
+
+\item Sie sind nicht an einen Namen gebunden.
+\begin{lstlisting}[caption=Erstellen einer anonymen Funktion]
+function makeFunction() {
+    return function() {};
+}
+\end{lstlisting}
+\end{itemize}
