@@ -91,9 +91,9 @@ den Status des \emph{LHC}\footnote{\emph{Large Hadron Collider}, der Teilchenbes
 für die Mitarbeiter relevante Neuigkeiten anzeigen.
 
 
-\subsection{Indico}
+\section{Indico}
 
-\subsubsection{Überblick}
+\subsection{Überblick}
 Indico\footnote{Integrated Digital Conference - \href{http://indico-software.org/}{http://indico-software.org/}}
 ist eine am CERN entwickelte Webapplikation, die zum Planen und Organisieren von Events dient. Diese
 Events können sowohl einfache Vorträge als auch Meetings und Konferenzen mit mehreren Sessions und
@@ -112,7 +112,7 @@ verfügbar sind. Eins der neuesten Features ist die Möglichkeit, sich die Konfe
 \href{http://maps.google.com/}{\emph{Google Maps}}-basierten Karte anzeigen zu lassen und
 beispielsweise anhand der Nähe zu einem bestimmten Gebäude zu filtern.
 
-\subsubsection{Aufbau}
+\subsection{Aufbau}
 Events in Indico sind Teil einer Baumstruktur: Auf der Top-Level-Ebene finden sich ausschließlich
 Kategorien, die jeweils wieder Kategorien oder beliebige Events - also Konferenzen, Meetings und
 Vorträge - enthalten können. Ein Event wiederum kann diverse Elemente enthalten - welche das sind
@@ -132,7 +132,7 @@ Im Folgenden sind die wichtigsten Bestandteile von Events aufgelistet:
 \item Zeitplan
 \end{itemize}
 
-\subsubsection{Architektur}
+\subsection{Architektur}
 Der serverseitige Code von Indico ist in Python geschrieben und nutzt
 ZODB\footnote{\href{http://www.zodb.org}{http://www.zodb.org}} als Datenbank. Der Code ist in einer
 Multi-Tier-Architektur organisiert: Die Anfrage des Webservers wird über
