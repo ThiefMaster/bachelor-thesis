@@ -195,3 +195,33 @@ einfach \lstinline{undefined} zurückgeben statt eine Exception auszulösen.
 Es ist auch durchaus möglich, dass eine Wertzuweisung keine Fehlermeldung bzw. Exception auslöst,
 jedoch stillschweigend ignoriert wird und die Eigenschaft des betroffenen Objekts ihren alten Wert
 beibehält.
+
+
+\subsection(Closures)
+Normalerweise unterscheidet man in der Programmierung zwischen lokalen Variablen, die nur innerhalb
+einer Funktion sichtbar und lebendig sind, globalen Variablen, die überall sichtbar sind und Membervariablen, die
+nur über ein Objekt sichtbar sind. Wenn keine Funktionen zur Laufzeit definiert werden, reichen
+diese Variablentypen auch aus. Wenn man jedoch Funktionen zur Laufzeit definiert, besteht die
+Möglichkeit, dass dies in einer Funktion geschieht, die bereits lokale Variablen besitzt. In der
+inneren Funktion sind diese Variablen nun ebenfalls verfügbar. Daher dürfen sie vom Garbage
+Collector nicht gelöscht werden obwohl es funktions-lokale Variablen sind und die Funktion, in der
+sie definiert wurden, bereits verlassen wurde. Die Kombination aus einer Funktion und ihrer Umgebung
+(also den außerhalb definierten Variablen) bezeichnet man als \emph{Closure}. Die innerhalb der
+Funktion verfügbaren Variablen, die weder lokal noch global sind, bezeichnet man als
+\emph{nichtlokale} Variablen.
+
+Im folgenden Beispiel wird eine Closure genutzt, um eine Funktion zu erstellen, die eine Variable in
+ihrer Nutzung insofern einschränkt, dass sie nicht direkt gelesen oder geschrieben werden kann
+sondern nur mittels der zurückgegebenen Funktion ausgelesen werden kann, wobei ihr Wert sich bei
+jedem dieser Vorgänge um \lstinline{1} erhöht.
+
+\begin{lstlisting}[caption=Beispiel für eine Closure]
+function makeIncrementer(val) {
+    return function() {
+        return ++val;
+    }
+}
+\end{lstlisting}
+
+Eine mögliche Nutzung von Closures ist also die Kapselung von Variablen; ein weiterer
+Anwendungsbereich wird später zusammen mit dem Objektmodell von JavaScript vorgestellt.
