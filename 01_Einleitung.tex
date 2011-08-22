@@ -131,3 +131,19 @@ Im Folgenden sind die wichtigsten Bestandteile von Events aufgelistet:
 \item Registrierung
 \item Zeitplan
 \end{itemize}
+
+\subsubsection{Architektur}
+Der serverseitige Code von Indico ist in Python geschrieben und nutzt
+ZODB\footnote{\href{http://www.zodb.org}{http://www.zodb.org}} als Datenbank. Der Code ist in einer
+Multi-Tier-Architektur organisiert: Die Anfrage des Webservers wird über
+WSGI\footnote{\href{http://www.python.org/dev/peps/pep-0333/}{Web Server Gateway Interface}} an die
+Applikation weitergegeben, wo die \emph{Request Handler (RH)}-Ebene die Geschäftlogik ausführt. Sie
+prüft die Zugangsberechtigung des Benutzers, verarbeitet GET- bzw. POST-Daten, baut die
+Datenbankverbindung auf und führt letztendlich auch die gewünschte Aktion aus. Um eine HTML-Seite
+auszugeben nutzt der \emph{RequestHandler} die \emph{Web Pages (WP)}-Ebene. Dort werden diverse
+Aktionen ausgeführt, welche die Anzeige der Daten beeinflussen - zum einen werden die benötigten
+JavaScript- bzw. CSS-Packages geladen, zum anderen werden falls vorhanden Tabs als aktiv markiert
+oder Daten sortiert. Die eigentliche Erzeugung der HTML-Datei übernimmt die \emph{Components
+(W)}-Ebene. Jede Klasse dieser Ebene repräsentiert ein Template mit demselbem Namen. In der Regel
+werden in dieser Ebene nur die aus der WP-Ebene übergebenen Daten an das Template weitergereicht und
+falls nötig aufbereitet.
