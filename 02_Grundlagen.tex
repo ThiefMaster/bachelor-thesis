@@ -225,3 +225,93 @@ function makeIncrementer(val) {
 
 Eine mögliche Nutzung von Closures ist also die Kapselung von Variablen; ein weiterer
 Anwendungsbereich wird später zusammen mit dem Objektmodell von JavaScript vorgestellt.
+
+
+\subsection{Objekte, Konstruktoren und Prototypen}
+Anders als objektorientierte Sprachen wie Java oder C++ ist JavaScript objekt\emph{basiert}. Wie
+bereits bei der Vorstellung der Programmierparadigmen erwähnt bedeutet dies, dass JavaScript keine
+Klassen besitzt. Um dennoch ein neues Objekt zu erstellen, was in etwa der \emph{Instanz} einer
+Klasse entspricht, benutzt man den \lstinline{new}-Operator und eine Konstruktorfunktion
+\lstinline{F}. Dieser erstellt ein neues Objekt \lstinline{obj} und weist seiner internen
+Eigenschaft \emph{[[Prototype]]} den Wert der Eigenschaft \lstinline{F.prototype} zu sofern er
+existiert und ein Objekt ist. Danach wird \lstinline{F} ausgeführt, wobei \lstinline{this === obj}
+ist. Der Rückgabewert des \lstinline{new}-Operators ist \lstinline{obj}. \\
+Es besteht also eine Möglichkeit, ein neues Objekt zu erstellen und mittels einer Funktion auf
+dieses Objekt zuzugreifen bzw. es danach einer Variable zuzuweisen.
+
+Da ein Objekt ohne Methoden allerdings kaum mit einer Klasse vergleichbar ist, muss JavaScript
+logischerweise eine Möglichkeit bieten, einem Objekt Methoden zuzuweisen. Eine Möglichkeit wäre, sie
+wie in \autoref{lst:func-in-ctor} im Konstruktor dem Objekt hinzuzufügen - dank der
+\emph{First-Class}-Eigenschaften von Funktionen ist das auch ohne Weiteres möglich. Allerdings hat
+diese Herangehensweise einen entscheidenden Nachteil: Für jedes Objekt wird eine neue Funktion
+erstellt - bei vielen Objekten ist diese Lösung also sehr speicherineffizient.
+
+\begin{lstlisting}[label=lst:func-in-ctor,caption=Funktionszuweisung im Konstruktor]
+function SomeClass {
+    this.doStuff = function() { };
+}
+\end{lstlisting}
+
+Für die effizientere Lösung ist es wichtig zu wissen, was beim Zugriff auf eine Objekteigenschaft
+geschieht: Die JavaScript-Engine führt die interne Methode \emph{[[GetProperty]]} des Objekts aus.
+Diese Methode prüft, ob das Objekt selbst die gewünschte Eigenschaft besitzt und gibt sie zurück
+falls dies der Fall ist. Ansonsten wird überprüft, ob die \emph{[[Prototype]]}-Eigenschaft des
+Objekts \lstinline{null} ist. Falls sie das ist, gibt \emph{[[GetProperty]]} \lstinline{undefined}
+zurück. Existiert jedoch ein Prototyp, so wird die \emph{[[GetProperty]]}-Methode des Prototypen
+ausgeführt und ihr Rückgabewert zurückgegeben. Es werden also alle Prototypen rekursiv durchlaufen,
+bis entweder die Eigenschaft gefunden wurde oder ein Objekt ohne Prototyp erreicht wurde.
+
+Da Methoden ebenfalls Eigenschaften sind wird durch die Nutzung der \emph{prototype chain} sowohl
+der erhöhte Speicherverbrauch verhindert - die Funktion ist ja nur noch in einem einzigen Objekt,
+dem Prototypen - und außerdem Vererbung und Überschreiben von Funktionen ermöglicht.
+
+\begin{lstlisting}[label=lst:func-in-proto,caption=Funktionszuweisung im Prototypen]
+function SomeClass { }
+SomeClass.prototype.doStuff = function() { };
+\end{lstlisting}
+
+Zur Vererbung weist man dem Prototypen der Konstruktorfunktion einfach ein (neues) Objekt zu,
+welches die entsprechenden Funktionen enthält, und fügt die neuen Funktionen danach diesem Objekt
+hinzu.
+
+\begin{lstlisting}[label=lst:proto-inheritance,caption=Prototypische Vererbung]
+function Parent() { }
+Parent.prototype.say = function() { print('Hi'); }
+function Child() {
+    this.greeting = 'Hallo';
+}
+Child.prototype = new Parent();
+Child.prototype.greet = function() { print(this.greeting); }
+c = new Child();
+c.greet(); // Hallo
+c.say(); // Hi
+Child.prototype.say = function() {
+    Parent.prototype.say.call(this);
+    this.greet();
+}
+c.say(); // Hi Hallo
+\end{lstlisting}
+
+\autoref{lst:proto-inheritance} demonstriert Vererbung und Überschreiben von Funktionen. Bei
+\lstinline{this} handelt es sich um eine spezielle Variable, die jeweils auf den aktuellen
+Objektkontext zeigt. Dies ist bei Funktionen, die direkt mittels \lstinline{func();} aufgerufen
+werden das globale Objekt - im Browser ist dies \lstinline{window}; im Fall eines Methodenaufrufs
+über \lstinline{obj.method();} ist \lstinline{this === obj}. Dabei ist zu beachten, dass eine innere
+Funktion ein neues \lstinline{this} besitzt; falls das der äußeren Klasse genutzt werden soll, muss
+es unter einem anderen Namen in einer Closure gesichert werden. Häufig wird dazu wie in
+\autoref{lst:this-self-closure} der Name \lstinline{self} genutzt. Um eine überschriebene Methode
+des Elternobjekts aufzurufen, kann man nicht \lstinline{this.method();} nutzen, da
+\lstinline{this.method} ja auf die neue Funktion zeigt. Stattdessen muss über
+\lstinline{ParentObject.prototype.method} auf die Methode zugreifen. Wenn man diese jedoch direkt
+ausführen würde, wäre \lstinline{this === ParentObject.prototype}, was eigentlich nie gewollt ist.
+Daher nutzt man die \lstinline{call(thisArg, ...)}-Methode, die jede Funktion besitzt und einem
+ermöglicht, den Wert von \lstinline{this} innerhalb der aufgerufenen Funktion manuell festzulegen.
+
+\begin{lstlisting}[label=lst:this-self-closure,caption=Sichern von this mittels einer Closure]
+Test.prototype.func = function() {
+    var self = this;
+    return function() {
+        self.doSomething();
+    }
+};
+\end{lstlisting}
