@@ -55,7 +55,7 @@ um welche HTML-Version es sich handelt.
 
 De Rest des Dokument ist aus \emph{Tags} aufgebaut, die wiederum \emph{Attribute} besitzen und Text
 oder weitere Tags enthalten können. Auf der obersten Ebene eines HTML-Dokuments befindet sich immer
-der Tag \lstinline[language=HTML]{<html>}. Dieser enthält zwei Tags,
+das \lstinline[language=HTML]{<html>}-Tag. Dieses enthält zwei Tags,
 \lstinline[language=HTML]{<head>} und \lstinline[language=HTML]{<body>}.
 
 Im \emph{HEAD}-Abschnitt des Dokuments finden sich neben dem Seitentitel und Metadaten verschiedene
@@ -90,6 +90,34 @@ einzelne Elemente nur in bestimmten Browserversionen verarbeitet werden. Da die 
 ist, dass diese Kommentare in anderen Browsern entweder ungültige Tags oder reguläre Kommentare
 sind, eignen sie sich nicht nur zur Unterscheidung zwischen Internet Explorer-Versionen sondern auch
 dazu, Code ausschließlich im Internet Explorer auszuführen bzw. nicht auszuführen.
+
+
+\subsection{Document Object Model (DOM)}
+\enquote{The Document Object Model is a platform- and language-neutral interface that will allow
+programs and scripts to dynamically access and update the content, structure and style of [HTML]
+documents. The document can be further processed and the results of that processing can be
+incorporated back into the presented page.} \citep{w3c:dom-old}
+
+Es handelt sich beim DOM also um eine standardisierte Schnittstelle, um auf die Elemente eines
+HTML-Dokuments zuzugreifen und sie zu modifizieren. Das Dokument selbst wird dabei durch ein
+\emph{Document}-Objekt repräsentiert, welches Methoden und Eigenschaften zum Zugriff auf die
+enthaltenen Elemente enthält. Beispielsweise sucht \lstinline{getElementById()} nach
+einem Element mit einer bestimmten ID und die \lstinline{documentElement}-Eigenschaft eines Elements
+verweist das \lstinline[language=HTML]{<html>}-Element. Neben den Zugriffsmethoden stellt das
+DOM-Interface auch Methoden zur Manipulation deS Dokuments zur Verfügung. Diese reichen über das
+simple Erstellen eines neuen Elements über das Entfernen eines Elements samt untergeordneten
+Elementen bis zum Einfügen eines Elements an einer bestimmten Position im Dokument.
+\todotext{DOM-Referenz in den Anhang}
+
+Da jedes Element (außer dem Dokument selbst) genau ein Elternelement und beliebig viele Kindelemente
+besitzt, spricht man auch von dem \emph{DOM-Tree}. Jeder Knoten in diesem Baum besitzt neben den
+bereits genannten Methoden und Eigenschaften weitere Attribute, die Informationen über den
+jeweiligen Knoten enthalten. Dadurch lässt sich beispielsweise leicht herausfinden ob ein Knoten ein
+Element ist, ob es sich um reinen Text handelt oder ob es sich gar um ein weiteres Dokument handelt.
+
+\imga{dom-table.png}{Der DOM-Tree einer HTML-Tabelle \citep{w3c:dom}}{DOM-Tree}
+
+
 
 
 
