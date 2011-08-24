@@ -1,5 +1,99 @@
 \chapter{Grundlagen}
 
+\section{HTML}
+
+\subsection{Geschichte}
+HTML wurde zusammen mit dem ersten Webbrowser und -server 1990 von Tim Berners-Lee am CERN
+entwickelt, um Wissenschaftlern zu ermöglichen, digitale Dokumente auszutauschen und durch
+Querverweise miteinander zu verknüpfen. Da am CERN bereits ein SGML-Dialekt für andere Zwecke
+benutzt wurde, wurde HTML am ISO-Standard SGML\footnote{Standard Generalized Markup Language}
+angelehnt, auf dem auch das 1998 vorgestellte XML\footnote{Extensible Markup Language} basiert.
+
+Erstmalig durch ein RFC\footnote{Request for Comments} spezifiziert wurde HTML 1995 in der Version
+2.0\footnote{\href{http://tools.ietf.org/rfc/rfc1866.txt}{http://tools.ietf.org/rfc/rfc1866.txt}}.
+1997 wurde HTML 3.2 als \emph{W3C Recommendation}
+veröffentlicht\footnote{\href{http://www.w3.org/TR/REC-html32}{http://www.w3.org/TR/REC-html32}}.
+Nur zwei Jahre danach wurde HTML 4.01 ebenfalls als \emph{W3C Recommendation}
+veröffentlicht\footnote{\href{http://www.w3.org/TR/html401/}{http://www.w3.org/TR/html401/}} und
+wird auch heute noch aktiv verwendet, obwohl es bereits Nachfolger gibt.
+
+Einer der Nachfolger von HTML 4.01 ist XHTML\footnote{eXtensible HyperText Markup Language}, eine
+auf XML basierte Version von HTML. Diese Version wurde entwickelt, da XML es ermöglicht, eigene
+Elemente und Attribuze zu definieren und seitens der vieler Entwickler der Bedarf nach einer solchen
+Erweitertungsmöglichkeit bestand. Darüberhinaus ermöglichen die Einschränkungen von XML, einfache
+Parser zu entwickeln oder einen bestehenden XML-Parser zu nutzen und XHTML-Dokumente in andere
+Formate zu transformieren; beispielsweise mittels XSLT\footnote{Extensible Stylesheet Language
+Transformations}. \citep{w3c:xhtml}
+
+Die neueste HTML-Version ist HTML5 und basiert auf Elementen von HTML 4.01 und XHTML 1.1.
+Sie befindet sich zwar noch immer in Entwicklich, jedoch werden viele Neuerungen bereits heute von
+den verbreiteten Browsern unterstützt. Neben dem Einführen neuer Features insbesondere im
+Multimedia-Bereich spezifiziert HTML5 die Verarbeitung von Dokumenten mit Syntaxfehlern. \citep{w3c:html5}
+Diese Dokumente wurden zuvor von fast allen Browsern angezeigt, allerdings gab es gravierende
+Unterschiede zwischen den verschiedenen Browsern, sodass Seiten oftmals für einzelne Browser
+optimiert wurden und in anderen Browsern nahezu unbenutzbar waren. Durch die Vorgaben von HTML5
+werden Dokumente mit Syntaxfehlern zwar nicht wie in Programmiersprachen mit einer Fehlermeldugn
+abgelehnt - eine radikale Lösung, die eine Vielzahl von Websites unbenutzbar machen würde - jedoch
+sollen sie in jedem aktuellen Browser identisch aussehen.
+Anders als HTML 4 und XHTML basiert HTML5 weder auf SGML noch auf XML sondern definiert eigene
+Parsingregeln, was unter anderem für die Verarbeitungsregeln bei Syntaxfehlern notwendig ist. Es ist
+jedoch trotzdem möglich und erlaubt, XML-valides HTML5 zu schreiben, sodass man einen XML-Parser
+benutzen kann. Diese Variante von HTML5 bezeichnet man auch als \emph{XHTML5}.
+
+\img{HTML5.pdf}{100px}{Das offizielle HTML5-Logo (http://www.w3.org/html/logo/)}{HTML5-Logo}
+
+
+\subsection{Elemente}
+Ein HTML-Dokument setzt sich aus einigen grundlegenden Bestandteilen zusammen.
+
+Am Anfang des Dokuments steht der \emph{Doctype}. Er teilt dem Parser und der Rendering-Engine mit,
+um welche HTML-Version es sich handelt.
+
+\begin{lstlisting}[language=HTML,caption=Doctype von HTML 4.01]
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+\end{lstlisting}
+
+De Rest des Dokument ist aus \emph{Tags} aufgebaut, die wiederum \emph{Attribute} besitzen und Text
+oder weitere Tags enthalten können. Auf der obersten Ebene eines HTML-Dokuments befindet sich immer
+der Tag \lstinline[language=HTML]{<html>}. Dieser enthält zwei Tags,
+\lstinline[language=HTML]{<head>} und \lstinline[language=HTML]{<body>}.
+
+Im \emph{HEAD}-Abschnitt des Dokuments finden sich neben dem Seitentitel und Metadaten verschiedene
+Referenzen auf externe Daten, die eingebunden werden sollen. Dabei kann es sich sowohl um
+Stylesheets handeln als auch um Scripts.
+
+Der \emph{BODY}-Abschnitt enthält den eigentlichen Inhalt des Dokuments. Dieser besteht aus Text,
+der durch Tags in Absätze, Tabellen, usw. unterteilt werden kann. Ebenfalls mithilfe von Tags lassen
+sich Bilder, Videos und Audiodateien einbinden.
+
+\begin{lstlisting}[language=HTML,caption=Ein HTML5-Dokument]
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Beispiel</title>
+    </head>
+    <body>
+        <!-- Hier ist das eigentliche Dokument -->
+        <h1>Testabschnitt</h1>
+        <p>Dies ist nur ein Beispiel.</p>
+        <img src="test.png" alt="Testbild">
+    </body>
+</html>
+\end{lstlisting}
+
+Genau wie in Programmiersprachen können auch in HTML Kommentare eingefügt werden, die vom Browser
+ignoriert werden. Eine Ausnahme bilden dabei die \emph{Conditional
+Comments}\footnote{\href{http://msdn.microsoft.com/en-us/library/ms537512\%28v=vs.85\%29.aspx}{http://msdn.microsoft.com/en-us/library/ms537512\%28v=vs.85\%29.aspx}}
+im Microsoft Internet Explorer. Diese enthalten spezielle Scriptelemente, die den Kommentar abhängig
+von der Browserversion ganz normal vor der Renderingengine verstecken oder ihn weiterreichen, sodass
+einzelne Elemente nur in bestimmten Browserversionen verarbeitet werden. Da die Syntax so gewählt
+ist, dass diese Kommentare in anderen Browsern entweder ungültige Tags oder reguläre Kommentare
+sind, eignen sie sich nicht nur zur Unterscheidung zwischen Internet Explorer-Versionen sondern auch
+dazu, Code ausschließlich im Internet Explorer auszuführen bzw. nicht auszuführen.
+
+
+
+
 \section{JavaScript}
 
 \subsection{Geschichte}
