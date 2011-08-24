@@ -137,7 +137,7 @@ erschienen ist. Im April 1998 wurde dieser durch die ISO zum internationalen Sta
 Im Laufe der Jahre wurde der ECMAScript-Standard immer erweitert und beispielsweise Reguläre
 Ausdrücke, Exception-Handling und verbesserte Stringfunktionen hinzugefügt. Die aktuelle Ausgabe 5.1
 des ECMAScript-Standards entspricht dem internationalen Standard \emph{ISO/IEC 16262:2011}.
-\citep[S. vii]{ecmascript}
+\citep{ecmascript}
 
 Auch zum Zeitpunkt der Veröffentlichung dieser Arbeit wird der ECMAScript-Standard und damit die
 Sprache JavaScript weiterentwickelt. Jeder moderne Browser unterstützt die Sprache, allerdings
@@ -157,7 +157,7 @@ Ebenfalls vom Browser bereitgestellt werden Objekte, die die einzelnen HTML-Elem
 also beispielsweise Hpyerlinks, Formulare und Bilder. Darüberhinaus bietet der Browser Methoden, um
 über verschiedene Ereignisse wie Klicks, Mausbewegungen und Änderungen an Formularfeldern
 benachrichtigt zu werden.
-\citep[S. 2]{ecmascript}
+\citep[Kap. 4.1]{ecmascript}
 
 Ein weiteres Anwendungsgebiet ist \emph{Server-Side JavaScript} (\emph{SSJS}). Dabei wird JavaScript
 direkt auf den (Web-)Server ausgeführt und kann beispielsweise direkt auf Datenbanken und Dateien
@@ -236,7 +236,7 @@ In JavaScript handelt es sich bei Funktionen um sogenannte \emph{First-Class-Obj
 bedeutet an sich nur, dass es sich bei Funktionen um Objekte handelt - beispielsweise kann eine
 Funktion wie jedes andere Objekt Attribute und Methoden (die wiederum Funktionen sind) besitzen.
 Details zu den verschiedenen Objekt-Typen einschließlich Funktionsobjekten finden sich in
-\citep[S. 30ff]{ecmascript}.
+\citep[Kap. 8.6]{ecmascript}.
 
 \emph{First-Class} beschreibt Eigenschaften die man bei Objekten im Allgemeinen erwartet, im
 Zusammenhang mit Funktionen allerdings durchaus ungewöhnlich sind:
@@ -295,11 +295,11 @@ müssen definiert und gewisse Invarianten erfüllt sein.
 
 Das Verhalten dieser Objekte ist jedoch nicht
 spezifiziert: \enquote{Host objects may implement these internal methods in any manner unless specified
-otherwise} \citep[S. 33]{ecmascript}; die \enquote{internal methods} sind beispielsweise die Getter
+otherwise} \citep[Kap. 8.6.2]{ecmascript}; die \enquote{internal methods} sind beispielsweise die Getter
 und Setter von Objekteigenschaften. Darüberhinaus dürfen auch die Auswirkungen von internen
 Eigenschaften erweitert werden: \enquote{Host objects may support these internal properties with any
 implementation-dependent behaviour as long as it is consistent with the specific host object
-restrictions stated in this document.} \citep[S. 31]{ecmascript}
+restrictions stated in this document.} \citep[Kap. 8.6.2]{ecmascript}
 
 Ein Beispiel für das undefinierte Verhalten von Host-Objekten findet sich im
 Blog\footnote{\href{http://perfectionkills.com/whats-wrong-with-extending-the-dom}{http://perfectionkills.com/whats-wrong-with-extending-the-dom}}
