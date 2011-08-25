@@ -1,0 +1,82 @@
+\chapter{JavaScript-Frameworks}
+
+\section{Vergleichskriterien}
+Um die Frameworks miteinander vergleichen zu können, müssen einige Kriterien festgelegt werden,
+anhand derer sich alle Frameworks messen lassen.
+
+\begin{description}
+\item[Zugriff auf Elemente] \hfill \\
+JavaScript-Frameworks kapseln den Zugriff auf Elemente in der Regel über Funktionen, die ein oder
+mehrere Elemente anhand eines CSS-Selektors suchen und zurückgeben. Dabei können neben den nativ
+implementierten CSS-Selektoren auch weitere Selektoren unterstützt werden.
+
+\item[DOM Traversal] \hfill \\
+Unter \emph{DOM Traversal} versteht man das Navigieren durch den DOM-Tree ausgehend von einem
+bestimmten Element. Dabei gibt es sowohl einige Standardfunktionen die man in jedem Framework
+erwarten kann als auch Komfortfunktionen.
+
+\item[Events] \hfill \\
+Wie bereits in \autoref{js-events} gezeigt unterscheiden sich die Eventsysteme der Browser
+teilweise. Daher ist dies ein Bereich wo ein Framework sowohl die Browserunterschiede verbergen als
+auch den Komfort erhöhen sollte.
+
+\item[Objektsystem] \hfill \\
+Manche JavaScript-Frameworks bringen ein eigenes Objektsystem mit, sodass die Arbeit mit Prototypen
+und Konstruktoren vereinfacht wird und beispielsweise Mixin-Objekte unterstützt werden oder der
+Aufruf einer überschriebenen Method der Parent-Klasse komfortabel möglich ist.
+
+\item[Hilfsfunktionen] \hfill \\
+Die meisten JavaScript-Frameworks bieten neben der bereits genannten Funktionalität weitere
+Funktionen, die oftmals einen funktionalen Programmierstil vereinfachen oder komfortabler machen.
+Allerdings sind nicht nur die funktionalen Funktionen sondern auch jegliche anderen Hilfsfunktionen
+betrachtenswert.
+
+\item[UI-Elemente] \hfill \\
+Einige JavaScript-Frameworks enthalten UI-Elemente, um beispielsweise Dialoge oder Buttons zu
+erzeugen. Die Frameworks unterscheiden sich dort sowohl im Umfang als auch in der Anpassbarkeit.
+
+\item[Kompatibilität] \hfill \\
+Bei der Integration in Indico ist es von Vorteil, wenn das Framework möglichst wenig Potenzial
+besitzt, Konflikte zu verursachen. Dies kann durch verschiedene Ansätze erreicht werden.
+
+\item[Sonstige Features] \hfill \\
+Viele JavaScript-Frameworks haben neben den üblichen Features zusätzliche Funktionen, die in anderen
+Frameworks nicht vorhanden sind.
+
+\item[Performance] \hfill \\
+Die unterschiedlichen Frameworks sind bei verschiedenen Operationen wie beispielsweise dem Zugriff
+auf Elemente anhand eines CSS-Selektors unterschiedlich schnell. Allerdings spielt die Performance
+im Rahmen dieser Arbeit nur eine untergeordnete Rolle, da Indico nirgends extrem viele Aktionen auf
+einmal ausführt und Performanceunterschiede somit - auch dank den immer schnelleren
+JavaScript-Engines - für den Endbenutzer nicht spürbar sind.
+
+\item[Lizenz] \hfill \\
+Die meisten Frameworks sind unter einer OpenSource-Lizenz verfügbar.
+Da Indico unter der
+GNU~GPL\footnote{\href{http://www.gnu.org/licenses/gpl-2.0.txt}{http://www.gnu.org/licenses/gpl-2.0.txt}}
+steht ist auf Kompatibilität mit dieser Lizenz zu achten.
+\end{description}
+
+
+
+\section{Indico}
+Das derzeit in Indico verwendet Framework besteht aus einem Loader-Script und ca. 50
+JavaScript-Dateien, die das eigentliche Framework enthalten. In den HTML-Seiten von Indico wird das
+Loader-Script jedoch nur im Entwicklungsmodus eingebunden; auf dem Produktivsystem werden die
+einzelnen JavaScript-Dateien in einer einzelnen Datei zusammengefasst und komprimiert.
+
+Das Framework ist in mehrere Module aufgeteilt. Im \emph{Core} werden Interfaces,
+Iteratorfunktionen, zusätzliche Stringfunktionen und diverse Helferfunktionen implementiert.
+Ebenfalls in diesem Modul befindet sich das Objektsystem, welches in Indico genutzt wird.
+Das \emph{Data}-Modul enthält ein \emph{Data Binding}-Framework, Funktionen um serverseitige
+Aktionen via JSON-RPC\footnote{Remote Procedure Call via AJAX+JSON} auszuführen und diverse
+Funktionen zum Verarbeiten von diverser Datentypen wie \lstinline{Date}-Objekten und JSON.
+
+Das größte und im weiteren Verlauf dieser Arbeit wichtigste Modul ist das \emph{UI}-Modul.
+Es enthält die in Kapitel 2 erwähnte Kapselung der teilweise browserspezifischen Methoden um auf das
+Dokument zuzugreifen und Komfortmethoden zur Erzeugung von DOM-Elementen. Darüberhinaus hat das
+Modul verschiedene Submodule: \emph{Draw} abstrahiert das Erstellen von SVG-Grafiken bzw. im
+Internet Explorer VRML-Grafiken. \emph{Extensions} und \emph{Styles} erweitern einige Objekte des
+\emph{UI}-Moduls um nützliche Methoden. Das \emph{Widgets}-Submodul enthält Funktionen, um
+HTML-Elemenet mit häufig benutzen Funktionen bzw. Eventhandlern zu verknüpfen oder mehrere
+HTML-Elemente in einer bestimmten Art und Weise zusammenzufügen.
