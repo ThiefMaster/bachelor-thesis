@@ -106,8 +106,9 @@ HTML-Elemente in einer bestimmten Art und Weise zusammenzufügen.
 \begin{description}
 \item[DOM-Zugriff] \hfill \\
 Das Indico-Framework stellt drei Methoden zur Verfügung, um einzelne DOM-Elemente zu selektieren.
-Die Funktion \lstinline{\$E(id)} sucht ein Element anhand der eindeutigen ID und gibt dieses in
-einen Wrapper verpackt zurück. \lstinline{\$N(name)} gibt eine Liste aller Elemente zurück, die den
+Die Funktion \lstinline{$E(id)} sucht ein Element anhand der eindeutigen ID und gibt dieses in
+einen Wrapper verpackt zurück; alternativ kann auch ein DOM-Elemente an die Funktion übergeben
+werden. \lstinline{$N(name)} gibt eine Liste aller Elemente zurück, die den
 passenden Namen haben. Neben diesen beiden Funktionen gibt es mit
 \lstinline{getElementsByClassName(class)} eine weitere Funktion, die alle Elemente mit der
 angegebenen CSS-Klasse zurückgibt. Eine Funktion, um Elemente anhand eines CSS-Selektors zu finden,
@@ -191,7 +192,6 @@ enthält das Indico-Framework ein Kalenderwidget, welches jedoch nur ein Wrapper
 \emph{Third-Party}-JavaScript-Kalender ist.
 \imga{indico-calendar.png}{Das Kalenderwidget von Indico}{Indico-Kalenderwidget}
 
-
 \item[Kompatibilität] \hfill \\
 Da es sich um das aktuelle Framework von Indico handelt gibt es logischerweise keine
 Kompatibilitätsprobleme mit Indico. Allerdings ist das Risiko von Konflikten mit anderen Frameworks
@@ -220,4 +220,169 @@ meisten im Framework vorhandenen Funktionen nutzt, existieret kein Beispielcode.
 \item[Lizenz] \hfill \\
 Da das Framework speziell für Indico entwickelt wurde und auch nicht \emph{standalone} verfügbar
 ist, steht es genau wie Indico selbst unter der GPL.
+\end{description}
+
+
+
+
+
+\section{Prototype}
+Bei Prototype handelt es sich um eine kompakte JavaScript-Klassenbibliothek - das Release
+besteht nur aus einer ca. 35 KB großen JavaScript-Datei. Es wurde ursprünglich für das \emph{Ruby on
+Rails}-Framework\footnote{\href{http://rubyonrails.org/}{http://rubyonrails.org/}} entwickelt, ist
+aber auch als \emph{standalone}-Bibliothek weit verbreitet.
+
+Prototype zielt darauf ab, Webentwicklung zu vereinfachen und insbesondere die Benutzung von AJAX
+sehr einfach zu machen. Durch das ausgereifte und komfortable Objektmodell fördert es die im
+Web-Bereich eher wenig genutzte objektorientierte Programmierung.
+
+In Indico wird Prototype zusammen mit \emph{Scriptaculous} bereits an einigen Stellen benutzt, um
+Drag\&Drop zu ermöglichen.
+
+\begin{description}
+\item[DOM-Zugriff] \hfill \\
+Prototype bietet mehrere Methoden, um auf DOM-Elemente zuzugreifen. Die Funktion
+\lstinline{$(id...)} gibt das DOM-Element mit der angegebenen ID zurück. Falls mehrere IDs angegeben
+wurden, gibt die Funktion ein Array zurück. Statt einer ID kann auch ein DOM-Element übergeben
+werden, womit die Funktion sehr flexibel ist. Bei allen gefundenen Elementen wird sichergestellt,
+dass diese mit den Prototype-spezifischen Erweiterungen versehen wurden: Prototype nutzt keinen
+Wrapper sondern modifiziert den Prototyp des \lstinline{HTMLElement}-Objekts des Browsers. Da der
+Internet Explorer diese Modifikation jedoch nicht zulässt fügt die \lstinline{$}-Funktion diese
+Erweiterungen falls notwendig dem jeweiligen Objekt hinzu. Das Fehlen eines Wrappers hat den
+Nachteil, dass Funktionsnamen nicht mit denen nativer Funktionen kollidieren sollten und prinzipiell
+zwischen einem einzelnen Element und mehreren Elementen unterschieden werden muss, da bei letzterem
+ein Array notwendig ist während bei ersterem ein Array dem Entwicklerkomfort abträglich wäre; er
+müsste dann jeweils \lstinline{elem[0]} nutzen, um auf das Element zuzugreifen. Diese Unterscheidung
+schadet oftmals der Lesbarkeit des Codes, da keine Prototype-Methode direkt auf alle Elemente einer
+Liste angewendet werden kann - man muss sie entweder selbst durchlaufen oder die
+\lstinline{invoke()}-Methode des Arrays nutzen, um die Funktion auf jedes Element anzuwenden. Da
+der Funktionsname jedoch als String an diese Methode übergeben werden muss, macht dies den Code
+unübersichtlicher un schlechter durchsuchbar, da man nun nicht mehr einfach nach \lstinline{func(}
+suchen kann, wenn man die Aufrufe von \emph{func} finden möchte.
+
+Sofern eine Suche anhand der ID nicht ausreichend ist, kann man auch die Funktion
+\lstinline{$$(selector...)} nutzen. Diese sucht Elemente andhand eines CSS-Selektors und gibt
+grundsätzlichen ein Array zurück, da abgesehen von ID-Selektoren der Form \lstinline{#id} beliebig
+viele Elemente gefunden werden können. Zum selektorbasierten Suchen benutzt Prototype die
+\emph{Sizzle}-Middleware\footnote{\href{http://sizzlejs.com}{http://sizzlejs.com}}.
+
+\item[DOM-Manipulation] \hfill \\
+Das \lstinline{Element}-Objekt enthält nicht nur alle Methoden, die den
+\lstinline{HTMLElement}-Objekten hinzugefügt werden, sondern dient auch der Erstellung neuer
+Elemente. Um mit Prototype ein neues HTML-Element zu erstellen, nutzt man den
+\lstinline{Element(tagName[, attributes])}-Konstruktor, wobei man den Namen des Elements als String
+und die optionalen Attribute als Objekt übergibt. Da letztere unverändert als Attribute des neuen
+elements übernommen werden, dürfen die Werte ausschließlich Strings und Zahlen sein. Wenn das neue
+Element nicht leer sein soll, kann man die \lstinline{update()}-Methode nutzen, um ihm einen Inhalt
+zuzuweisen - dieser kann entweder ein HTML-String, ein HTML-Element oder ein Objekt sein, welches
+entweder eine \lstinline{toHTML()}- oder \lstinline{toElement()}-Methode besitzt.
+
+Da Prototype keinen Wrapper nutzt, kann auf Element-Eigenschaften direkt zugegriffen werden; wenn
+explizit der Zugriff auf ein Attribut gewünscht ist, kann man die Methoden
+\lstinline{readAttribute()} bzw. \lstinline{writeAttribute()} nutzen. Für den Zugriff auf diverse
+Eigenschaften wie der CSS-Klasse (hinzufügen, entfernen, \emph{contains}), der Sichtbarkeit und bei
+Formularelementen dem Wert und dem \emph{Disabled}-Flag  stellt Prototype ebenfalls Methoden zur
+Verfügung. Darüberhinaus können auch CSS-Eigenschaften über ein Objekt gesetzt werden, sodass
+mehrere Eigenschaften auf einmal geändert werden können. Ein insbesondere für grafiklastige oder
+pixelgenau arbeitende Webapplikationen nützliches Feature ist die \lstinline{measure()}-Methode.
+Diese gibt ein Objekt zurück, welches Zugriff auf alle Größen- und Positionsinformationen bietet.
+
+Auch für die Nanipulation des DOM-Trees bietet Prototype diverse Funktionen. Neben den
+Standardfunktionen bietet Prototype dort auch Komfortfunktionen wie \lstinline{wrap()}, womit ein
+Element durch ein neues Element umschlossen wird und das neue Element zurückgegeben wird.
+
+\item[DOM Traversal] \hfill \\
+Um ausgehend von einem Element ein anderes, unterhalb liegendes, Element zu finden, bietet Prototype
+mit der \lstinline{select(selector...)}-Methode einen komfortablen Weg, das Element anhand eines
+CSS-Selektors zu finden. Zur einfachen Navigation innerhalb der DOM-Struktur stellt Prototype
+ebenfalls Methoden zur Verfügung, wobei teilweise mehrere Methoden für fast denselben Zweck
+existieren. Sowohl \lstinline{adjacent()} als auch \lstinline{siblings()} geben die
+Geschwisterelemente eines Elements zurück - der einzige Unterschied ist, dass \lstinline{adjacent()}
+ein Filtern der Elemente durch einen CSS-Selektor erlaubt.
+
+\item[Events] \hfill \\
+Prototype bietet zwei Möglichkeiten, Events zu registrieren. Die klassische Möglichkeit ist über die
+\lstinline{observe(eventName, handler)}-Methode, wobei \lstinline{handler} für alle Events
+ausgeführt werden, die das Element erreichen - also Events die vom Element selbst oder einem
+enthaltenen Elemente ausgehen. Da die Methode das Element selbst zurückgibt, besteht die einzige
+Möglichkeit, den Event-Handler wieder zu entfernen, darin, ihn anhand des Eventnamens und der
+Handler-Funktion zu identifizieren. Dazu dient die Methode
+\lstinline{stopObserving([eventName][, handler])}, wobei beide Argumente optional sind; wenn
+ein Argument nicht angegeben ist, werden alle entsprechenden Event-Handler entfernt.
+
+Der neue und auch komfortablere Weg ist über die Methode
+\lstinline{on(eventName[, selector], handler)}. Sofern ein CSS-Selektor angegeben wurde,
+wird aus dem Event-Handler ein \emph{Delegate}, d.h. er reagiert nur noch auf Events, die von einem
+enthaltenen Element ausgelöst wurden, welches dem CSS-Selektor entspricht. Ein weiterer Vorteil
+dieser Methode ist ihr Rückgabewert. Sie gibt ein Objekt zurück, welches zwei Methodem
+\lstinline{start()} und \lstinline{stop()} enthält, wobei letztere den Event-Handler entfernt und
+erstere ihn wieder hinzufügt.
+
+In beiden Fällen stellt Prototype sicher, dass \lstinline{this} auf das ursprüngliche Element zeigt,
+wobei sich bei einem \emph{Delegate} darüber streiten lässt, ob \lstinline{this} nicht eher auf das
+Element zeigen sollte, von dem das Event ausgeht. Als Parameter erhält die Callbackmethode jeweils
+das durch Prototype erweiterte Event-Objekt: Das Zielelement ist browserunabhängig über die
+\lstinline{target}-Eigenschaft verfügbar und die \lstinline{stop()}-Methode verhindert sowohl das
+Aufsteigen des Events im DOM-Tree als auch das Ausführen der Standardaktion (beispielsweise das
+Laden einer neuen Seite bei einem Link). Eine browserunabhängige Möglichkeit, nur eine dieser
+Aktionen zu verhindern, fehlt jedoch. Sofern \lstinline{on()} zum Registrieren des Eventhandlers
+genutzt wurde, wird das Zielelement in einem zusätzlichen Parameter an da Callback übergeben.
+
+
+\item[Objektsystem] \hfill \\
+Das Objektsystem von Prototype bietet Klassen, Vererbung und Mixins, wobei eine Klasse beliebig
+viele Mixins aber nur eine Parentklasse besitzen kann. Eine neue Klasse erstellt man, indem man den
+Rückgabewert der Funktion \lstinline{Class.create([superclass][, methods...])} einer Variable
+zuweist - es handelt sich dabei um die Konstruktorfunktion der neuen Klasse. Sofern man von einer
+anderen Klasse erben möchte, übergibt man diese Klasse als erstes Argument. Alle weiteren Argumente
+sind JavaScript-Objekte, die Funktionen enthalten. Diese werden der neuen Klasse hinzugefügt, wobei
+bereits vorhandene Methoden überschrieben werden - wenn man Mixins benutzt, sollte man diese also
+vor dem Objekt übergeben, welches die neuen Funktionen der Klassen enthält. Beim Überschreiben von
+Methoden der Parentklasse nutzt Prototype den dynamischen Character von JavaScript voll aus: Sofern
+das erste Argument der neuen Methode den Namen \lstinline{$super} hat, zeigt dieses auf die
+überschriebene Methode, sodass sie einfach und ohne zusätzlichen Code aufgerufen werden kann.
+
+
+\item[Hilfsfunktionen] \hfill \\
+Prototype stellt keine globalen Hilfsfunktionen zur Verfügung, allerdings erweitert es die
+Prototypen und Konstruktoren bestehender Objekte, sodass über diese Objekte auf die die zahlreichen
+Hilfsfunktionen von Prototype zugegriffen werden kann.
+
+\item[UI-Elemente] \hfill \\
+Prototype enthält keine UI-Widgets, allerdings wird es oftmals zusammen mit
+Scriptaculous\footnote{\href{http://script.aculo.us}{http://script.aculo.us}} verwendet wird. Diese
+Erweiterung erlaubt Drag\&Drop von Elementen, sortierbare Listen, Autovervollständigung von
+Textfeldern, Inline-Editierung von Texten/Werten und ein \emph{Slider}-Widget zur Auswahl eines
+numerischen Werts.
+
+\item[Kompatibilität] \hfill \\
+Prototype wird bereits in einigen Teilen von Indico genutzt, daher ist es an sich mit dem übrigen
+Code von Indico kompatibel, obwohl sowohl Indico als auch Prototype einige
+\lstinline{$X}-Funktionen nutzen, wobei \lstinline{$A} sogar in beiden Frameworks definiert wird -
+allerdings überschreibt die \lstinline{$A}-Funktion von Indico die aus Prototype, wobei es keine
+Konflikte gibt, da beide Funktionen denselben Zweck haben und auch von den Parametern her
+identisch sind. Neben diesem Konflikt gibt keien weiteren Probleme, obwohl Prototype sehr invasiv
+ist: Wie auch das Indico-Framework definiert es mehrere globale Objekte mit \enquote{Standardnamen}
+wie \emph{Event} oder \emph{Element}. Darüberhinaus erweitert es die Prototypen sowohl von nativen
+Objekten wie \lstinline{Array}, \lstinline{Number} und \lstinline{String} - jedoch nicht den
+\lstinline{Object}-Prototypen, da Veränderungen an diesem mit hoher Wahrscheinlichkeit Probleme
+verursachen; beispielsweise verändert sich das Verhalten von \lstinline{for(var elem in object)}
+dadurch - als auch von Hostobjekten wie \lstinline{HTMLElement}. Gerade letzteres ist aufgrund des
+größtenteils undefinierten Verhaltens dieser Objekte riskant.
+
+\item[Sonstige Features] \hfill \\
+Die meisten Methoden von Prototype kann man sowohl als Methode als auch als Funktion aufrufen, wobei
+bei letzterem das Objekt als Funktionsargument übergeben wird. Prototype enthält selbst keine
+Funktionen zur Animation von Elementen, jedoch bietet Scriptaculous entsprechende Funktionalität.
+
+\item[Dokumentation] \hfill \\
+Prototype besitzt eine ausführliche Online-Dokumentation. Zu jeder Funktion gibt es neben der
+Beschreibung auch ein kurzes Codebeispiel, allerdings sind diese Beispiele statisch und können nicht
+ausgeführt werden, ohne den Code manuell in eine HTML-Datei zu kopieren. Der Quellcode von Prototype
+ist ausführlich kommentiert und in Module unterteilt, die jedoch im Release in eine einzelne Datei
+zusammengefasst sind.
+
+\item[Lizenz] \hfill \\
+Prototype steht unter der
+MIT-Lizenz\footnote{\href{http://www.opensource.org/licenses/mit-license.php}{http://www.opensource.org/licenses/mit-license.php}}.
 \end{description}
