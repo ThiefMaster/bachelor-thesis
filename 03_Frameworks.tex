@@ -668,3 +668,59 @@ Möglichkeit die Lizenz zu nutzen, die besser zu seiner Software bzw. dessen Liz
 \end{description}
 
 \imga{jquery-ui-accordion.png}{Das Akkordion-Menü von jQuery UI}{jQuery UI-Akkordion}
+
+
+
+
+
+\section{Classy}
+Bei Classy handelt es sich um eine JavaScript-Bibliothek, um Klassen zu implementieren. Dabei
+orientiert sie sich am Objektmodell von Python. Classy kann von
+\href{http://classy.pocoo.org/}{http://classy.pocoo.org/} heruntergeladen werden.
+
+\begin{description}
+\item[DOM-Funktionen] \hfill \\
+Da Classy eine auf auf Klassen/Objekte spezialisierte Bibliothek ist, bietet sie keinerlei
+DOM-Funktionen.
+
+\item[Objektsystem] \hfill \\
+Das Objektmodell von Classy orientiert sich an dem der Scriptsprache Python. Jede Klasse erbt von
+einer Basisklasse - in Python ist das (bei \emph{new-style}-Klassen)
+\lstinline[language=Python]{object}, in Classy ist es \lstinline{Class}. Um eine neue Klasse zu
+definieren, erstellt man also eine neue Klasse, die von \lstinline{Class} erbt, indem man deren
+statische Methode \lstinline{$extend(props)} aufruft, wobei \lstinline{props} ein Objekt ist,
+welches die neue Klasse definiert: die Methode \lstinline{__init__()} wird zum Konstruktor der neuen
+Klasse, alle weiteren Methoden werden zu Instanzmethoden der Klasse.
+
+Um einer Klasse Mixins hinzuzufügen, definiert man beim Erstellen der Klasse ein Array
+\lstinline{__include__}, welches die Mixins enthält - dabei handelt es sich um JavaScript-Objekte,
+die Funktionen enthalten. Ein weiteres optionales Objekt, welches man beim Erstellen der Klasse
+übergeben kann, ist \lstinline{__classvars__}. Die darin gespeicherten Werte sind innerhalb der
+Klasse über \lstinline{this.$class.<name>} verfügbar und nicht instanzspezifisch.
+
+Sofern beim Erstellen einer Klasse eine Methode der Parent-Klasse überschrieben wurde, ist diese
+Methode in \lstinline{this.$super} verfügbar, sodass sie komfortabel aufgerufen werden kann.
+
+Genau wie in Python ist auch bei Classy der \lstinline{new}-Operator optional. Dies wird dadurch
+erreicht, dass in der Konstruktorfunktion überprüft wird, ob \lstinline{this === window} ist. Falls
+dem so ist, erstellt die Funktion ein neues Objekt und gibt dieses zurück.
+
+\item[Hilfsfunktionen] \hfill \\
+Classy bietet neben dem Objektsystem keine weitere Funktionalität.
+
+\item[Kompatibilität] \hfill \\
+Classy exportiert ein globales Objekt \lstinline{Class}. Sofern dieser Name mit einem bestehenden
+Objekt kollidiert, kann die ursprüngliche Zuweisung mit \lstinline{Class.$noConflict()}
+wiederhergestellt werden und der Rückgabewert dieser Funktion entweder einer anderen Variable
+zugewiesen oder als Parameter einer anonymen Funktion genutzt werden, um innerhalb dieser
+\lstinline{Class} benutzen zu können.
+
+\item[Dokumentation] \hfill \\
+Classy besitzt eine Onlinedokumentation, in der die Benutzung anhand von Beispielen beschrieben
+wird und jede Funktion dokumentiert ist. Der Quellcode ist an Stellen, wo es zum Verständnis
+notwendig ist, kommentiert.
+
+\item[Lizenz] \hfill \\
+Classy steht unter der
+BSD-Lizenz\footnote{\href{http://www.opensource.org/licenses/BSD-3-Clause}{http://www.opensource.org/licenses/BSD-3-Clause}}.
+\end{description}
