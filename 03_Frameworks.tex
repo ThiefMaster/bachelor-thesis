@@ -416,8 +416,46 @@ jQuery nutzt \emph{Sizzle} zur Suche von Elementen anhand eines CSS-Selektors..
 jQuery enthält kein Objektsystem.
 
 \item[Hilfsfunktionen] \hfill \\
+jQuery bietet eine Vielzahl an Funktionen, die jeweils über \lstinline{$.funcName} verfügbar sind.
+Neben den üblichen funktionalen Funktionen wie \lstinline{map()} und \lstinline{each} bietet jQuery
+auch Funktionen, um eine Variable auf einen bestimmten Typ zu testen und mit \lstinline{trim()} auch
+eine Funktion, um Whitespace am Anfang oder Ende eines Strings zu entfernen. Auch ein JSON-Parser
+ist enthalten - dieser wird jedoch nur genutzt, wenn der verwendete Browser JSON nicht nativ
+unterstützt.
+
+Mit \lstinline{$.browser} besitzt jQuery ein Objekt, welches Informationen zum verwendeten Browser
+und dessen Version enthält. Dieses ist jedoch als \emph{deprecated} markiert, da es im Falle von
+browserspezifischen Problemen und Features sinnvoller ist, auf das Vorhandensein ebendieser zu
+prüfen. Dazu besitzt jQuery das \lstinline{$.support}-Objekt. Es enthält Informationen zu allen
+Browserfeatures, die jQuery selbst benötigt - die Tests, ob die jeweiligen Features vorhanden sind
+müssen beim Laden jeder Seite ausgeführt werden, weshalb die Anzahl möglichst gering gehalten wird.
 
 \item[UI-Elemente] \hfill \\
+jQuery selbst enthält keinerlei Widgets, allerdings existiert mit \emph{jQuery
+UI}\footnote{\href{http://jqueryui.com}{http://jqueryui.com}} eine Erweiterung, die diverse Widgets
+und UI-bezogene Features wie Drag\&Drop und vergrößer- und verkleinerbare, auswählbare und
+sortierbare Elemente enthält. Die Widgets bieten Dialogfenster, Buttons, Kalender,
+Fortschrittsbalken, Tabs und Slider. Neben diesen Standardwidgets gibt es noch ein
+\emph{Accordion}-Widget, welches ein \enquote{Akkordion}-Menü bzw. -Panel ermöglicht. Ebenfalls
+enthalten ist ein \emph{Autocomplete}-Widget, um HTML-Textfelder mit Autovervollständigung zu
+versehen.
+
+\imga{jquery-ui-calendar.png}{Der jQuery UI Datepicker}{jQuery UI-Datepicker}
+
+Erwähnenswert ist ist einfache Anpassbarkeit der jQuery UI-Widgets - mit dem
+\emph{ThemeRoller}\footnote{\href{http://jqueryui.com/themeroller/}{http://jqueryui.com/themeroller/}}
+gibt es eine Webapplikation, über die man mit wenigen Klicks ein neues Farbtheme für alle Widgets
+zusammenstellen kann und auch direkt sieht, wie die Widgets mit dem neuen Theme aussehen. Neben den
+Farben lassen sich auch viele weitere Aspekte per CSS anpassen - entweder global für alle Widgets
+oder über die widgetspezifischen CSS-Klassen \lstinline{.ui-<widgetname>} nur für einzelne Widgets.
+
+Codeseitig erweitert jedes Widget das jQuery-Objekt um eine Methode, über die das Widget sowohl
+erstellt als auch verändert oder wieder entfernt werden kann. Wenn die Methode ohne Parameter
+aufgerufen wird, erstellt sie das Widget mit Standardeinstellungen; alternativ kann auch ein Objekt
+als Parameter übergeben werden, um eigene Einstellungen zu benutzen. Für alle anderen Operationen
+übergibt man dieser Methode als ersten Parameter den Funktionsnamen und in den weiteren Parametern
+die funktionsspezifischen Parameter, beispielsweise \lstinline{dialog('open')} um einen zuvor
+erstellten Dialog zu öffnen.
 
 \item[Kompatibilität] \hfill \\
 jQuery exportiert nur zwei globale Funktionen: \lstinline{jQuery} und \lstinline{$}, wobei es
@@ -434,6 +472,41 @@ jQuery.noConflict();
 \end{lstlisting}
 
 \item[Sonstige Features] \hfill \\
+Wie bereits in der einführenden Beschreibung erwähnt macht jQuery extensiven Gebrauch vom
+\emph{Method Chaining}. Dies erspart dem Programmierer Arbeit, da er viele Methoden auf ein Objekt
+anwenden kann ohne den Objektnamen für jeden Aufruf neu schreiben zu müssen. Ebenfalls erhöht es die
+Performance, da nur einmal ein \emph{variable lookup} für die Objektvariable notwendig ist. Bei
+Methoden, die sowohl Getter als auch Setter sein können, ist allerdings nur die Setter-Variante
+\emph{chainable}, da der Getter einen Wert zurückgeben muss, der nicht dem ursprünglichen Objekt
+entspricht. Ein weiteres Feature in diesen Bereich ist die interne Verkettung von jQuery-Objekten.
+Wenn ein jQuery-Objekt, welches Element enthält, gefiltert wird oder Elemente hinzugefügt werden,
+wird intern ein neues Objekt erstellt, sodass die alte Elementliste erhalten bleibt. Mit der
+\lstinline{end()}-Methode kann man in der Aufrufkette zum vorherigen Objekt zurückspringen.
+Allerdings ist dabei zu beachten, dass der Code lesbar und verständlich bleibt - teilweise ist es
+sinnvoll, eine neue Aufrufkette zu beginnen statt stur zu versuchen, möglichst viele Aktionen
+innerhalb derselben Kette auszuführen.
+
+Ein anderes Feature von jQuery ist das \lstinline{Deferred}-Objekt. Es ermöglicht die Registrierung
+von Callbacks, wobei diese in drei verschiedenen Kategorien registriert werden können: \emph{done},
+\emph{fail} und \emph{always}. Das Deferred-Objekt kann entweder \emph{fail} oder \emph{done} zu
+einer beliebigen Zeit auslösen - es gilt dann als \emph{resolved}. Nach dem Ausführen der Callbacks
+werden automatisch die \emph{always}-Callbacks aufgerufen. Sobald das Objekt \emph{resolved} ist
+kann sich sein Status nicht mehr ändern, d.h. es ist ausgeschlossen dass sowohl die
+\emph{fail}-Callbacks als auch die \emph{done}-Callbacks ausgeführt werden. Der große Vorteil des
+Deferred-Objekts ist, dass Callbacks auch registriert werden können, wenn das Objekt bereits
+\emph{resolved} ist - die entsprechende Callbackfunktion wird in diesem Fall sofort ausgeführt.
+Da externer Code oftmals nur die Möglichkeit haben soll, Callbacks zu registrieren, diese aber nicht
+selbst auslösen können soll, bietet das Deferred-Objekt mit der \lstinline{promise()}-Methode eine
+Möglichkeit, nur die entsprechenden Methoden zurückzugeben, sodass das Deferred-Objekt selbst
+niemals den Sichtbarkeitsbereich der erstellenden Funktion verlassen muss. Diese Funktionalität wird
+beispielsweise von den AJAX-Funktionen von jQuery genutzt; sie geben ein solches
+\emph{Promise}-Objekt zurück.
+
+jQuery kann einfach mit eigenen Funktionen erweitert werden. Über \lstinline{jQuery.fn} kann auf den
+Prototypen der jQuery-Objekte zugegriffen werden sodass man diesem einfach eine eigene Funktion
+hinzufügen kann. Um jQuery uanbhängig von einem bestimmten jQuery-Objekt zu erweitern -
+beispielsweise um eine Funktion hinzuzufügen, die keine HTML-Elemente verwendet - kann man eine
+Funktion auch direkt dem globalen \lstinline{jQuery}-Objekt hinzufügen.
 
 \item[Dokumentation] \hfill \\
 jQuery besitzt eine ausführliche Online-Dokumentatino, die nach Aufgabenbereichen wie
@@ -457,9 +530,9 @@ enthaltene Code kommentiert, wobei es sich bei den Kommentaren strikt um technik
 handelt - ale Dokumentation sind diese nicht brauchbar, was dank der Onlinedokumentation aber auch
 nicht notwendig ist.
 
-
-
 \item[Lizenz] \hfill \\
 jQuery ist sowohl unter der MIT-Lizenz als auch der GPL verfügbar; jeder Entwickler hat die
 Möglichkeit die Lizenz zu nutzen, die besser zu seiner Software bzw. dessen Lizenz passt.
 \end{description}
+
+\imga{jquery-ui-accordion.png}{Das Akkordion-Menü von jQuery UI}{jQuery UI-Akkordion}
