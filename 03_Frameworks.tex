@@ -288,7 +288,7 @@ mehrere Eigenschaften auf einmal geändert werden können. Ein insbesondere für
 pixelgenau arbeitende Webapplikationen nützliches Feature ist die \lstinline{measure()}-Methode.
 Diese gibt ein Objekt zurück, welches Zugriff auf alle Größen- und Positionsinformationen bietet.
 
-Auch für die Nanipulation des DOM-Trees bietet Prototype diverse Funktionen. Neben den
+Auch für die Manipulation des DOM-Trees bietet Prototype diverse Funktionen. Neben den
 Standardfunktionen bietet Prototype dort auch Komfortfunktionen wie \lstinline{wrap()}, womit ein
 Element durch ein neues Element umschlossen wird und das neue Element zurückgegeben wird.
 
@@ -402,12 +402,88 @@ möglich sind. Auf der Website \href{http://jquery.com}{http://jquery.com} wird 
 
 \begin{description}
 \item[DOM-Zugriff] \hfill \\
+In jQuery findet der Zugriff auf das DOM über die \lstinline{$(...)}-Funktion statt. Sofern man als
+Parameter einen CSS-Selektor übergibt, werden alle durch diesen Selektor ausgewählten Element in
+einem neuen jQuery-Objekt verpackt und dieses wird zurückgegeben. Optional kann als zusätzlicher
+Parameter der Kontext in Form eines DOM-Elements, DOM-Dokuments oder jQuery-Objekts angegeben
+werden, um ausgehend von diesem Element zu suchen. Statt eines Selektors kann man auch ein
+DOM-Element oder ein Array solcher Elemente übergeben, um aus selbigen ein neues jQuery-Objekt zu
+erzeugen. Wenn man \lstinline{$()} ohne Parameter aufruft, wird ein leeres jQuery-Objekt erstellt.
 
-jQuery nutzt \emph{Sizzle} zur Suche von Elementen anhand eines CSS-Selektors..
+Um an in einem jQuery-Objekt enhaltene DOM-Objekte zu kommen, kann man die Arraysyntax
+\lstinline{obj[index]} nutzen, um das das jeweilige Element zu erhalten. Alternativ kann man auch
+mit der \lstinline{get([index])}-Methode nutzen. Sofern ein Index angegeben wird, gibt sie das
+jeweilige Element zurück, ansonsten ein Array aller im jQuery-Objekt enthaltenen Elemente.
+
+jQuery nutzt \emph{Sizzle} zur Suche von Elementen anhand eines CSS-Selektors.
 
 \item[DOM-Manipulation] \hfill \\
+Zum Erstellen neuer Elemente nutzt man in jQuery ebenfalls die \lstinline{$}-Funktion, indem man den
+gewünschten HTML-Code - dabei kann es sich sowohl um ein einzelnes Tag als auch eine beliebig
+komplexe HTML-Struktur handeln - als Parameter übergibt. Als zusätzlichen Parameter kann man
+entweder ein DOM-Dokument angeben, in dem die Elemente erstellt werden solle, oder aber ein Objekt,
+welches die Attribute, die dem neuen Element zugewiesen werden sollen, als Strings enthält.
+
+Bei der Verwendung von jQuery ist es eigentlich niemals notwendig, direkt auf DOM-Elemente
+zuzugreifen, da sowohl der Zugriff auf die Attribute eines Elements mittels
+\lstinline{attr(name[, value])} als auch der Zugriff auf seine Eigenschaften mittels
+\lstinline{prop(name[, value])} möglich ist.
+Elementspezifische CSS-Eigenschaften lassen sich durch die \lstinline{css()}-Methode hinzufügen bzw.
+ändern. Diese akzeptiert entweder Eigenschaft und Wert in separaten Parametern oder aber ein Objekt,
+welches mehrere Eigenschaften und Werte enthält. Dabei kann der Name sowohl in der CSS-Schreibweise
+\emph{words-with-dashes} (z.B. \lstinline{background-color}) als auch in der DOM-Schreibweise
+\emph{lowerCamelCase} (z.b. \lstinline{backgroundColor} angegeben werden. Bei numerischen
+Eigenschaften kann anstelle eines absoluten Werts auch ein Offset in der Form \lstinline{+=number}
+angegeben werden, um \emph{number} zum aktuellen Wert zu addieren.
+
+Für häufig genutzte Manipulationen wie dem Ein- und Ausblenden von Elementen stellt jQuery
+komfortabel nutzbare Funktionen zur Verfügung, sodass man dabei Entwicklungszeit einspart. Die
+Funktionen \lstinline{hide()} und \lstinline{show()} akzeptieren einen optionalen
+\emph{duration}-Parameter, der aus dem sofortigen Aus- und Einblenden eine Animation macht.
+Alternativ können Elemente auch mit den \emph{slide}-Funktionen ein- und ausgelbendet werden, wobei
+sie dabei am oberen Rand der Seite hinaus- bzw. hineinbewegt werden.
+
+Zur Veränderung der Struktur des DOM-Trees - also dem Einfügen, Entfernen und umsortieren von
+Elementen - bietet jQuery viele Funktionen, die eigentlich alle sinnvolle Möglichkeiten abdecken.
+Neben der inzwischen relativ verbreiteten \lstinline{wrap()}-Funktion enthält jQuery mit
+\lstinline{unwrap()} auch das genaue Gegenteil dieser Funktion, d.h. das Entfernen des
+Parent-Elements eines Elements und dem Einfügen selbigens an dieser Stelle. Das Einfügen von
+Elementen kann in beide Richtungen geschehen: zusätzlich zu Methoden wie \lstinline{append(elem)},
+die das übergebene Element in das im jQuery-Objekt enthaltene Element einfügen existieren mit
+Methoden wie \lstinline{appendTo(elem)} Methoden, die das im jQuery-Objekt enthaltene Element in das
+übergebene Element einfügen. Der komplette Inhalt von Elementen lässt sich durch die Methode
+\lstinline{empty()} löschen; beim Ersetzen durch neuen Inhalt gibt es mit \lstinline{html()} und
+\lstinline{text()} sowohl die Möglichkeit, HTML einzufügen, als auch einen String als Plaintext
+einzufügen, sodass möglicherweise enthaltener HTML-Code nicht ausgeführt wid.
+
+Wenn ein jQuery-Objekt mehrere Element enthält, hängt das Verhalten von der aufgerufenen Funktion
+ab. Sofern es möglich und sinnvoll ist, wirkt sich die Funktion aus jedes Element aus. Bei anderen
+Operationen wie beispielsweise dem lesenden Zugriff mittels \lstinline{attr()} wird ausschließlich
+auf das erste Element zugegriffen.
 
 \item[DOM Traversal] \hfill \\
+Wie bereits zuvor erwähnt, kann der \lstinline{$}-Funktion ein Kontext übergeben werden, um
+ausgehend von einem Element anhand eines Selektors andere Elemente zu suchen. Neben dieser
+Möglichkeit bietet jQuery diverse Methoden um Elemente ausgehend von einem Element auszuwählen -
+alle dieser Methoden akzeptieren einen CSS-Selektor zum Filtern der gefundenen Elemente. Neben den
+Geschwisterelementen, wobei diese auf Elemenet vor bzw. nach dem aktuellen Element eingeschränkt
+werden können, können mit diesen Methoden auch die Parent-Elemente selektiert werden, wobei dort je
+nach Funktion das direkte Parent-Element, alle Parent-Elemente oder alle Parent-Elemente bis zu
+einem bestimmten Element zurückgegeben werden. Mit \lstinline{closest(selector)} bietet jQuery eine
+Komfortmethode, um sich ausgehend vom aktuellen Element im DOM-Tree nach oben durchzuarbeiten, bis
+das gewünschte Element gefunden wurde - dabei kann es sich auch um das aktuelle element selbst
+handeln.
+
+Der Inhalt von jQuery-Objekten lässt sich darüberhinaus filtern und erweitern: man kann die
+Elementliste anhand eines CSS-Selektors filtern, bestimmte Elemente entfernen, die vor einer
+Suche enthaltenen Elemente der Elementliste wieder hinzufügen und einzelne Elemente hinzufügen. Auch
+das Reduzieren eines jQuery-Objekts auf ein einzelnes Element ist möglich - dabei kann es
+beispielsweise sich um das Element mit einem bestimmten Index oder um das erste bzw. letzte Element
+handeln.
+
+Eine sehr spezielle, aber für die absolute Positionierung von Elementen sehr nützliche Methode ist
+\lstinline{offsetParent()}. Diese sucht das erste übergeordnete Element, welches positioniert ist
+und damit das Referenzelement für die absolute Positionierung ist.
 
 \item[Events] \hfill \\
 
@@ -485,6 +561,12 @@ wird intern ein neues Objekt erstellt, sodass die alte Elementliste erhalten ble
 Allerdings ist dabei zu beachten, dass der Code lesbar und verständlich bleibt - teilweise ist es
 sinnvoll, eine neue Aufrufkette zu beginnen statt stur zu versuchen, möglichst viele Aktionen
 innerhalb derselben Kette auszuführen.
+
+Die meisten Funktionen in jQuery, die Werte verändern, akzeptieren statt eines Werts auch eine
+Funktion. Diese wird durch jQuery mit dem Index des Elements innerhalb des jQuery-Objekts und dem
+aktuellen Wert als Parameter aufgerufen und der Rückgabewert wird als Wert benutzt, sofern er nicht
+\lstinline{undefined} ist. Innerhalb dieser Funktion zeigt \lstinline{this} auf das jeweilige
+DOM-Element.
 
 Ein anderes Feature von jQuery ist das \lstinline{Deferred}-Objekt. Es ermöglicht die Registrierung
 von Callbacks, wobei diese in drei verschiedenen Kategorien registriert werden können: \emph{done},
