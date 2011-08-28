@@ -230,7 +230,8 @@ ist, steht es genau wie Indico selbst unter der GPL.
 Bei Prototype handelt es sich um eine kompakte JavaScript-Klassenbibliothek - das Release
 besteht nur aus einer ca. 35 KB großen JavaScript-Datei. Es wurde ursprünglich für das \emph{Ruby on
 Rails}-Framework\footnote{\href{http://rubyonrails.org/}{http://rubyonrails.org/}} entwickelt, ist
-aber auch als \emph{standalone}-Bibliothek weit verbreitet.
+aber auch als \emph{standalone}-Bibliothek weit verbreitet. Sie kann auf
+\href{http://www.prototypejs.org}{http://www.prototypejs.org} heruntergeladen werden.
 
 Prototype zielt darauf ab, Webentwicklung zu vereinfachen und insbesondere die Benutzung von AJAX
 sehr einfach zu machen. Durch das ausgereifte und komfortable Objektmodell fördert es die im
@@ -385,4 +386,80 @@ zusammengefasst sind.
 \item[Lizenz] \hfill \\
 Prototype steht unter der
 MIT-Lizenz\footnote{\href{http://www.opensource.org/licenses/mit-license.php}{http://www.opensource.org/licenses/mit-license.php}}.
+\end{description}
+
+
+
+
+
+\section{jQuery}
+jQuery ist eine leichtgewichtiges JavaScript-Bibliothek, die auf komfortablen DOM-Zugriff und AJAX
+spezialisiert ist. Dabei wird insbesondere das \emph{Chaining} von Methoden genutzt, d.h. die
+meisten Methoden geben das aktuelle Objekt zurück, sodass Aufrufketten wie \lstinline{obj.m1().m2()}
+möglich sind. Auf der Website \href{http://jquery.com}{http://jquery.com} wird jQuery auch als
+\enquote{designed to change the way that you write JavaScript} bezeichnet. Mit einer einzigen, ca.
+30 KB (minimiert und \emph{gzip}-komprimiert) großen Datei ist jQuery sehr kompakt.
+
+\begin{description}
+\item[DOM-Zugriff] \hfill \\
+
+jQuery nutzt \emph{Sizzle} zur Suche von Elementen anhand eines CSS-Selektors..
+
+\item[DOM-Manipulation] \hfill \\
+
+\item[DOM Traversal] \hfill \\
+
+\item[Events] \hfill \\
+
+
+\item[Objektsystem] \hfill \\
+jQuery enthält kein Objektsystem.
+
+\item[Hilfsfunktionen] \hfill \\
+
+\item[UI-Elemente] \hfill \\
+
+\item[Kompatibilität] \hfill \\
+jQuery exportiert nur zwei globale Funktionen: \lstinline{jQuery} und \lstinline{$}, wobei es
+sich bei letzterer um einen Alias für \lstinline{jQuery} handelt. Falls \lstinline{$} bereits
+anderweitig verwendet wird, kann man die \lstinline{jQuery.noConflict()}-Funktion nutzen, um das
+ursprünliche \lstinline{$} wiederherzustellen. Um trotzdem nicht immer \lstinline{jQuery} statt
+\lstinline{$} schreiben zu müssen, kann man seinen Code einfach in eine Funktion wrappen, die
+\lstinline{$} als Parameter zur Verfügung stellt.
+\begin{lstlisting}[caption=Verwendung von \$.noConflict]
+jQuery.noConflict();
+(function($) {
+    // $ === jQuery
+})(jQuery);
+\end{lstlisting}
+
+\item[Sonstige Features] \hfill \\
+
+\item[Dokumentation] \hfill \\
+jQuery besitzt eine ausführliche Online-Dokumentatino, die nach Aufgabenbereichen wie
+\emph{Events}, \emph{Traversing}, \emph{Manipulation} und \emph{forms} gegliedert ist. Jede
+Funktionsbeschreibung besitzt mindestens ein Codebeispiel; wenn eine Funktion je nach Parameter
+unterschiedliche Aktionen ausführt, gibt es für jede Funktionalität ein eigenes Beispiel. Diese
+Beispiele werden meist beim Laden der Seite automatisch ausgeführt, sodass man direkt sieht, wie
+sich eine Funktion auswirkt. Bei einigen Funktionen wie beispielsweise Animationen und Effekten muss
+der Beispielcode durch einen Klick explizit ausgeführt werden - dies macht Sinn, da bei solchen
+Funktionen nicht der Endzustand interessant ist sondern der Übergang. Die komplette Dokumentation
+kann inklusive Beispielcode auch als XML-Datei heruntergeladen werden, sodass man sie beispielsweise
+in einer IDE, die das Format unterstützt, importieren könnte.
+
+Während die Produktivversion von jQuery minimiert ist, kann man auf der jQuery-Website eine lesbare
+Entwicklungsversion herunterladen. Dabei handelt es sich um eine ca. 230 KB große JavaScript-Datei
+die von der Funktionalität her mit der Produktiversion identisch ist. Sofern man lieber einzelne,
+nach Aufgabenbereich unterteilte, Dateien möchte, kann man sich auch den \enquote{Quellcode} auf der
+GitHub-Seite\footnote{\href{https://github.com/jquery/jquery}{https://github.com/jquery/jquery}} von
+jQuery herunterladen. Unabhängig davon welche Entwicklungsversion man herunterlädt ist der
+enthaltene Code kommentiert, wobei es sich bei den Kommentaren strikt um technikbezogene Hinweise
+handelt - ale Dokumentation sind diese nicht brauchbar, was dank der Onlinedokumentation aber auch
+nicht notwendig ist.
+
+
+
+\item[Lizenz] \hfill \\
+jQuery ist sowohl unter der MIT-Lizenz als auch der GPL verfügbar; jeder Entwickler hat die
+Möglichkeit die Lizenz zu nutzen, die besser zu seiner Software bzw. dessen Lizenz passt.
 \end{description}
