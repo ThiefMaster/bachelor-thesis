@@ -486,7 +486,57 @@ Eine sehr spezielle, aber für die absolute Positionierung von Elementen sehr n�
 und damit das Referenzelement für die absolute Positionierung ist.
 
 \item[Events] \hfill \\
+jQuery bietet verschiedene Möglichkeiten, Eventhandler zu registrieren. Der einfachste und
+komfortabelste Weg ist, die dem Eventnamen entsprechende Methode eines jQuery-Objekts aufzurufen und
+dieser die Handlerfunktion als Parameter zu übergeben. Eine weitere Möglichkeit ist über die
+\lstinline{bind()}-Methode; dabei übergibt man Eventname und -handler als separate Parameter oder in
+einem Objekt, welches mehrere Eventhandler enthalten kann. Um dieselbe Funktion für mehrere Events
+zu benutzen können die jeweiligen Eventnamen mit Leerzeichen getrennt angegeben werden. Der große
+Vorteil bei der Benutzung von \lstinline{bind()} ist jedoch, dass man die Events in Namespaces
+unterteilen kann indem man \lstinline{'eventname.something'} als Eventname verwendet. Dies hat den
+Vorteil dass man diese Events separat auslösen oder entfernen kann, ohne andere Events dasselben
+Typs auszulösen oder zu entfernen. Darüberhinaus kann man mit dieser Funktion beliebige Events
+erstellen, d.h. nicht nur die standardmäßig unterstützen DOM-Events. Neben den regulären DOM-Events
+unterstützt jQuery die Internet Explorer-spezifischen Events \emph{mouseenter} und
+\emph{mouseleave}, welche logischerweise emuliert werden, wenn sie nicht vom Browser unterstützt
+werden.
 
+Mit \lstinline{delegate(selector, eventType, handler)} erlaubt jQuery die Delegation von Events an
+ein übergeordnetes Element. Dies hat den Vorteil, dass nicht alle von \lstinline{selector}
+ausgewählte Elemente bereits zum Zeitpunkt der Eventhandler-Registrierung existieren müssen und
+beispielsweise bei einer Liste mit vielen Elementen nur ein einziger Eventhandler registriert werden
+muss, was die Performance erhöht. Sofern man kein Basis-Element kennt, sondern Events von Elementen
+an einer \emph{beliebigen} Position im Dokument verarbeiten möchte, kann man die
+\lstinline{live}-Methode nutzen; ihre Parameter sind mit denen von \lstinline{bind()} identisch.
+Intern erstellt diese Methode einfach ein \emph{Delegate} mit dem Dokument selbst als Basis-Element.
+Der Nachteil dieser Art der Eventverarbeitung ist jedoch, dass das Element bis zum Basis-Element
+aufsteigt und erst dort ein weiteres Aufsteigen verhindert werden kann.
+
+Um Events manuell auszulösen bietet jQuery genau wie bei der regulären Registrierung von
+Eventhandlern zwei Möglichkeiten. Zum einen kann man die Shortcut-Methode die dem Eventnamen
+entspricht ohne Parameter aufrufen, zum anderen kann man die Methode
+\lstinline{trigger(eventType[, params])} nutzen. Diese erlaubt nebem der Möglichkeit, einen Namespace
+anzugeben, die Übergabe weiterer Parameter an den Eventhandler. Durch \lstinline{trigger()}
+ausgelöste Events verhalten sich wie durch Benutzerinteraktion ausgelöste Events; sie steigen im
+DOM-Tree auf und lösen die Standardaktion des Browsers aus (beispielsweise das Laden einer neuen
+Seite). Wenn dieses Verhalten nicht erwünscht ist, bietet die Funktion \lstinline{triggerHandler()}
+die Möglichkeit, nur per jQuery registrierte Eventhandler auszulösen und den Rückgabewert des
+letzten Handlers dieses Events zu verarbeiten.
+
+An die Eventhandler-Funktionen übergibt jQuery jeweils ein Event-Objekt und falls das Event manuell
+ausgelöst wurde und zusätzliche Parameter übergeben wurden ebendiese. Beim Event-Objekt handelt es
+sich um ein von jQuery erstelltes Objekt, in welches die Eigenschaften des ursprünglichen
+Event-Objekts kopiert wurden. Dabei stellt jQuery sicher, dass browserspezifische Eigenschaften wie
+der gedrückten Taste bei einem Tastatur-Event oder der Mausposition bei einem Maus-Event
+normalisiert werden und immer über dieselben Eigenschaften verfügbar sind. Darüberhinaus enthält das
+Event-Objekt browserunabhändige Methoden, um die weitere Verarbeitung des Events zu beeinflussen und
+beispielsweise das Ausführen der Standardaktion zu verhindern.
+
+\begin{lstlisting}[caption=Blockieren des Click-Events einiger Links via jQuery]
+$('a.do-not-click').click(function(e) {
+    e.preventDefault();
+});
+\end{lstlisting}
 
 \item[Objektsystem] \hfill \\
 jQuery enthält kein Objektsystem.
