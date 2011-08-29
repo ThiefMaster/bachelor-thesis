@@ -531,6 +531,13 @@ Intern erstellt diese Methode einfach ein \emph{Delegate} mit dem Dokument selbs
 Der Nachteil dieser Art der Eventverarbeitung ist jedoch, dass das Element bis zum Basis-Element
 aufsteigt und erst dort ein weiteres Aufsteigen verhindert werden kann.
 
+Zum Löschen von Eventhandlern bietet jQuery mit \lstinline{unbind()}, \lstinline{die()} und
+\lstinline{undelegate()} Funktionen für die verschiedenen Eventhandlertypen. Dabei entsprechen die
+Parameter der Funktionen ihren Gegenstücken, wobei die Handlerfunktion jeweils optional ist, sodass
+man auch alle Events eines Typs löschen kann. Zusätzlich zu diesen Parametern kann man bei
+\lstinline{unbind()} und \lstinline{undelegate()} auch \lstinline{'.namespace'} angeben, um alle
+Events aus dem angegebenen Namespace zu löschen.
+
 Um Events manuell auszulösen bietet jQuery genau wie bei der regulären Registrierung von
 Eventhandlern zwei Möglichkeiten. Zum einen kann man die Shortcut-Methode die dem Eventnamen
 entspricht ohne Parameter aufrufen, zum anderen kann man die Methode
