@@ -388,6 +388,25 @@ Prototype steht unter der
 MIT-Lizenz\footnote{\href{http://www.opensource.org/licenses/mit-license.php}{http://www.opensource.org/licenses/mit-license.php}}.
 \end{description}
 
+Ähnlich wie das Indico-Framework bietet Prototype aus fast jedem Bereich etwas, wobei JSON-RPC und
+\emph{Data Binding} nicht unterstützt werden.
+Die Erstelung und auch der Zugriff auf DOM-Elemente ist in Prototype deutlich sauberer gelöst als in
+Prototype, da nur selten auf native DOM-Eigenschaften und -Methoden zurückgegriffen werden muss und
+damit einheitlich Prototype-Code verwendet werden kann statt einer Mischung aus Framework-Funktionen
+und nativen Funktionen. Die Eventsysteme von Indico und Prototype sind relativ ähnlich - allerdings
+bietet Prototype insbesondere durch das auf das Element zeigende \lstinline{this} mehr Komfort.
+Anders als in Indico können bei Prototype keine Klassen als Mixins genutzt werden, sondern nur
+Objekte - daher ist es nur schwer möglich, Mehrfachvererbung zu erzeugen - man könnte zwar einem
+Mixin eine Funktion geben die man als Konstruktor nutzt, allerdings würden sich diese Funktionen der
+einzelnen Mixins überschreiben, sodass neben der Parent-Klasse jeweils nur ein solches Mixin genutzt
+werden könnte. Über die \emph{Enumerable}- und \emph{Function}-Funktionen bietet Prototype die auch
+in Indico vorhandenen Funktionen zur funktionalen Programmierung, wobei sie bei Prototype als
+Instanzmethoden realisiert sind statt mit dem jeweiligen Objekt als Parameter aufgerufen zu werden.
+Bei UI-Elementen kann Prototype nicht mit Indico mithalten, da selbst mit Scriptaculous wichtige
+Elemente wie Dialogfenster nicht unterstützt werden. Deutlich punkten kann Prototype bei der
+Dokumentation - das ist dank der minimalen Dokumentation des Indico-Frameworks aber nicht schwierig.
+Die MIT-Lizenz, die Prototype nutzt, ist mit der GPL kompatibel, sodass es lizenztechnisch keine
+Konflikte gibt.
 
 
 
