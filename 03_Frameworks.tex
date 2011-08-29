@@ -695,6 +695,46 @@ Möglichkeit die Lizenz zu nutzen, die besser zu seiner Software bzw. dessen Liz
 
 \imga{jquery-ui-accordion.png}{Das Akkordion-Menü von jQuery UI}{jQuery UI-Akkordion}
 
+jQuery ist auf DOM-Operationen und AJAX spezialisiert, wobei letzteres allgemein gehalten ist,
+sodass JSON-RPC selbst implementiert werden müsste. Der Zugriff auf DOM-Elemente ist in jQuery
+deutlich komfortabler als in Indico, da man durch die Nutzung von CSS-Selektoren flexibler ist und
+es oftmals nicht notwendig ist, automatisch generierte IDs zu vergeben, um ein Element später noch
+referenzieren zu können - in jQuery nutzt man die Methoden zum Durchsuchen des DOM-Trees um
+beispielsweise ausgehend vom angeklickten Element die dazugehörige Tabellenzeile zu finden. Beim
+Verändern von Elementen führt jQuery ebenfalls: die Möglichkeit, Objekte und Funktionen als Wert zu
+nutzen erhöht die Flexibilität extrem und auch die große Menge an Funktionen zum Verändern der
+DOM-Struktur ist beim Erzeugen dynamischer Elemente wie Formularen in Dialogfenstern und deren
+Validierung nützlich. Das Eventsystem von jQuery ist dank der Namespaces sehr flexibel und das
+vollständig normalisierte Event-Objekt vereinfacht die browserunabhängige Entwicklung. Ein Nachteil,
+der durch das \emph{Method Chaining} aber unumgänglich ist, ist das Fehlen eines
+Eventhandler-Objekts, welches eine komfortable Möglichkeit bietet, das Event wieder zu löschen. Man
+kann eine solche Funktion aber leicht selbst erstellen, indem man beim Registrieren des Events
+Eventname und Funktion in einer Closure speichert und damit den entsprechenden Eventhandler löscht.
+Ein Objektsystem ist in jQuery nicht vorhanden - daher müsste dort auf das bestehende System oder
+eine separate Bibliothek zurückgegriffen werden. Genau wie das Indico-Framework unterstützt auch
+jQuery Standardmethoden zur funktionalen Programmierung, wobei nicht alle in Indico verwendeten
+Funktionen auch in jQuery vorhanden sind. Sowohl Indico als auch jQuery enthalten ein UI-Framework,
+wobei sie sich in einigen grundlegenden Aspekten unterscheiden: Die Widgets von Indico sind darauf
+ausgelegt, sowohl Struktur als auch Inhalt selbst zu generieren, während jQuery UI dazu gedacht ist,
+bestehenden HTML-Code zu erweitern - letzteres hat den Vorteil, dass auch ohne JavaScript eine
+gewisse Grundfunktionalität vorhanden ist, in Indico derzeit nicht der Fall ist und auch nicht
+vorgesehen ist. Abgesehen von diesem Nachteil enthält jQuery UI mit den Widgets \emph{Dialog} und
+\emph{Tabs} die beiden Widgets, die für Indico am wichtigsten sind - das in Indico vorhandene
+Dialog-Widget hat insbesondere beim Anzeigen modaler Dialogfenster einige Probleme. Ein weiterer
+Pluspunkt für jQuery bzw. jQuery UI ist die Anpassbarkeit der Widgets - da das Design von Indico
+schlicht und seriös ist, sollten die Widgets nicht durch bunte Balken hervortreten sondern sich
+sauber in das Design integrieren. Durch die widgetübergreifenden CSS-Klassen wäre dies problemlos
+möglich. Da Prototype derzeit auf einigen Seiten vno Indico integriert wird, steht dessen
+\lstinline{$}-Funktion mit der gleichnamigen Funktion aus jQuery im Konflikt. Indico nutzt derzeit
+an einigen Stellen \emph{Preloader}-Mixins, die zuerst einen oder mehrere AJAX-Requests ausführen
+und danach das Objekt selbst initialisieren. Dabei könnte das \emph{Deferred}-Objekt von jQuery
+nützlich sein. \emph{Data Binding} wird von jQuery nicht unterstützt. Die ausführliche Dokumentation
+von jQuery ermöglicht es insbesondere auch neuen Entwicklern, sich schnell einzuarbeiten, während
+man beim JavaScript-Framework von Indico viel vorhandenen Code studieren muss um sich mit seinen
+Funktionen vertraut zu machen. Beide Lizenzen von jQuery sind mit für die Nutzung in Indico
+geeignet.
+
+
 
 
 
