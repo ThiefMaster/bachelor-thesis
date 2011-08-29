@@ -791,6 +791,25 @@ Classy steht unter der
 BSD-Lizenz\footnote{\href{http://www.opensource.org/licenses/BSD-3-Clause}{http://www.opensource.org/licenses/BSD-3-Clause}}.
 \end{description}
 
+Classy implementiert ausschließlich ein Klassensystem, weshalb auch nur dieser Bereich mit Indico
+verglichen werden kann. Sowohl Indico als auch Classy ermöglichen die Definition von Klassen und das
+Erben von einer anderen Klasse. Classy hat dabei den Vorteil, dass überschriebene Methoden
+komfortable aufgerufen werden können, ohne den Namen der ursprünglichen Klasse im Aufruf verwenden
+zu müssen. Dies bedeutet aber gleichzeitig, dass man jeweils nur eine gleichnamige Parent-Methode
+aufrufen kann, was in Classy aber kein Problem ist, da es keine Mehrfachvererbung unterstützt
+sondern nur eine Parent-Klasse und mehrere Mixins, die ausschließlich Funktionen enthalten - dabei
+überschreiben gleichnamige Funktionen innerhalb von Mixins die vorherige Funktion. Dadurch, dass
+Classy zwischen Mixins und der Parent-Klasse unterscheidet, ist keine echte Mehrfachvererbung
+möglich - der manuelle Aufruf einer als Konstruktor verwendeten Funktion ist problematisch, da jedes
+Mixin einen einzigartigen Namen für diese Funktion benutzen müsste. Allerdings wäre es durchaus
+möglich, diese Funktion genau wie das Mixin zu nennen, sodass der Unterschied zum Indico-Code, wo
+der Konstruktor einer Parentklasse mittels \lstinline{this.NameOfTheClass()} aufgerufen wird, nicht
+so gravierend wäre. Der große Nachteil gegenüber dem Objektsystem von Indico besteht jedoch darin,
+dass Mixins nicht eigenständig benutzt werden können - sie sind reine Sammlungen von Funktionen.
+Kompatibilitätsprobleme zwischen Indico und Classy bestehen nicht, da der Name \lstinline{Class}
+nirgends verwendet wird. Classy ist deutlich besser dokumentiert als das Objektsystem von Indico,
+allerdings gibt es aufgrund der starken Nutzung von Klassen in Indico extrem viele Codebeispiele des
+aktuellen Objektsystems. Die BSD-Lizenz ist mit der von Indico genuzten GPL kompatibel.
 
 
 
