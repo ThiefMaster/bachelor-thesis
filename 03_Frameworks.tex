@@ -890,3 +890,16 @@ ausführlich kommentierte Version den Quellcodes, die alle internen Abläufe erk
 \item[Lizenz] \hfill \\
 Underscore.js steht unter der MIT-Lizenz.
 \end{description}
+
+Underscore.js bietet sehr viele Hilfsfunktionen, die auch in Indico vorhanden sind. Da einige
+Funktionen wie \lstinline{each}, \lstinline{filter} und \lstinline{map} in der aktuellsten
+ECMAScript-Spezifikation standardisiert sind und von manchen Browsern bereits nativ unterstützt
+werden, nutzt Underscore.js diese nativen Funktionen, sofern sie verfügbar sind - da sie in C oder
+C++ implementiert sind, erhöht dies die Performance. Damit ist Underscore.js in der Lage, einen
+Großteil der in Indico vorhandenen Hilfsfunktionen durch performantere, besser dokumentierte
+Funktionen zu ersetzen. Der globale Name \lstinline{_} kollidiert auf globaler Ebene mit keinen
+anderen Variablen/Funktionen; in einzelnen Funktionen wird \lstinline{_} als temporäre lokale
+Variable genutzt - man könnte diese Variablen aber ohne Weiteres umbenennen was unabhängig von
+Underscore.js sinnvoll wäre, da \lstinline{_} nicht wirklich aussagekräftig ist und \lstinline{tmp}
+für eine temporäre Variable genausogut geeignet ist. Die MIT-Lizenz von Underscore.js ist mit der
+GPL kompatibel.
