@@ -1,3 +1,92 @@
 \chapter{Migration}
 
-\todotext{...}
+Bei der (teilweisen) Migration zu jQuery sind einige Schritte am Anfang zwingend notwendig, während
+andere optional sind und in relativ beliebiger Reihenfolge ausgeführt werden können. Im Folgenden
+werden die Migrationsschritte in der Reihenfolge beschrieben, wie sie durchgeführt wurden.
+
+\section{Vorbereitung}
+
+In der Vorbereitungsphase wird jQuery eingebunden und dabei auftretende Konflikte behoben. Es findet
+zu diesem Zeitpunkt noch keine Migration statt.
+
+\subsection{Einbinden von jQuery}
+
+Um JavaScript-Dateien in Indico einzubinden fügt man nicht wie üblich
+\lstinline[language=HTML]{<script>}-Tags in einem HTML-Template ein sondern erweitert die Funktion
+\lstinline{getJSFiles()} der Basisklasse für HTML-Seiten \lstinline{WPBase} sodass sie die
+notwendigen Dateien einbindet. Im Falle von jQuery, wo neben jQuery selbst auch jQuery UI und später
+diverse Plugins eingebunden werden müssen, bietet sich eine separate Funktion an. Da Indico im
+Produktivmodus einzelne JavaScript-Dateien zu komprimierten Paketen \enquote{kompiliert}, muss
+zusätzlich zur Python-Funktion die Konfigurationsdatei von \emph{jsmin} angepasst werden, damit die
+neuen Dateien in einem solchen Paket zusammengefasst werden.
+
+\begin{lstlisting}[language=Python,caption=Einbinden von jQuery und Underscore.js in Indico]
+def _includeJQuery(self):
+    info = HelperMaKaCInfo().getMaKaCInfoInstance()
+    files = ['underscore', 'jquery', 'jquery-ui']
+    if info.isDebugActive():
+        return ['js/jquery/%s.js' % f for f in files]
+    else:
+        return ['js/jquery/jquery.js.pack']
+\end{lstlisting}
+
+\subsection{Beheben von Konflikten}
+
+Nachdem jQuery und Underscore.js nun eingebunden sind, muss überprüft werden, ob es Konflikte gibt.
+Diese gibt es durch das gleichzeitige Vorhandensein von jQuery und Prototype in der Tat - unabhängig
+davon, dass dieser Konflikt bereits aus der Analysephase bekannt ist, zeigt er sich auf Seiten, die
+Prototype nutzen - auf diesen funktionieren die JavaScripts nicht mehr korrekt. Der Konflikt
+entsteht dadurch, dass jQuery und Prototype beide \lstinline{$} für sich beanspruchen und daher das
+zuletzt eingebundene Framework die vorherige Variable überschreibt. Da jQuery nach Prototype
+eingebunden wird, ist dieses Problem einfach zu lösen - mittels
+\lstinline{var $j = jQuery.noConflict();} wird die Prototype-Funktion wiederhergestellt und jQuery
+via \lstinline{$j} verfügbar gemacht. Dabei handelt es sich allerdings um eine temporäre Lösung um
+Prototype so lange beizubehalten, bis der darauf basierende Code vollständig migriert wurde. Sie hat
+den Vorteil, dass der Prototype-Code teilweise zeilenweise migriert werden und währenddessen immer
+wieder auf korrekte Funktion geprüft werden kann.
+
+\subsection{Migration von Prototype-basiertem Code}
+
+Einige Bereiche des \emph{Room Booking}-Systems von Indico nutzen Prototype zum Registrieren von
+Events. Darüberhinaus wird Prototype dort zur Formularvalidierung genutzt: Mithilfe des Objekts
+\lstinline{Form.Observer} werden die Formulare alle 400ms auf Änderungen überprüft und wenn nötig
+erneut validiert. Die häufige Prüfung auf Änderungen ist weder effizient noch notwendig -
+Formularelemente können über die \lstinline{change}-, \lstinline{click}- und
+\lstinline{keyup}-Events bei jeder Änderung validiert werden ohne mehrmals pro Sekunde alle
+Formularelemente auf Änderungen zu überprüfen. Um den Validierungscode mit jQuery möglichst
+effizient zu machen werden die Events nicht für alle Formularelemente registriert sondern nur für
+das Formular selbst, wobei ein \emph{Delegate} genutzt wird, um speziell auf Events der enthaltenen
+Formularelemente zu reagieren. \autoref{lst:jquery-validation-events} zeigt die Registrierung der
+Events; im \emph{submit}-Event wird das Formular erneut validiert und, sofern es nicht gültig ist,
+das Abschicken des Formulars verhindert und eine Fehlermeldung ausgegeben.
+
+\begin{lstlisting}[caption=Formularvalidierung via jQuery,label=lst:jquery-validation-events]
+$j('#bookingForm').delegate(':input', 'keyup change', function() {
+    forms_are_valid();
+}).submit(function(e) {
+    if (!forms_are_valid(true)) {
+        e.preventDefault();
+        alert($T('There are errors in the form. Please correct the fields with red background.'));
+    };
+});
+\end{lstlisting}
+
+Ebenfalls Änderungsbedarf besteht bei den in \autoref{lst:rb-inline-events} verwendeten
+Inline-Eventhandlern. Da die betroffenen Formularelemente bereits IDs besitzen kann ihnen über
+jQuery mühelos ein Eventhandler zugewiesen werden - dadurch können alle Scripts an derselben Stelle
+im HTML-Code stehen, was den Code lesbarer macht; unabhängig davon muss der Code geändert werden, da
+die dort verwendete \lstinline{$}-Funktion aus Prototype stammt.
+
+\begin{lstlisting}[language=HTML,caption=Inline-Eventhandler]
+<input id="onlyBookings" type="checkbox" onchange="if (this.checked) $('onlyPrebookings').checked = false;"/>
+<input id="onlyPrebookings" type="checkbox" onchange="if (this.checked) $('onlyBookings').checked = false;" />
+\end{lstlisting}
+
+An vielen Stellen zahlt es sich aus, dass Prototype und jQuery gewisse Ähnlichkeiten besitzen;
+\autoref{lst:prototype-jquery-diff} zeigt die Änderungen eines von Prototype zu jQuery migrierten
+Codeblocks.
+
+\begin{lstlisting}[language=diff,label=lst:prototype-jquery-diff,caption=Ähnlichkeit zwischen jQuery und Prototype]
+- $('blockedRooms').setValue(Json.write(roomGuids));
++ $j('#blockedRooms').val(Json.write(roomGuids));
+\end{lstlisting}
