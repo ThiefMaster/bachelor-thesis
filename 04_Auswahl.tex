@@ -43,7 +43,7 @@ oftmals aus, \lstinline{func} durch \lstinline{$.func} zu ersetzen; diverse in j
 vorhandenen Funktionen müssen dabei neu implementiert werden, sofern sie nicht unabhängig vom
 restlichen Indico-Framework funktionsfähig sind. jQuery unterstützt leider genau wie Prototype kein
 \emph{Data Binding}, weshalb dort eine Eigenentwicklung notwendig ist. Allerdings bietet jQuery
-durch \lstinline{val([newValue])} eine Methode um den Wert eines formularelements auszulesen und zu
+durch \lstinline{val([newValue])} eine Methode um den Wert eines Formularelements auszulesen und zu
 ändern - an einigen Stellen könnte man diese Funktion an ein bestimmtes Element binden und als
 \emph{Accessor} an eine andere Funktion übergeben - wenn man diese Funktionen in einem Objekt
 speichert hat man ein sauberes Interface zum Zugriff auf die Werte und Änderungen wirken sich
@@ -147,4 +147,35 @@ ist in diesem Fall auf eine entsprechende Dokumentation zu achten, sodass Entwic
 Funktion sie bevorzugen sollen, falls sie mehrfach vorhanden ist.
 
 
-\todotext{Entscheidung}
+\section{Entscheidung für ein Framework}
+
+Nach der Analyse der diversen Frameworks bzw. Bibliotheken und der verschiedenen Migrationspfade
+sind genügend Informationen vorhanden, um eine Entscheidung treffen zu können. Bei dieser
+Entscheidung muss allerdings auch bedacht werden, dass sie, sobald die Migration begonnen hat und
+entsprechend weit fortgeschritten ist, dauerhaft ist, da es nicht wirtschaftlich wäre, nach kurzer
+Zeit erneut die Technologie zu wechseln und man damit auch die übrigen Entwickler zwingen würde,
+sich wieder mit einem neuen Framework auseinanderzusetzen.
+
+Die Idee, das Indico-Framework vollständig zu ersetzen, ist zwar diskussionswürdig, kann aber gerade
+bei einem von einer Vielzahl an Benutzern aktiv verwendeten System, wo es häufig kleinere
+Fehler-Reports aber auch Feature-Requests gibt, nicht wirklich in die Tat umgesetzt werde, da ein
+Entwickler nicht langfristig ausschließlich an einer solchen Migration arbeiten kann - und die große
+Zahl zu ändernder Klassen und Funktionen würde möglicherweise sogar die Mitarbeit weiterer
+Entwickler benötigen. Daher stellt sich nur die Frage, durch welches Framework Indico erweitert
+werden soll.
+
+Prototype und jQuery - beide Frameworks haben ihre jeweiligen Vor- und Nachteile. Neben der eigenen
+Vorliebe für ein bestimmtes Framework und der Meinung der übrigen Entwickler, die letzendlich damit
+arbeiten müssen, bietet jQuery einige Vorteile gegenüber Prototype - trotz des geringen
+Mehraufwands, da Prototype bereits teilweise integriert ist. Mit den Widgets \emph{Dialog},
+\emph{Tab} und \emph{Datepicker} deckt jQuery UI drei in Indico häufig genutzte Widgets ab und
+weitere UI-Elemente können durch das Widgetsystem von jQuery UI einfach und wiederverwendbar
+entwickelt werden. Durch den komfortablen Zugriff auf die in HTML5 eingeführten
+\lstinline{data}-Attribute, die unabängig von der Browserunterstützung von HTML5 über jQuery
+zugänglich sind kann auf unübersichtlichen Inline-JavaScript-Code verzichtet werden und die
+\lstinline{$}-Funktion ist intuitiver als die drei in Prototype vorhandenen Funktionen zum Zugriff
+bzw. dem Erstellen von Elementen. Daher ist die Entscheidung auf \textbf{jQuery} gefallen.
+
+Zusätzlich zu jQuery wird \textbf{Underscore.js} integriert, da es einige Funktionen implementiert,
+die durch die Entfernung von Prototype verloren gehen und auch davon abgesehen eine nützliche
+Funktionssammlung enthält, die die zukünftige Entwicklung vereinfachen können.
