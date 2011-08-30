@@ -119,7 +119,7 @@ erwünscht ist. Bei der Migration von DOM-Zugriffen ist wie auch beim Umstieg au
 Aufwand mit dem Nutzen zu vergleichen. Ebenfalls zu beachten ist die Kompatibilität mit bestehenden
 Funktionen: Eine Funktion, die jQuery nutzt, muss überprüfen, ob es sich bei einem Objekt um ein
 DOM-Element bzw. jQuery-Objeklt handelt oder ob ein \lstinline{XElement}-Wrapper übergeben wurde und
-in diesem Fall mittels \lstinline{$(obj.dom);} das enthaltene Element in ein jQuery-Element
+in diesem Fall mittels \lstinline{$(obj.dom)} das enthaltene Element in ein jQuery-Element
 kopieren. Auch andersrum muss auf Kompatibilität geachtet werde, indem Funktionen keine
 jQuery-Objekte sondern DOM-Objekte zurückgeben - dies ist dank des Arrayzugriffs auf jQuery-Objekte
 jedoch problemlos möglich.
