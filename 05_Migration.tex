@@ -96,3 +96,19 @@ von Namensschildern für Konferenzen, Prototype. Dort wird es primär zur Unters
 eingesetzt.
 
 \img{indico-badge-editor.png}{400px}{Der Indico Badge Editor}{Indico Badge Editor}
+
+Nebem dem Migrieren des Prototype/Scriptaculous-basierten Drag\&Drop-Systems bietet sich dort eine
+vollständige Migration an, da zum einen eine Mischung aus Indico- und Prototype-Code benutzt wird
+und zum anderen selbiger Code ausschließlich DOM-Operationen ausführt. Wie auch auf dem \emph{Room
+Booking}-Seiten bietet sich auch hier an, ungültigen und unsauberen Code zu korrigieren bzw.
+aufzupolieren. In diesem Fall beinhaltet dies die Benutzung korrekter IDs - Leerzeichen sind dort
+nicht zulässig - und das Entfernen von Inline-Eventhandlern. Die Uploadfunktion für
+Hintergrundbilder erstellt einen IFrame, um das Uploadformular dorthin abzusenden, sodass die Seite
+selbst nicht neugeladen werden muss. Für diese unsaubere Methode bieten sich zwei Lösungen an: Durch
+die Integration des \emph{jQuery Form}-Plugins ließe sich der IFrame-Code in jQuery-Plugin
+auslagern, sodass der Code übersichtlicher gehalten wird und gleichzeitig die Kompatibilität mit
+allen Browsern bestehen bleibt. Sofern letzteres nicht notwendig wäre, könnte man auch die Fähigkeit
+moderner Browser nutzen, über AJAX Dateien hochzuladen - aufgrund der Zielgruppe von Indico ist dies
+jedoch nicht praktikabel. Da in der aktuellen Phase jedoch das Ziel Prototype zu entfernen im
+Vordergrund steht und das Form-Plugin auch noch nicht eingebunden ist, bleibt der IFrame-Code
+zunächst erhalten.
