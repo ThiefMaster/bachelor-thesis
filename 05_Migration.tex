@@ -77,7 +77,7 @@ jQuery mühelos ein Eventhandler zugewiesen werden - dadurch können alle Script
 im HTML-Code stehen, was den Code lesbarer macht; unabhängig davon muss der Code geändert werden, da
 die dort verwendete \lstinline{$}-Funktion aus Prototype stammt.
 
-\begin{lstlisting}[language=HTML,caption=Inline-Eventhandler]
+\begin{lstlisting}[language=HTML,label=lst:rb-inline-events,caption=Inline-Eventhandler]
 <input id="onlyBookings" type="checkbox" onchange="if (this.checked) $('onlyPrebookings').checked = false;"/>
 <input id="onlyPrebookings" type="checkbox" onchange="if (this.checked) $('onlyBookings').checked = false;" />
 \end{lstlisting}
@@ -112,3 +112,35 @@ moderner Browser nutzen, über AJAX Dateien hochzuladen - aufgrund der Zielgrupp
 jedoch nicht praktikabel. Da in der aktuellen Phase jedoch das Ziel Prototype zu entfernen im
 Vordergrund steht und das Form-Plugin auch noch nicht eingebunden ist, bleibt der IFrame-Code
 zunächst erhalten.
+
+An dieser Stelle sind alle anhand der \lstinline{$}-Funktion leicht aufzufindenden Codestellen, die
+Prototype nutzen, angepasst. Durch die Erweiterung der Prototypen nativer Objekte gibt es allerdings
+noch Prototype-Funktionen, die nicht über \lstinline{$} oder eine der globalen Prototype-Klassen
+gefunden werden können. Um diese zu finden könnte man entweder eine Liste aller in Prototype
+enthaltenen Methoden erstellen und danach suchen oder aber nach der Entfernung von Prototype testen,
+wo es Probleme gibt. Da Prototype nur auf relativ wenigen Seiten eingebunden wird, bietet sich
+letztere Methode aufgrund des geringeren Aufwands an, obwohl dabei nicht sichergestellt ist, dass
+alle Problemstellen gefunden werden - dazu wäre parallel dazu eine \emph{Code Coverage}-Analyte
+notwendig, die sich jedoch ausschließlich auf die Codeteile erstrecken dürfte, die möglicherweise
+Prototype nutzen, da ansonsten mangels automatischer Tests möglichst alle JavaScripts in Indico
+manuell ausgeführt werden müssten, obwohl ein großer Teil garnicht in der Lage ist, Prototype zu
+nutzen.
+
+\subsection{Entfernen von Prototype}
+
+Ähnlich wie beim Einbinden von jQuery muss auch beim Entfernen von Prototype die Methode
+\lstinline{getJSFiles()} modifiziert werden. Da Prototype nicht global integriert ist, überschreiben
+verschiedene Unterklassen von \lstinline{WPBase} diese Methode - sofern dies ausschließlich der
+Integration von Prototype dient, kann die Methode einfach entfernt werden; falls weitere JavaScripts
+eingebunden werden, muss die Methode entsprechend angepasst werden.
+
+Die im letzten Abschnitt erwähnten Tests zeigen, dass außer einer undefinierten Funktion
+\lstinline{size()} keine Probleme auftreten. Bei der Funktion handelt es sich um eine generische
+Funktion um die Anzahl der Elemente in einem \emph{Enumerable}-Objekt - also einem Array, einem
+Objekt oder einer Argumentliste - zu bestimmen. Während JavaScript bei Arrays über die
+\lstinline{length}-Eigenschaft direkten Zugriff auf die Anzahl der Elemente bietet, existiert eine
+solche Eigenschaft bei Objekten nicht. Dies ergibt insofern Sinn, dass es zwei Möglichkeiten gibt,
+die Anzahl zu bestimmen: Zum einen könnte man ausschließlich die Eigenschaften zählen, die das
+Objekt selbst besitzt, zum anderen könnte man auch alle über die Prototypenkette erreichbaren
+Eigenschaften mitzählen. Da Underscore.js mit \lstinline{_.size()} eine solche Funktion enthält,
+kann \lstinline{someObject.size()} einfach durch \lstinline{_.size(someObject)} ersetzt werden.
