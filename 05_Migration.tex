@@ -226,6 +226,8 @@ self.startPicker.datepicker($.extend({
 }));
 \end{lstlisting}
 
+\img{indico-daterange.png}{400px}{Das jQuery-basierte DateRange-Widget}{Indico DateRange Widget}
+
 Um ungültige Daten zu verhindern, wird ein Eventhandler für die \emph{onSelect}-Events der beiden
 Datepicker registriert. In diesem wird im Falle eines ungültigen Datums, d.h.
 \lstinline{startDate > endDate}, das Datum des Datepickers, der gerade nicht verändert wurde, auf
@@ -235,4 +237,121 @@ ausschließlich gültige Daten ausgewählt werden können. Dies würde jedoch de
 verringern, da ein an sich gültiges Datum in diesem Fall möglicherweise nicht auswählbar ist ohne
 zuvor das andere Datum anzupassen.
 
-\img{indico-daterange.png}{400px}{Das jQuery-basierte DateRange-Widget}{Indico DateRange Widget}
+
+
+\subsection{Migration der Dialogfenster}
+
+Indico nutzt Dialogfenster, im Code normalerweise als \emph{Popup} bzw. \emph{ExclusivePopup}
+bezeichnet, um Informationen und Formulare in einem separaten Fenster darzustellen, welches
+allerdings auf der Seite integriert ist - diese wird während ein solches Fenster geöffnet ist durch
+ein graues Overlay als inaktiv dargestellt und lässt keine Benutzerinteraktion zu. Diese Fenster
+haben den Vorteil, dass sie fest mit der Seite verknüpft sind und - da es sich nicht um echte
+Fenster handelt - nicht durch Popup-Blocker blockiert werden können.
+
+\subsubsection{Aktuelle Situation}
+
+Dialogfenster werden durch die Klasse \lstinline{ExclusivePopup} erstellt. Diese generiert die
+HTML-Struktur des Dialogs und seines Inhalts. Neben \lstinline{ExclusivePopup} gibt es mit
+\lstinline{ExclusivePopupWithButtons} eine davon abgeleitete Klasse, die am unteren Ende des
+Dialogs eine Buttonzeile erstellt. Um ein Dialogfenster zu erstellen, leitet man eine neue Klasse
+von einer der gerade genannten Klassen ab und überschreibt dort die \lstinline{draw}-Methode und -
+falls nötig - den Konstruktor. In \lstinline{draw()} generiert man die DOM-Elemente, die im Dialog
+angezeigt werden sollen und - falls man \lstinline{ExclusivePopupWithButtons} nutzt - den Inhalt der
+Buttonleiste. Beides wird danach an die \lstinline{draw}-Methode der Parent-Klasse übergeben.
+Teilweise werden in von \lstinline{ExclusivePopup} erbenden Dialogfenstern Buttons erstellt welche
+zwar problemlos funktionieren, sich jedoch im Aussehen von der korrekten Implementierung
+unterscheiden.
+
+\begin{lstlisting}[label=lst:confirmpopup-old,caption=Indico-Code zum Erstellen eines simplen Dialogfensters]
+draw: function() {
+    var self = this;
+    var okButton = Html.input('button', {style:{marginRight: pixels(3)}}, $T(this.buttonTitle));
+    okButton.observeClick(function(){
+        self.close();
+        self.handler(true);
+    });
+
+    var cancelButton = Html.input('button', {style:{marginLeft: pixels(3)}}, $T(this.cancelButtonTitle));
+    cancelButton.observeClick(function(){
+        self.close();
+        self.handler(false);
+    });
+
+    return this.ExclusivePopupWithButtons.prototype.draw.call(
+        this,
+        this.content,
+        Html.div({}, okButton, cancelButton));
+}
+\end{lstlisting}
+
+In \autoref{lst:confirmpopup-old} sieht man die Implementation eines simplen
+\enquote{OK/Abbrechen}-Dialogs. Für beide Buttons werden manuell HTML-Buttons erstellt und mit CSS
+der Abstand zwischen ihnen festgelegt. Ähnlicher Code ist für alle Dialogfenster mit Buttons
+notwendig, da das Indico-Framework keine Möglichkeit bietet, Dialog-Buttons in einer abstrakten Art
+und Weise zu erstellen.
+
+\subsubsection{Gewünschte Situation}
+
+Beim Erstellen von Dialogfenstern - sowohl mit als auch ohne Buttons - handelt es sich um eine
+Standardaufgabe. Während der Workflow für ein Dialogfenster ohne Buttons bereits frei von
+\emph{duplicate code} ist, besteht bei den Buttons Änderungsbedarf. Ein Button kann mit vier
+Eigenschaften charakterisiert werden: Titel, Aktion, Position, Zustand. Titel, Aktion und Zustand
+sidn dabei buttonspezifisch während die Position bzw. Reihenfolge der Buttons dialogspezifisch ist.
+Daher bietet es sich an, die Buttons in einem Array zu speichern, wobei es sich bei jedem Button um
+ein Objekt oder Array handelt. Da der Zustand (aktiv/inaktiv) eines Buttons in der Regel per Code
+nachträglich geändert wird, muss dieser nicht unbedingt schon bei der Definition es Buttons
+angegeben werden - die meisten Buttons sind dauerhaft aktiv. Damit gibt es pro Button noch zwei
+Attribute - ein Array bietet sich also an, da der Entwickler dabei nicht immer die Namen der
+Eigenschaften angeben muss.
+
+Um die \lstinline{draw}-Funktion zu entschlacken - bei komplexeren Dialogen enthält sie oftmals
+einen Großteil der Logik des Dialogs - und auch um voneinander unabhängige Codeabschnitte zu trennen
+ist es sinnvoll, die Buttondefinition in eine separate Funktion auszulagern.
+\autoref{lst:confirmpopup-new} zeigt dabei den Code des jQuery-basierten Dialogs. Die
+\lstinline{draw}-Funktion reicht nun ausschließlich den (an den Konstruktor übergebenen) Inhalt des
+Dialogfensters an die Parent-Funktion weiter; \lstinline{_getButtons()} gibt ein Array mit den
+Buttons drück, wobei ein Button jeweils ein 2-Tupel aus Titel und Callbackfunktion ist. Die Variable
+\lstinline{self} wird genutzt, da innerhalb des Callbacks \lstinline{this} nicht mehr auf die
+aktuelle Objektinstanz sondern auf das globale Objekt \lstinline{window} zeigt.
+
+
+\begin{lstlisting}[label=lst:confirmpopup-new,caption=jQuery-Code zum Erstellen eines simplen Dialogfensters]
+draw: function() {
+    return this.ExclusiveWithButtonsPopup.prototype.draw.call(
+        this, this.content);
+},
+_getButtons: function() {
+    var self = this;
+    return [
+        [$T(this.buttonTitle), function() {
+            self.close();
+            self.handler(true);
+        }],
+        [$T(this.cancelButtonTitle), function() {
+            self.close();
+            self.handler(false);
+        }]
+    ];
+}
+\end{lstlisting}
+
+\subsubsection{Anpassung der ExclusivePopup-Klasse}
+
+Im ursprünglichen Code erstellt die \lstinline{draw}-Funktion der \lstinline{ExclusivePopup}-Klasse
+sowohl das graue Overlay als auch das Dialogfenster samt Titelzeile und \enquote{X}-Button zum
+Schließen. Da das Dialog-Widget von jQuery UI diese Aufgaben übernimmt, muss die neue Funktion
+lediglich ein leeres \lstinline[language=HTML]{<div>}-Element erstellen und es mit der
+jQuery-Methode \lstinline{dialog()} in einen Dialog umwandeln. Danach muss nur noch der Inhalt des
+Dialogs eingefügt werden, wobei eine Kompatibilitätsschicht dafür sorgt, dass auch
+\lstinline{XElement}-Objekte des Indico-Frameworks als Dialog-Inhalt übergeben werden können. Wie
+auch das Datepicker-Widget akzeptiert der jQuery UI-Dialog ein Objekt mit verschiedenen Optionen. Um
+Unterklassen zu ermöglichen, \enquote{ihren} Dialog zu beeinflussen, können die Optionen durch das
+Überschreiben einer weiteren Funktion beeinflusst werden. Dies ist insbesondere für die
+\lstinline{ExclusivePopupWithButtons}-Klasse notwendig, da sie dem Dialog Buttons hinzufügen muss.
+
+Aufgrund der einfachen Erweiterbarkeit der Dialog-Optionen besteht die
+\lstinline{ExclusivePopupWithButtons}-Erweiterung der Dialogklasse primär aus Code, um das
+Button-Array ist das vom Dialog-Widget benötige Format zu konvertieren.
+
+\img{indico-dialog-old.png}{300px}{Klassisches Dialogfenster in Indico}{Indico-Dialogfenster (klassisch)}
+\img{indico-dialog-new.png}{300px}{jQuery UI-basiertes Dialogfenster in Indico}{Indico-Dialogfenster (jQuery UI)}
