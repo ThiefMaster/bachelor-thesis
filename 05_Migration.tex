@@ -1,4 +1,4 @@
-\chapter{Migration}
+\chapter{Migration zu Query}
 
 Bei der (teilweisen) Migration zu jQuery sind einige Schritte am Anfang zwingend notwendig, während
 andere optional sind und in relativ beliebiger Reihenfolge ausgeführt werden können. Im Folgenden
@@ -144,3 +144,95 @@ die Anzahl zu bestimmen: Zum einen könnte man ausschließlich die Eigenschaften
 Objekt selbst besitzt, zum anderen könnte man auch alle über die Prototypenkette erreichbaren
 Eigenschaften mitzählen. Da Underscore.js mit \lstinline{_.size()} eine solche Funktion enthält,
 kann \lstinline{someObject.size()} einfach durch \lstinline{_.size(someObject)} ersetzt werden.
+
+Zusammen mit Prototype kann auch die \lstinline{$j}-Kompatibilitätsschicht entfernt werden, da
+\lstinline{$} nun unbenutzt ist. Dazu wird der Aufruf von \lstinline{jQuery.noConflict} entfernt und
+per dateiübergreifendem \emph{Suchen\&Ersetzen} jedes Vorkommen von \lstinline{$j} durch
+\lstinline{$} ersetzt.
+
+\section{Migration}
+
+\subsection{Entwicklung des DateRange-Widgets}
+
+Das \emph{Room Booking}-Modul von Indico ermöglicht es bestimmten Personen, Konferenzzimmer über
+eine gewisse Zeit zu blockieren, sodass diese nur von ausgewählten Gruppen reserviert werden können.
+Beim Erstellen einer solchen Blockade müssen sowohl Start- als auch Enddatum ausgewählt werden.
+Dazu werden zwei Textfelder benutzt, die jeweils beim Klick auf den nebenstehenden Button einen
+Kalender zur Auswahl des Datums öffnen. Diese Datumsfelder werden durch ein Indico-Widget erstellt.
+Komfortabler wäre es allerdings, statt der Textfelder dauerhaft zwei Kalender anzuzeigen. Da das von
+Indico verwendete Kalender-Widget mehrere gleichzeitig sichtbare Kalender nicht unterstützt und es
+von Vorteil wäre, kein separates \emph{Third-Party}-Script für den Kalender zu bnötigen, bietet es
+sich hier an, den \emph{DatePicker} von jQuery UI zu nutzen.
+
+\subsubsection{Funktionsanalyse des Datepickers}
+
+Der Datepicker wird in der Regel mit einem Textfeld verknüpft, sodass er sich beim Fokussieren des
+Felds automatisch öffnet und nach Auswahl eines Datums wieder schließt. Es ist allerdings auch
+möglich, ihn mit einem \lstinline[language=HTML]{<div>} zu verknüpfen. In diesem Fall ist er
+dauerhaft sichtbar und stellt das ausgewählte Datum lediglich über seine API zur Verfügung. Viele
+Eigenschaften des Datepickers können individuell konfiguriert werden; insbesondere ist es möglich,
+Daten in der Vergangenheit bzw. vor oder nach einem bestimmten Datum zum sperren und die
+auswählbaren Jahre zu beschränken. Das Widget bietet auch eine Option, um mehrere Monate
+gleichzeitig anzuzeigen. Hierbei sind allerdings nur mehrere aufeinanderfolgende Monate möglich und
+es kann unabhängig von der Anzahl der angezeigten Monate nur ein Datum ausgewählt werden. Daher muss
+das DateRange-Widget zwei separate DatePicker nutzen.
+
+\subsubsection{Anforderungen}
+
+Das DateRange-Widget soll zwei DatePicker nebeneinander anzeigen und ausschließlich die Auswahl
+gültiger Daten zulassen. Die ausgewählten Daten sollen optional in versteckten Formularfeldern
+gespeichert werden, sodass sie beim Absenden des zugehörigen Formulars mitgesendet werden. Es soll
+möglich sein, bereits beim Erstellen des Widgets ein Start- und Enddatum anzugeben welches
+standardmäßig ausgewählt ist. Das Datum soll über die DatePicker jeweils änderbar sein, sofern das
+Widget nicht deaktiviert ist. Um den Benutzerkomfort zu erhöhen soll jedes gültige Datum auswählbar
+sein, sodass (sofern Jahr und Monat bereits ausgewählt sind) es immer möglich ist, mit zwei Klicks
+die gewünschten Daten auszuwählen. Es soll eine Option geben, um die Auswahl von Daten in der
+Vergangenheit zu verhindern - um das Widget so allgemein wie möglich zu halten, soll es allerdings
+möglich sein, beliebige Datepicker-Optionen zu verändern - sowohl für beide Datepicker als auch nur
+für einzelne.
+
+\subsubsection{Implementierung}
+
+Da es das DateRange-Widget vollständig auf jQuery basieren soll und keinerlei Funktionen aus dem
+alten Indico-Framework benötigt, bietet es sich an, es als \emph{UI Widget} zu realisieren. Dabei
+handelt es sich um eine Sammlung von Funktionen, die über eine einzelne jQuery-Funktion zugänglich
+gemacht werden, und verschiedene Basisfunktionen standardmäßig enthalten. Innerhalb der Funktionen
+eines Widgets zeigt \lstinline{this} auf das Widget-Objekt und \lstinline{this.element} enthält das
+jQuery-Element, in welchem das Widget erstellt wurde - wenn ein Widget über ein jQuery-Objekt
+erstellt wird, welches mehrere Elemente enthält werden separate Widgets erstellt, sodass
+\lstinline{this.element} immer exakt ein Element enthält. Einzelne Funktionen im Widget werden durch
+jQuery automatisch aufgerufen; beispielsweise wird \lstinline{_init()} bei jedem Aufruf der
+Widgetfunktion ausgeführt und \lstinline{_create()} ausgeführt, wenn die Widgetfunktion ein neues
+Widget erstellt.
+
+Im DateRange-Widget wird die \lstinline{_create}-Funktion genutzt, um die Datepicker zu erstellen
+und zu konfigurieren. Sofern versteckte Formularfelder verwendet werden sollen, werden sie ebenfalls
+in dieser Funktion erstellt. Um die geforderte Flexibilität bei der Konfiguration der einzelnen
+Datepicker zu erreichen, wird die Methode \lstinline{$.extend()} von jQuery genutzt. Sie erweitert
+das erste übergebene Objekt mit den Eigenschaften der übrigen Objekte, wobei bereits vorhandene
+Eigenschaften überschrieben werden. Wie in \autoref{lst:daterange-picker-cfg} zu sehen ist, wird als
+erstes das frühstmögliche Datum festgelegt. Da es unabhängig von \lstinline{allowPast} möglich sein
+soll, ein anderes frühestes Datum vorzugeben, werden die zusätzlichen Datepicker-Optionen erst
+danach festgelegt, sodass sie \lstinline{minDate} überschreiben können. Zuletzt werden die Optionen
+für das Standarddatum und das versteckte Formularfeld übergeben. Diese können nicht überschrieben
+werden, da beide durch die API des DateRange-Widgets ausreichend konfigurierbar sind.
+
+\begin{lstlisting}[label=lst:daterange-picker-cfg,caption=Datepicker-Konfiguration im DateRange-Widget]
+self.startPicker.datepicker($.extend({
+    minDate: self.options.allowPast ? null : 0
+}, self.options.pickerOptions, self.options.startPickerOptions, {
+    altField: self.startDateField || '',
+    defaultDate: self.options.startDate
+}));
+\end{lstlisting}
+
+Um ungültige Daten zu verhindern, wird ein Eventhandler für die \emph{onSelect}-Events der beiden
+Datepicker registriert. In diesem wird im Falle eines ungültigen Datums, d.h.
+\lstinline{startDate > endDate}, das Datum des Datepickers, der gerade nicht verändert wurde, auf
+das des anderen Datepickers gesetzt. Eine andere Möglichkeit wäre in diesem Eventhandler jeweils
+\lstinline{minDate} und \lstinline{maxDate} des anderen Datepickers anzupassen, sodass
+ausschließlich gültige Daten ausgewählt werden können. Dies würde jedoch den Benutzerkomfort
+verringern, da ein an sich gültiges Datum in diesem Fall möglicherweise nicht auswählbar ist ohne
+zuvor das andere Datum anzupassen.
+
+\img{indico-daterange.png}{400px}{Das jQuery-basierte DateRange-Widget}{Indico DateRange Widget}
