@@ -6,15 +6,15 @@
 % (2010)
 %
 \documentclass[%
-	pdftex,%              PDFTex verwenden
-	a4paper,%             A4 Papier
-	oneside,%             Einseitig (für scrbook zweiseitig einstellen!)  beachte ihead/ohead
-	headsepline,%         Linie nach Kopfzeile
-	footsepline,%         Linie vor Fusszeile
-	12pt,%                Größere Schrift, besser lesbar am bildschirm
-	pointlessnumbers,
-	%titlepage						starts a new page for a new document title. Default in scrbook, but not in article
-]{scrbook}%		 			    scrartcl für ohne Chapters, sonst scrreprt
+    pdftex,%              PDFTex verwenden
+    a4paper,%             A4 Papier
+    oneside,%             Einseitig (für scrbook zweiseitig einstellen!)  beachte ihead/ohead
+    headsepline,%         Linie nach Kopfzeile
+    footsepline,%         Linie vor Fusszeile
+    12pt,%                Größere Schrift, besser lesbar am bildschirm
+    pointlessnumbers,
+    %titlepage            starts a new page for a new document title. Default in scrbook, but not in article
+]{scrbook}%               scrartcl für ohne Chapters, sonst scrreprt
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Pagedesign
@@ -35,8 +35,8 @@
 %
 % Abstände zwischen Abschnitten und Zeilen
 %
-\setlength{\parindent}{0ex} 												% Einzug erste Zeile neues Kapitel
-\setlength{\parskip}{2.0ex plus 0.9ex minus 0.4ex} 	% Lücke zwischen zwei Absätzen
+\setlength{\parindent}{0ex}                                                 % Einzug erste Zeile neues Kapitel
+\setlength{\parskip}{2.0ex plus 0.9ex minus 0.4ex}     % Lücke zwischen zwei Absätzen
 %
 % Zeilenabstand auf 1,5 Zeilen (Anforderung Diplomarbeiten)
 %
@@ -167,40 +167,40 @@
 \usepackage{pstricks, pst-node, pst-plot, pst-math, pst-optic, pst-lens, pst-text, pst-xkey, pstricks-add}
 \usepackage{ifpdf}
 \ifpdf
-		\usepackage[
-			pdftex=true,
-			hyperfigures=true,
-			backref=false,
-			hyperindex=true,
-			bookmarksnumbered=true,
-			bookmarksopen=true,
-			colorlinks=true,
-			citecolor=black,
-			linkcolor=black,
-			urlcolor=black,
-			filecolor=magenta,
-			pdfborder={0 0 0},
-			plainpages=false
-			]{hyperref}
-		\pdfinfo{
-			/Title (Bachelor-Thesis)
-			/Subject (Redesign und Modernisierung von Indicos JavaScript-Framework)
-			/Author (Adrian Mönnich)
-			/Keywords (JavaScript Indico CERN Framework JQuery)
-		}
-		\else
-			\usepackage[
-				hypertex=true,
-				hyperref=true,
-				backref=true,
-				hyperindex=true,
-				bookmarksnumbered=true,
-				colorlinks=true,
-				inkcolor=blue,
-				urlcolor=blue,
-				filecolor=magenta,
-				german
-			]{hyperref}
+        \usepackage[
+            pdftex=true,
+            hyperfigures=true,
+            backref=false,
+            hyperindex=true,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            colorlinks=true,
+            citecolor=black,
+            linkcolor=black,
+            urlcolor=black,
+            filecolor=magenta,
+            pdfborder={0 0 0},
+            plainpages=false
+            ]{hyperref}
+        \pdfinfo{
+            /Title (Bachelor-Thesis)
+            /Subject (Redesign und Modernisierung von Indicos JavaScript-Framework)
+            /Author (Adrian Mönnich)
+            /Keywords (JavaScript Indico CERN Framework JQuery)
+        }
+        \else
+            \usepackage[
+                hypertex=true,
+                hyperref=true,
+                backref=true,
+                hyperindex=true,
+                bookmarksnumbered=true,
+                colorlinks=true,
+                inkcolor=blue,
+                urlcolor=blue,
+                filecolor=magenta,
+                german
+            ]{hyperref}
 \fi
 
 %% Gesataltung von Hyperlinks
