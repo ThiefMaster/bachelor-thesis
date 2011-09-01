@@ -72,9 +72,9 @@ $j('#bookingForm').delegate(':input', 'keyup change', function() {
 \end{lstlisting}
 
 Ebenfalls Änderungsbedarf besteht bei den in \autoref{lst:rb-inline-events} verwendeten
-Inline-Eventhandlern. Da die betroffenen Formularelemente bereits IDs besitzen kann ihnen über
-jQuery mühelos ein Eventhandler zugewiesen werden - dadurch können alle Scripts an derselben Stelle
-im HTML-Code stehen, was den Code lesbarer macht; unabhängig davon muss der Code geändert werden, da
+Inline-Events. Da die betroffenen Formularelemente bereits IDs besitzen kann ihnen über jQuery
+mühelos ein Eventhandler zugewiesen werden - dadurch können alle Scripts an derselben Stelle im
+HTML-Code stehen, was den Code lesbarer macht; unabhängig davon muss der Code geändert werden, da
 die dort verwendete \lstinline{$}-Funktion aus Prototype stammt.
 
 \begin{lstlisting}[language=HTML,label=lst:rb-inline-events,caption=Inline-Eventhandler]
