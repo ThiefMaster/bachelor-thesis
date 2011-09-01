@@ -1,3 +1,30 @@
 \chapter{Fazit}
 
-\todotext{Fazit schreiben}
+Im Rahmen dieser Bachelorarbeit am CERN wurden nicht nur zwei der bekanntesten JavaScript-Frameworks
+unter die Lupe genommen sondern auch die \emph{Internals} des Indico-Frameworks. Bei allen
+Frameworks haben sich sowohl Stärken als auch Schwächen gezeigt, wobei sich jQuery gegenüber
+Prototype insbesondere durch die enthaltenen UI-Widgets behaupten konnte.
+
+Tatsächlich auf jQuery umgestellt wurden bisher nur einige wenige Teile von Indico, wobei mit den
+Dialogfenstern und Tabs Elemente ausgesucht wurden, die an möglichst vielen Stellen zum Einsatz
+kommen. Im Verlauf der Arbeit hat sich neben dem Primärziel, das bestehende Framework zu ersetzen oder zu
+erweitern, ein weiteres Ziel herauskristallisiert: jQuery so früh wie möglich, d.h. sobald Prototype
+entfernt und Konflikte behoben waren, in die von allen Entwicklern genutzten Version zu integrieren,
+sodass sowohl bei Neuentwicklungen als auch beim (nicht frameworkbezogenen) Refactoring bestehender
+Elemente jQuery und jQuery-Plugins verwendet werden können.
+
+Der Entwicklungszweig, in dem Dialoge und Tabs auf jQuery umgestellt werden, befindet sich auch nach
+Abschluss dieser Arbeit noch in Entwicklung, da noch kleinere Anpassungen am Design und einige
+Bugfixes notwendig sind.
+
+Neben den bereits migrierten Bereichen von Indico gibt es noch weitere, wo sich ein - zumindest
+DOM-Operationen betreffend - vollständiger Umstieg auf jQuery lohnen würde. Einer dieser Bereiche
+ist die Validierung von Formularelementen. Dort würde sich die Nutzung des jQuery
+Validation-Plugins\footnote{\href{http://bassistance.de/jquery-plugins/jquery-plugin-validation/}{http://bassistance.de/jquery-plugins/jquery-plugin-validation/}}
+anbieten, wobei dabei aufgrund der dynamischen Erzeugung vieler Formulare und den teilweise
+komplexen, d.h. nicht auf ein einzelnes Feld beschränkten, Validierungsregeln weitere Analysen
+notwendig werden um festzustellen, ob dieses Plugin tatsächlich für gen gewünschten Zweck geeignet
+ist.
+
+Langfristig bietet es sich auch an, über eine vollständige Migration nachzudenken - allerdings erst,
+wenn der Anteil an jQuery-basiertem Code deutlich gestiegen ist.
