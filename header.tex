@@ -369,6 +369,8 @@
 \counterwithout{figure}{chapter}
 \counterwithout{footnote}{chapter}
 
+% Captions abschaltbar machen
+\usepackage{caption}
 
 % Bilder
 \newcommand{\img}[4]{
@@ -392,6 +394,18 @@
       \caption[#3]{\label{img.#1} #2}
       \vspace{1ex}
     %\end{center}
+  \end{figure}
+}
+
+\newcommand{\imgrot}[5]{
+  \begin{figure}[!hbt]
+    %\begin{center}
+    \centering
+      \vspace{1ex}
+      \includegraphics[width=#2,angle=#3]{images/#1}
+      \caption[#5]{\label{img.#1} #4}
+    %\end{center}
+    \vspace{1ex}
   \end{figure}
 }
 
