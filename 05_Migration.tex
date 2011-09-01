@@ -398,3 +398,16 @@ $('> .ui-tabs-nav a', this).each(function() {
     $this.unbind('click.tabs');
 });
 \end{lstlisting}
+
+
+\section{Probleme bei der Migration}
+
+Die Migration zu jQuery lief größtenteils unproblematisch ab, die einzigen Probleme gab es durch die
+Verwendung von HTML-Elementen an Stellen, wo man reinen Text erwarten würde - insbesondere in
+Dialogtiteln. Da diese direkt an das jQuery UI-Dialog-Widget durchgereicht werden, müssen sie
+entweder reiner Text oder aber ein DOM-Element bzw. jQuery-Objekt sein. Aufgrund der Verwendung der
+\lstinline{Html.*}-Funktionen wurden jedoch \lstinline{XElement}-Wrapper übergeben, sodass es je
+nach Browser zu einer Fehlermeldung oder einem leeren Titel kam. Um diesen Fehler auszuschließen
+wäre es nützlich, wenn jQuery beliebige Objekte unterstützen würde, sofern sie eine Methode
+enthalten, die HTML oder ein DOM-Element zurückgibt. Allerdings hat das Fehlen dieses Features auch
+seine Vorteile, da unsauberer Code so sofort auffällt und überarbeitet werden kann.
