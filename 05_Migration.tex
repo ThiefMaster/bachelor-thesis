@@ -355,3 +355,46 @@ Button-Array ist das vom Dialog-Widget benötige Format zu konvertieren.
 
 \img{indico-dialog-old.png}{300px}{Klassisches Dialogfenster in Indico}{Indico-Dialogfenster (klassisch)}
 \img{indico-dialog-new.png}{300px}{jQuery UI-basiertes Dialogfenster in Indico}{Indico-Dialogfenster (jQuery UI)}
+
+
+\subsection{Migration der statischen Tabs}
+
+Indico verwendet zwei Arten von Tabs, was primär damit zusammenhängt, dass in Indico ursprünglich
+kein JavaScript verwendet wurde. Bei den \enquote{dynamischen} Tabs handelt es sich um eine Klasse,
+an die für jedes Tab Titel und Generatorfunktion übergeben werden und daraus ein Tab-Widget erzeugt
+wird. Die \enquote{statischen} Tabs hingegen werden im serverseiten Python-Code erzeugt und laden
+beim Auswählen eines Tabs eine neue Seite. Um Designanpassungen möglichst einfach zu machen ist an
+verschiedenen Stellen vorhandener Code, der jeweils dieselbe Aufgabe hat zu vermeiden - Tabs sollten
+also ausschließlich an einer Stelle generiert werden. Da das Tab-Widget aus jQuery UI verwendet
+werden soll, bietet es sich an, dieses auch für die statischen Tabs zu nutzen. Dazu gibt es
+prinzipiell zwei Möglichkeiten: Man könnte das Template, welches für die statischen Tabs genutzt
+wird, so anpassen, dass es dieselbe Struktur und CSS-Klassen wie die jQuery-Tabs verwendet. Dies
+würde zwar das Aussehen vereinheitlichen und CSS-Änderungen würden alle Tabs betreffen, allerdings
+würde es zu Problemen führen falls sich die Struktur in einer zukünftigen Version von jQuery UI
+ändert. Daher ist es sinnvoll, im Template ausschließlich die vom Tab-Widget benötigte Struktur zu
+erzeugen und danach per JavaScript das eigentliche Tab-Widget zu erzeugen.
+
+Dazu wird der HTML-Code der statischen Tabs mit einer speziellen CSS-Klasse versehen, sodass er via
+JavaScript einfach gefunden werden und in ein Tab-Widget umgewandelt werden kann. Normalerweise ist
+vorgesehen, dass der Inhalt von Tabs entweder bereits vorhanden ist oder per AJAX nachgeladen wird.
+Um das klassische Verhalten zu erreichen muss sowohl verhindert werden dass ein AJAX-Request
+abgesendet wird als auch dass versucht wird, einen nicht vorhandenen Tab-Container anzuzeigen. Dies
+lässt sich am einfachsten dadurch erzielen, dass die Links der einzelnen Tabs als Linkziel die dem
+Tab zugehörige Seite enthalten und keinerlei \emph{click}-Events ausgeführt werden. Für ersteres
+wird bei Tab-Link in einem \lstinline{data}-Attribut die Ziel-URL gespeichert, da das Tab-Widget das
+Linkziel verändert, und nach dem Erstellen des Widgets wieder als \lstinline{href} zugewiesen. Um
+das Tab-Widget daran zu hindern, den Tab-Inhalt per AJAX zu laden, werden einfach die
+\emph{click}-Events gelöscht - dank der Nutzung von Namespaces betrifft dies ausschließlich die
+durch das Tab-Widget hinzugefügten Eventhandler.
+
+Der Code, um die Links anzupassen, ist in \autoref{lst:static-tabs} zu sehen. \lstinline{this} zeigt
+dabei jeweils auf den äußersten Container des Tab-Widgets, sodass nur die Links innerhalb eines
+direkten Childelements des Containers mit der Klasse \lstinline{ui-tabs-nav} modifiziert werden.
+
+\begin{lstlisting}[label=lst:static-tabs,caption=Umwandlung der Tabs in reguläre Links]
+$('> .ui-tabs-nav a', this).each(function() {
+    var $this = $(this);
+    $this.attr('href', $this.data('href'));
+    $this.unbind('click.tabs');
+});
+\end{lstlisting}
