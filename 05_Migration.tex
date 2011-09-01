@@ -346,12 +346,12 @@ Dialogs eingefügt werden, wobei eine Kompatibilitätsschicht dafür sorgt, dass
 \lstinline{XElement}-Objekte des Indico-Frameworks als Dialog-Inhalt übergeben werden können. Wie
 auch das Datepicker-Widget akzeptiert der jQuery UI-Dialog ein Objekt mit verschiedenen Optionen. Um
 Unterklassen zu ermöglichen, \enquote{ihren} Dialog zu beeinflussen, können die Optionen durch das
-Überschreiben einer weiteren Funktion beeinflusst werden. Dies ist insbesondere für die
-\lstinline{ExclusivePopupWithButtons}-Klasse notwendig, da sie dem Dialog Buttons hinzufügen muss.
+Überschreiben einer weiteren Funktion beeinflusst werden. Dies ist insbesondere für die Klasse
+\lstinline{ExclusivePopupWithButtons} notwendig, da sie dem Dialog Buttons hinzufügen muss.
 
-Aufgrund der einfachen Erweiterbarkeit der Dialog-Optionen besteht die
-\lstinline{ExclusivePopupWithButtons}-Erweiterung der Dialogklasse primär aus Code, um das
-Button-Array ist das vom Dialog-Widget benötige Format zu konvertieren.
+Aufgrund der einfachen Erweiterbarkeit der Dialog-Optionen besteht die erweiterte Dialogklasse
+\lstinline{ExclusivePopupWithButtons} primär aus Code um das Button-Array ist das vom Dialog-Widget
+benötige Format zu konvertieren.
 
 \img{indico-dialog-old.png}{300px}{Klassisches Dialogfenster in Indico}{Indico-Dialogfenster (klassisch)}
 \img{indico-dialog-new.png}{300px}{jQuery UI-basiertes Dialogfenster in Indico}{Indico-Dialogfenster (jQuery UI)}
