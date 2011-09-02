@@ -1,0 +1,29 @@
+interface Document : Node {
+  readonly attribute DocumentType doctype;
+  readonly attribute DOMImplementation implementation;
+  readonly attribute Element documentElement;
+  Element createElement(in DOMString tagName)
+  DocumentFragment createDocumentFragment();
+  Text createTextNode(in DOMString data);
+  Comment createComment(in DOMString data);
+  CDATASection createCDATASection(in DOMString data)
+  ProcessingInstruction createProcessingInstruction(in DOMString target, in DOMString data)
+  Attr createAttribute(in DOMString name)
+  EntityReference createEntityReference(in DOMString name)
+  NodeList getElementsByTagName(in DOMString tagname);
+  Node importNode(in Node importedNode, in boolean deep)
+  Element createElementNS(in DOMString namespaceURI, in DOMString qualifiedName)
+  Attr createAttributeNS(in DOMString namespaceURI, in DOMString qualifiedName)
+  NodeList getElementsByTagNameNS(in DOMString namespaceURI, in DOMString localName);
+  Element getElementById(in DOMString elementId);
+  readonly attribute DOMString inputEncoding;
+  readonly attribute DOMString xmlEncoding;
+  attribute boolean xmlStandalone;
+  attribute DOMString xmlVersion;
+  attribute boolean strictErrorChecking;
+  attribute DOMString documentURI;
+  Node adoptNode(in Node source)
+  readonly attribute DOMConfiguration domConfig;
+  void normalizeDocument();
+  Node renameNode(in Node n, in DOMString namespaceURI, in DOMString qualifiedName)
+};

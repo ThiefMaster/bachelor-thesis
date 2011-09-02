@@ -2,6 +2,8 @@
 \captionsetup[figure]{list=no}
 \counterwithin{figure}{chapter}
 \setcounter{figure}{0}
+\counterwithin{lstlisting}{chapter}
+\setcounter{lstlisting}{0}
 
 \chapter{Anhang}
 
@@ -14,17 +16,20 @@
 
 \section{Quellcodes}
 \subsection{Quellcode des DateRange-Widgets}
-\lstinputlisting{code/jquery.daterange.js}
+\lstinputlisting[nolol,caption=DateRange-Widget]{code/jquery.daterange.js}
 
 \subsection{Quellcode der ExclusivePopup-Klasse}
-\lstinputlisting{code/exclusivepopup.js}
+\lstinputlisting[nolol,caption=ExclusivePopup-Klasse]{code/exclusivepopup.js}
 
 
 
-\section{Document Object Model-Referenz}
+\section{DOM-Interfaces}
 
-\todotext{auf w3.org nach was schönem dazu suchen}
+\subsection{Das Node-Interface}
+\lstinputlisting[nolol,language=IDL,caption=DOM-Node-Interface (DOM Level 3 Core Specification)]{code/dom-node.idl}
 
+\subsection{Das Document-Interface}
+\lstinputlisting[nolol,language=IDL,caption=DOM-Document-Interface (DOM Level 3 Core Specification)]{code/dom-document.idl}
 
 
 \section{Funktionsreferenzen der JavaScript-Frameworks}
