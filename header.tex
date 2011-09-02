@@ -12,7 +12,6 @@
     headsepline,%         Linie nach Kopfzeile
     footsepline,%         Linie vor Fusszeile
     12pt,%                Größere Schrift, besser lesbar am bildschirm
-    pointlessnumbers,
     %titlepage            starts a new page for a new document title. Default in scrbook, but not in article
 ]{scrbook}%               scrartcl für ohne Chapters, sonst scrreprt
 
@@ -361,6 +360,10 @@
 \makeatletter
 \newcommand*{\textoverline}[1]{$\overline{\hbox{#1}}\m@th$}
 \makeatother
+
+\renewcommand*{\figureformat}{
+  \figurename~\thefigure
+}
 
 % Hyphenation
 \hyphenation{Java-Script Frame-work}
