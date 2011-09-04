@@ -173,16 +173,16 @@ beispielsweise HTTP-Requests und Formular\emph{daten}. Die Ereignisse, auf die S
 können, sind dabei primär netzwerkbezogen - zum Beispiel die neue Verbindung eines Clients oder
 der vorzeitige Abbruch eines Seitenaufrufs. Es ist allerdings durchaus möglich, dass mit
 entsprechendem Code Teile der Browserumgebung serverseitig nachgebildet werden. So ist es denkbar,
-ein HTML-Dokument nicht als String sondern als DOM-Tree darzustellen. Dieser könnte dann dieselben
-Methoden wie der Browser zur Verfügung stellen, sodass Operationen die sowohl clientseitig als auch
-serverseitig sinnvoll sind, denselben Code nutzen können.
+ein HTML-Dokument nicht als String sondern als DOM-Tree darzustellen. In diesem Fall könnten
+dieselben Methoden wie im Browser zur Verfügung gestellt werden, sodass Teile des Codes sowohl
+client- als auch serverseitig nutzbar sind.
 
 
 \subsection{Programmierparadigmen}
 
-Das Programmierparadigma einer Programmiersprache ist "die Sichtweise auf und den Umgang mit den zu
-verarbeiteten Daten und Operationen". \citep[Kap. 1.3.1]{progsprachen}
-In JavaScript kann man man sich zwischen drei dieser Paradigmen entscheiden:
+Das Programmierparadigma einer Programmiersprache ist \enquote{die Sichtweise auf und den Umgang mit
+den zu verarbeiteten Daten und Operationen}. \citep[Kap. 1.3.1]{progsprachen} In JavaScript kann man
+man sich zwischen drei dieser Paradigmen entscheiden:
 
 \begin{description}
 \item[Imperative/prozedurale Programmierung] \hfill \\
@@ -191,11 +191,11 @@ Kapselung und Wiederverwendung von Funktionalität werden Funktionen genutzt.
 \citep[Kap. 1.3.1]{progsprachen}
 
 Da die Host-Umgebung in JavaScript Objekte zur Verfügung stellt und auch Datentypen wie Strings und
-Arrays Objekte sind, kann man jedoch nicht rein prozedural programmieren - man kann aber vollständig
+Arrays Objekte sind, lässt sich zwar nicht rein prozedural programmieren, jedoch vollständig
 auf die Nutzung eigener Objekte verzichten. Da dadurch viel Komfort wie die Nutzung assoziativer
-Arrays - die in JavaScript simple Objekte sind - verloren geht ist dieses Paradigma nicht zu
+Arrays - die in JavaScript simple Objekte sind - verloren geht, ist dieses Paradigma nicht zu
 empfehlen. Es kann aber durchaus sinnvoll sein, Funktionen außerhalb von Objekten zu definieren,
-sofern sie alleinstehend sind und man keien Namespaces nutzen will: JavaScript unterstützt zwar
+sofern sie alleinstehend sind und man keine Namespaces nutzen will: JavaScript unterstützt zwar
 keine Namespace, allerdings sind Funktionen sog. \emph{First-Class-Objekte}, d.h. man kann sie in
 Variablen speichern und sie haben noch weitere Eigenschaften, auf die später näher eingegangen
 wird. Aufgrund der Möglichkeit, Funktionen in Variablen zu speichern, kann man Namespaces einfach
@@ -208,14 +208,14 @@ objekt\emph{orientierten} Programmiersprache allerdings keine Klassen.
 \citep[Kap. 1.3.1]{progsprachen}
 
 Nachdem zuvor schon Objekte erwähnt wurden, die von der Host-Umgebung zur Verfügung gestellt werden,
-ist es nur logisch, dass der Entwickler auch selbst Objekte definieren kann. Dies geschieht
-allerdings anders als in klassischen objektorientierten Programmiersprachen wie Java oder C++ über
-Klassen sondern über Objekte und Konstruktoren (die wiederum ganz normale Funktionen sind).
-Da das Objektsystem von JavaScript einzigartig ist und einige Besonderheiten besitzt, wird im
-Verlauf dieses Kapitels näher darauf eingegangen.
+ist es nur logisch, dass der Entwickler auch selbst Objekte definieren kann. Dies geschieht anders
+als in klassischen objektorientierten Programmiersprachen wie Java oder C++ nicht über Klassen,
+sondern erfolgt hier über Objekte und Konstruktoren (die wiederum ganz normale Funktionen sind).  Da
+das Objektsystem von JavaScript einzigartig ist und einige Besonderheiten besitzt, wird im Verlauf
+dieses Kapitels näher darauf eingegangen.
 
 \item[Funktionale Programmierung] \hfill \\
-Eine rein funktionales Programmiersprache basiert nicht auf Wertzuweisungen sondern benutzt
+Eine rein funktionale Programmiersprache basiert nicht auf Wertzuweisungen sondern benutzt
 ausschließlich Funktionsdefinitionen, die eine Eingabe in eine Ausgabe transformieren.
 \citep[Kap. 1.3.1]{progsprachen}
 
@@ -226,7 +226,7 @@ einfach funktionale Elemente mit objektorientierten bzw. prozeduralen Elementen 
 prominentesten aus anderen funktionalen Programmiersprachen bekannten Methoden sind
 \lstinline{forEach()} um eine Funktion alle Elemente einer Liste anzuwenden, \lstinline{map()} um
 eine Liste mittels einer Funktion in eine neue Liste zu transformieren und \lstinline{filter()} um
-nur die Elemente aus einer Liste zu übernehmen, die von der Filter-Funktion durch die Rückgabe vob
+nur die Elemente aus einer Liste zu übernehmen, die von der Filter-Funktion durch die Rückgabe von
 \lstinline{true} akzeptiert wurden.
 \end{description}
 
