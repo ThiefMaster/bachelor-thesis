@@ -179,7 +179,7 @@ mehrere Entwickler am Framework gearbeitet haben ohne sich an einheitliche Stand
 Indico enthält einige UI-Widgets, die teilweise im Framework enthalten sind oder darauf basieren und
 außerhalb des Frameworks erweitert werden. Da diese Erweiterungen größtenteils allgemein gehalten
 sind, kann man sie zum Framework dazuzählen. Das Dialog-Widget ermöglicht Inline-Popups mit Titel,
-Inhalt und Buttons; zur Verwendung erstellt man eine Klasse, die von der Dialog-Klasse abgeleitet
+Inhalt und Buttons; zur Verwendung erstellt man eine Klasse, die von der Dialogklasse abgeleitet
 ist und eine \lstinline{draw()}-Methode implementiert, welche sowohl den Inhalt als auch die Buttons
 generiert. Letztere werden ebenfalls durch ein Widget erstellt, welches jedoch nur den Button
 erstellt und einen \emph{click}-Handler hinzufügt - die Positionierung innerhalb des Dialogs findet
@@ -332,14 +332,14 @@ genutzt wurde, wird das Zielelement in einem zusätzlichen Parameter an da Callb
 
 \item[Objektsystem] \hfill \\
 Das Objektsystem von Prototype bietet Klassen, Vererbung und Mixins, wobei eine Klasse beliebig
-viele Mixins aber nur eine Parentklasse besitzen kann. Eine neue Klasse erstellt man, indem man den
+viele Mixins aber nur eine Parent-Klasse besitzen kann. Eine neue Klasse erstellt man, indem man den
 Rückgabewert der Funktion \lstinline{Class.create([superclass][, methods...])} einer Variable
 zuweist - es handelt sich dabei um die Konstruktorfunktion der neuen Klasse. Sofern man von einer
 anderen Klasse erben möchte, übergibt man diese Klasse als erstes Argument. Alle weiteren Argumente
 sind JavaScript-Objekte, die Funktionen enthalten. Diese werden der neuen Klasse hinzugefügt, wobei
 bereits vorhandene Methoden überschrieben werden - wenn man Mixins benutzt, sollte man diese also
 vor dem Objekt übergeben, welches die neuen Funktionen der Klassen enthält. Beim Überschreiben von
-Methoden der Parentklasse nutzt Prototype den dynamischen Character von JavaScript voll aus: Sofern
+Methoden der Parent-Klasse nutzt Prototype den dynamischen Character von JavaScript voll aus: Sofern
 das erste Argument der neuen Methode den Namen \lstinline{$super} hat, zeigt dieses auf die
 überschriebene Methode, sodass sie einfach und ohne zusätzlichen Code aufgerufen werden kann.
 
@@ -803,7 +803,7 @@ Classy zwischen Mixins und der Parent-Klasse unterscheidet, ist keine echte Mehr
 möglich - der manuelle Aufruf einer als Konstruktor verwendeten Funktion ist problematisch, da jedes
 Mixin einen einzigartigen Namen für diese Funktion benutzen müsste. Allerdings wäre es durchaus
 möglich, diese Funktion genau wie das Mixin zu nennen, sodass der Unterschied zum Indico-Code, der
-den Konstruktor einer Parentklasse mittels \lstinline{this.NameOfTheClass()} aufruft, nicht
+den Konstruktor einer Parent-Klasse mittels \lstinline{this.NameOfTheClass()} aufruft, nicht
 so gravierend wäre. Der große Nachteil gegenüber dem Objektsystem von Indico besteht jedoch darin,
 dass Mixins nicht eigenständig benutzt werden können - sie sind reine Sammlungen von Funktionen.
 Kompatibilitätsprobleme zwischen Indico und Classy bestehen nicht, da der Name \lstinline{Class}
