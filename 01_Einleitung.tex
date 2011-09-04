@@ -40,8 +40,8 @@ geachtet werden kann, dass diese Probleme dort nicht ebenfalls vorhanden sind. S
 User-Interface-Elemente (\enquote{Widgets}) wie beispielsweise Buttons, Dialoge und Tableisten
 enthält, ist zu prüfen, ob diese sinnvoll genutzt und an das bestehende Design angepasst werden können.
 
-Nachdem ein Framework ausgewählt wurde muss dieses in die Software integriert werden. Nachdem dies
-geschehen ist müssen möglicherweise auftretende Konflikte mit bestehendem Code behoben werden.
+Nachdem ein Framework ausgewählt wurde muss dieses in die Software integriert werden. Darauffolgend
+müssen möglicherweise auftretende Konflikte mit bestehendem Code behoben werden.
 Ebenfalls kann nun analysiert werden, ob es sinnvoll ist, das alte Framework vollständig zu ersetzen
 oder nur durch das neue zu erweitern bzw. problematische Teile zu ersetzen und andere zu erweitern
 oder überhaupt nicht zu modifizieren.
@@ -57,24 +57,30 @@ man sich einen Überblick darüber verschaffen kann.
 
 Im Grundlagenkapitel werden die genutzen Technologien und ihre Besonderheiten näher betrachtet und
 erläutert. Nach einem kurzen Überblick über die Scriptsprache JavaScript wird ihr Objektmodell
-vorgestellt und mit dem anderer objektorientierter Sprachen verglichen. Anhand einem Beispiel wird
+vorgestellt und mit dem anderer objektorientierter Sprachen verglichen. Anhand eines Beispiels wird
 demonstriert, inwiefern sich die JavaScript-Programmierung für verschiedene Browser unterscheidet,
 sofern man kein Framework nutzt.
 
-Die Funktionen des bestehenden Frameworks werden im dritten Kapitel kurz vorgestellt. Desweiteren
+Auf die Funktionen des bestehenden Frameworks wird im dritten Kapitel kurz eingegangen. Desweiteren
 werden dort die in Frage kommenden Frameworks vorgestellt, anhand von verschiedenen Gesichtspunkten
 analysiert und mit dem aktuellen Framework verglichen.
 
-Im vierten Kapitel wird die Entscheidung für ein bestimmtes Framework bzw. ein Framework und
-zusätzliche Bibliotheken begründet, nachdem die Vor- und Nachteile der Migration auf die
-verschiedenen Frameworks diskutiert wurden.
+Im vierten Kapitel wird die Entscheidung für das jQuery-Framework und die Underscore.js-Bibliothek
+begründet, nachdem die Vor- und Nachteile der Migration auf die verschiedenen Frameworks diskutiert
+wurden.
+
+Das fünfte Kapitel geht auf die eigentliche Migration und die damit verbundenen Schritte,
+Entwicklungen und Probleme ein.
+
+Im sechsten Kapitel wird der aktuelle Stand mit der ursprünglichen Aufgabenstellung verglichen und
+kurz auf mögliche zukünftige Erweiterungen eingegangen.
 
 
 \section{CERN}
 
-Das CERN, die Europäische Organisation für Kernforschung, ist eine Großforschungseinrichtung bei
-Meyrin im Kanton Genf in der Schweiz. Am CERN wird vielfältige physikalische Grundlagenforschung
-betrieben, bekannt ist es vor allem für seine großen Teilchenbeschleuniger. \citep{wiki:cern}
+Beim CERN, der Europäischen Organisation für Kernforschung, handelt es sich um eine
+Forschungseinrichtung im schweizer Kanton Genf. Der Hauptaufgabenbereich liegt in der Erforschung
+von Grundlagen der Physik, wobei der weltgrößte Teilchenbeschleuniger \emph{LHC} zum Einsatz kommt.
 
 Neben der physikalischen Forschung wird am CERN auch Software entwickelt, die zwar in erster Linie
 zur internen Nutzung dient, jedoch oftmals auch als \emph{Open Source} der Allgemeinheit zur Verfügung
@@ -84,10 +90,10 @@ Personals, Grid-Lösungen für die verteilte Datenspeicherung und Webanwendungen
 und Indizierung von Medien entwickelt.
 
 Die Abteilung \emph{IT-UDS-AVC}\footnote{User and Document Services - Audio Visual \& Conference
-Rooms} am CERN ist für die Verwaltung und Einrichtung von video- und telefonbasierten
+Rooms} am CERN ist zuständig für die Verwaltung und Einrichtung von video- und telefonbasierten
 Konferenzsystemen, Aufzeichnung und Onlinestreaming von Vorträgen, Meetings und Konferenzen und die
-Software zur Planung von selbigen zuständig. Ebenfalls im Zuständigkeitsbereich der Abteilung sind
-die Informationsbildschirme die in verschiedenen Gebäuden des CERN aufgebaut sind und beispielsweise
+Software zur Planung von selbigen. Ebenfalls im Zuständigkeitsbereich der Abteilung sind
+die Informationsbildschirme, die in verschiedenen Gebäuden des CERN aufgebaut sind und beispielsweise
 den Status des \emph{LHC}\footnote{\emph{Large Hadron Collider}, der Teilchenbeschleuniger am CERN} und
 für die Mitarbeiter relevante Neuigkeiten anzeigen.
 
@@ -104,7 +110,7 @@ Konferenz}, elektronische Sitzungsprotokolle und ein Archiv für die in einer Ko
 Materialien. \citep{indico}
 
 Im Laufe der Zeit wurden immer mehr Funktionen hinzugefügt, sodass diese Featureliste schon lange
-nicht mehr aktuell ist.  Inzwischen enthält Indico beispielsweise ein Buchungs- und
+nicht mehr aktuell ist. Inzwischen enthält Indico beispielsweise ein Buchungs- und
 Reservierungssystem für Konferenzzimmer, sodass beim Erstellen eines Events sichergestellt werden
 kann, dass der gewünschte Raum auch verfügbar ist und nicht gerade anderweitig benutzt wird.
 Ebenfalls in Indico integriert sind die am CERN genutzten Audio-/Videokonferenzsysteme, sodass diese
