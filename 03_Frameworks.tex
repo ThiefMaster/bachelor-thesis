@@ -307,7 +307,7 @@ Prototype bietet zwei Möglichkeiten, Events zu registrieren. Die klassische Mö
 ausgeführt werden, die das Element erreichen - also Events die vom Element selbst oder einem
 enthaltenen Elemente ausgehen. Da die Methode das Element selbst zurückgibt, besteht die einzige
 Möglichkeit, den Eventhandler wieder zu entfernen, darin, ihn anhand des Eventnamens und der
-Handler-Funktion zu identifizieren. Dazu dient die Methode
+Handlerfunktion zu identifizieren. Dazu dient die Methode
 \lstinline{stopObserving([eventName][, handler])}, wobei beide Argumente optional sind; wenn
 ein Argument nicht angegeben ist, werden alle entsprechenden Eventhandler entfernt.
 
@@ -368,7 +368,7 @@ wie \emph{Event} oder \emph{Element}. Darüber hinaus erweitert es die Prototype
 Objekten wie \lstinline{Array}, \lstinline{Number} und \lstinline{String} - jedoch nicht den
 \lstinline{Object}-Prototypen, da Veränderungen an diesem mit hoher Wahrscheinlichkeit Probleme
 verursachen; beispielsweise verändert sich das Verhalten von \lstinline{for(var elem in object)}
-dadurch - als auch von Hostobjekten wie \lstinline{HTMLElement}. Gerade letzteres ist aufgrund des
+dadurch - als auch von Host-Objekten wie \lstinline{HTMLElement}. Gerade letzteres ist aufgrund des
 größtenteils undefinierten Verhaltens dieser Objekte riskant.
 
 \item[Sonstige Features] \hfill \\
@@ -685,7 +685,7 @@ nach Aufgabenbereich unterteilte, Dateien möchte, kann man sich auch den \enquo
 GitHub-Seite\footnote{\href{https://github.com/jquery/jquery}{https://github.com/jquery/jquery}} von
 jQuery herunterladen. Unabhängig davon welche Entwicklungsversion man herunterlädt ist der
 enthaltene Code kommentiert, wobei es sich bei den Kommentaren strikt um technikbezogene Hinweise
-handelt - als Dokumentation sind diese nicht brauchbar, was dank der Onlinedokumentation aber auch
+handelt - als Dokumentation sind diese nicht brauchbar, was dank der Online-Dokumentation aber auch
 nicht notwendig ist.
 
 \item[Lizenz] \hfill \\
@@ -782,7 +782,7 @@ zugewiesen oder als Parameter einer anonymen Funktion genutzt werden, um innerha
 \lstinline{Class} benutzen zu können.
 
 \item[Dokumentation] \hfill \\
-Classy besitzt eine Onlinedokumentation, in der die Benutzung anhand von Beispielen beschrieben wird
+Classy besitzt eine Online-Dokumentation, in der die Benutzung anhand von Beispielen beschrieben wird
 und jede Funktion dokumentiert ist. Der Quellcode ist an Stellen, bei denen es zum Verständnis
 notwendig ist, kommentiert.
 
@@ -865,7 +865,7 @@ ein bestimmter Typ verhält und falls dem so ist wird angenommen, dass es ein Ob
 einen ID-Generator der einzigartige IDs zurückgibt und eine einfache Template-Engine.
 
 Gleichzeitig handelt es sich bei \lstinline{_} auch um eine Funktion, die ein Objekt in einem
-Wrapperobjekt einschließt, welches \emph{Chaining} ermöglicht. Eine solche Aufrufkette beginnt in
+Wrapper-Objekt einschließt, welches \emph{Chaining} ermöglicht. Eine solche Aufrufkette beginnt in
 Underscore.js immer mit \lstinline{_(obj).chain()}. Danach können alle Funktionen aus Underscore.js
 als Instanzmethoden des Chain-Objekts aufgerufen werden, wobei der erste Funktionsparameter, der ja
 normalerweise das OBjekt wäre, nicht mehr angegeben werden muss. Um am Ende aus dem Chain-Wrapper
@@ -882,7 +882,7 @@ In diesem Fall muss man die \lstinline{_.noConflict()}-Funktion nutzen und Under
 anderen Namen zugänglich zu machen und die urspröngliche Variable bzw. Funktion wiederherzustellen.
 
 \item[Dokumentation] \hfill \\
-Underscore.js enthält eine ausführliche Onlinedokumentation mit einer kurzen Beschreibung und einem
+Underscore.js enthält eine ausführliche Online-Dokumentation mit einer kurzen Beschreibung und einem
 Beispiel für jede Funktion. Die Beispiele sind nicht ausführbar, allerdings sind Ausgabe bzw.
 Rückgabewerte des Beispielcodes jeweils angegeben. Neben der Dokumentation existiert auch eine
 ausführlich kommentierte Version den Quellcodes, die alle internen Abläufe erklärt.

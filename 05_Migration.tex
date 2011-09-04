@@ -160,7 +160,7 @@ Beim Erstellen einer solchen Blockade müssen sowohl Start- als auch Enddatum au
 Dazu werden zwei Textfelder benutzt, die jeweils beim Klick auf den nebenstehenden Button einen
 Kalender zur Auswahl des Datums öffnen. Diese Datumsfelder werden durch ein Indico-Widget erstellt.
 Komfortabler wäre es allerdings, statt der Textfelder dauerhaft zwei Kalender anzuzeigen. Da das von
-Indico verwendete Kalender-Widget mehrere gleichzeitig sichtbare Kalender nicht unterstützt und es
+Indico verwendete Kalenderwidget mehrere gleichzeitig sichtbare Kalender nicht unterstützt und es
 von Vorteil wäre, kein separates \emph{Third-Party}-Script für den Kalender zu benötigen, bietet es
 sich hier an, den \emph{DatePicker} von jQuery UI zu nutzen.
 
@@ -389,7 +389,7 @@ ausschließlich die durch das Tab-Widget hinzugefügten Eventhandler.
 
 Der Code, um die Links anzupassen, ist in \autoref{lst:static-tabs} zu sehen. \lstinline{this} zeigt
 dabei jeweils auf den äußersten Container des Tab-Widgets, sodass nur die Links innerhalb eines
-direkten Childelements des Containers mit der Klasse \lstinline{ui-tabs-nav} modifiziert werden.
+direkten Child-Elements des Containers mit der Klasse \lstinline{ui-tabs-nav} modifiziert werden.
 
 \begin{lstlisting}[label=lst:static-tabs,caption=Umwandlung der Tabs in reguläre Links]
 $('> .ui-tabs-nav a', this).each(function() {
