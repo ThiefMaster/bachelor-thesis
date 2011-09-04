@@ -306,17 +306,17 @@ Prototype bietet zwei Möglichkeiten, Events zu registrieren. Die klassische Mö
 \lstinline{observe(eventName, handler)}-Methode, wobei \lstinline{handler} für alle Events
 ausgeführt werden, die das Element erreichen - also Events die vom Element selbst oder einem
 enthaltenen Elemente ausgehen. Da die Methode das Element selbst zurückgibt, besteht die einzige
-Möglichkeit, den Event-Handler wieder zu entfernen, darin, ihn anhand des Eventnamens und der
+Möglichkeit, den Eventhandler wieder zu entfernen, darin, ihn anhand des Eventnamens und der
 Handler-Funktion zu identifizieren. Dazu dient die Methode
 \lstinline{stopObserving([eventName][, handler])}, wobei beide Argumente optional sind; wenn
-ein Argument nicht angegeben ist, werden alle entsprechenden Event-Handler entfernt.
+ein Argument nicht angegeben ist, werden alle entsprechenden Eventhandler entfernt.
 
 Der neue und auch komfortablere Weg ist über die Methode
 \lstinline{on(eventName[, selector], handler)}. Sofern ein CSS-Selektor angegeben wurde,
-wird aus dem Event-Handler ein \emph{Delegate}, d.h. er reagiert nur noch auf Events, die von einem
+wird aus dem Eventhandler ein \emph{Delegate}, d.h. er reagiert nur noch auf Events, die von einem
 enthaltenen Element ausgelöst wurden, welches dem CSS-Selektor entspricht. Ein weiterer Vorteil
 dieser Methode ist ihr Rückgabewert. Sie gibt ein Objekt zurück, welches zwei Methodem
-\lstinline{start()} und \lstinline{stop()} enthält, wobei letztere den Event-Handler entfernt und
+\lstinline{start()} und \lstinline{stop()} enthält, wobei letztere den Eventhandler entfernt und
 erstere ihn wieder hinzufügt.
 
 In beiden Fällen stellt Prototype sicher, dass \lstinline{this} auf das ursprüngliche Element zeigt,
