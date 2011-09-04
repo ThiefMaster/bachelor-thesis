@@ -19,14 +19,14 @@ wird auch heute noch aktiv verwendet, obwohl es bereits Nachfolger gibt.
 
 Einer der Nachfolger von HTML 4.01 ist XHTML\footnote{eXtensible HyperText Markup Language}, eine
 auf XML basierte Version von HTML. Diese Version wurde entwickelt, da XML es ermöglicht, eigene
-Elemente und Attribuze zu definieren und seitens der vieler Entwickler der Bedarf nach einer solchen
-Erweitertungsmöglichkeit bestand. Darüberhinaus ermöglichen die Einschränkungen von XML, einfache
+Elemente und Attribute zu definieren und seitens der vieler Entwickler der Bedarf nach einer solchen
+Erweitertungsmöglichkeit bestand. Darüber hinaus ermöglichen die Einschränkungen von XML, einfache
 Parser zu entwickeln oder einen bestehenden XML-Parser zu nutzen und XHTML-Dokumente in andere
 Formate zu transformieren; beispielsweise mittels XSLT\footnote{Extensible Stylesheet Language
 Transformations}. \citep{w3c:xhtml}
 
 Die neueste HTML-Version ist HTML5 und basiert auf Elementen von HTML 4.01 und XHTML 1.1.
-Sie befindet sich zwar noch immer in Entwicklich, jedoch werden viele Neuerungen bereits heute von
+Sie befindet sich zwar noch immer in Entwicklung, jedoch werden viele Neuerungen bereits heute von
 den verbreiteten Browsern unterstützt. Neben dem Einführen neuer Features insbesondere im
 Multimedia-Bereich spezifiziert HTML5 die Verarbeitung von Dokumenten mit Syntaxfehlern. \citep{w3c:html5}
 Diese Dokumente wurden zuvor von fast allen Browsern angezeigt, allerdings gab es gravierende
@@ -35,7 +35,7 @@ optimiert wurden und in anderen Browsern nahezu unbenutzbar waren. Durch die Vor
 werden Dokumente mit Syntaxfehlern zwar nicht wie in Programmiersprachen mit einer Fehlermeldugn
 abgelehnt - eine radikale Lösung, die eine Vielzahl von Websites unbenutzbar machen würde - jedoch
 sollen sie in jedem aktuellen Browser identisch aussehen.
-Anders als HTML 4 und XHTML basiert HTML5 weder auf SGML noch auf XML sondern definiert eigene
+Anders als HTML 4 und XHTML basiert HTML5 weder auf SGML noch auf XML, sondern definiert eigene
 Parsingregeln, was unter anderem für die Verarbeitungsregeln bei Syntaxfehlern notwendig ist. Es ist
 jedoch trotzdem möglich und erlaubt, XML-valides HTML5 zu schreiben, sodass man einen XML-Parser
 benutzen kann. Diese Variante von HTML5 bezeichnet man auch als \emph{XHTML5}.
@@ -58,7 +58,7 @@ oder weitere Tags enthalten können. Auf der obersten Ebene eines HTML-Dokuments
 das \lstinline[language=HTML]{<html>}-Tag. Dieses enthält zwei Tags,
 \lstinline[language=HTML]{<head>} und \lstinline[language=HTML]{<body>}.
 
-Im \emph{HEAD}-Abschnitt des Dokuments finden sich neben dem Seitentitel und Metadaten verschiedene
+Im \emph{HEAD}-Abschnitt des Dokuments finden sich neben Seitentitel und Metadaten verschiedene
 Referenzen auf externe Daten, die eingebunden werden sollen. Dabei kann es sich sowohl um
 Stylesheets handeln als auch um Scripts.
 
@@ -93,10 +93,11 @@ dazu, Code ausschließlich im Internet Explorer auszuführen bzw. nicht auszufü
 
 
 \subsection{Document Object Model (DOM)}
-\enquote{The Document Object Model is a platform- and language-neutral interface that will allow
-programs and scripts to dynamically access and update the content, structure and style of [HTML]
-documents. The document can be further processed and the results of that processing can be
-incorporated back into the presented page.} \citep{w3c:dom-old}
+Das W3C\footnote{World Wide Web Consortium, \href{http://www.w3.org}{http://www.w3.org}} definiert
+das DOM als \enquote{a platform- and language-neutral interface that will allow programs and scripts
+to dynamically access and update the content, structure and style of [HTML] documents. The document
+can be further processed and the results of that processing can be incorporated back into the
+presented page.} \citep{w3c:dom-old}
 
 Es handelt sich beim DOM also um eine standardisierte Schnittstelle, um auf die Elemente eines
 HTML-Dokuments zuzugreifen und sie zu modifizieren. Das Dokument selbst wird dabei durch ein
@@ -104,7 +105,7 @@ HTML-Dokuments zuzugreifen und sie zu modifizieren. Das Dokument selbst wird dab
 enthaltenen Elemente enthält. Beispielsweise sucht \lstinline{getElementById()} nach
 einem Element mit einer bestimmten ID und die \lstinline{documentElement}-Eigenschaft eines Elements
 verweist das \lstinline[language=HTML]{<html>}-Element. Neben den Zugriffsmethoden stellt das
-DOM-Interface auch Methoden zur Manipulation deS Dokuments zur Verfügung. Diese reichen über das
+DOM-Interface auch Methoden zur Manipulation des Dokuments zur Verfügung. Diese reichen über das
 simple Erstellen eines neuen Elements über das Entfernen eines Elements samt untergeordneten
 Elementen bis zum Einfügen eines Elements an einer bestimmten Position im Dokument.
 
@@ -125,15 +126,15 @@ Element ist, ob es sich um reinen Text handelt oder ob es sich gar um ein weiter
 
 \subsection{Geschichte}
 
-JavaScript wurde 1995 von Brendan Eich für den \emph{Netscape Navigator 2.0} entwickelt. Sie war auch
-in allen darauf folgenden Versionen enthalten und wurde von Microsoft unter dem Namen \emph{JScript}
-im \emph{Internet Explorer 3.0} implementiert.
+JavaScript wurde 1995 von Brendan Eich für den \emph{Netscape Navigator 2.0} entwickelt. Die Sprache
+war auch in allen darauf folgenden Versionen enthalten und wurde von Microsoft unter dem Namen
+\emph{JScript} im \emph{Internet Explorer 3.0} implementiert.
 
 Ab 1996 begann die Standardisierung der Sprache im Rahmen eines ECMA-Standards, welcher im Juni 1997
 erschienen ist. Im April 1998 wurde dieser durch die ISO zum internationalen Standard \emph{ISO/IEC
 16262} zugelassen.
 
-Im Laufe der Jahre wurde der ECMAScript-Standard immer erweitert und beispielsweise Reguläre
+Im Laufe der Jahre wurde der ECMAScript-Standard immer mehr erweitert und beispielsweise reguläre
 Ausdrücke, Exception-Handling und verbesserte Stringfunktionen hinzugefügt. Die aktuelle Ausgabe 5.1
 des ECMAScript-Standards entspricht dem internationalen Standard \emph{ISO/IEC 16262:2011}.
 \citep{ecmascript}
@@ -146,14 +147,14 @@ nicht zwangsläufig alle Sprachelemente die in der aktuellsten Spezifikation ent
 \subsection{Anwendungsgebiete}
 
 Der bekannteste und häufigste Verwendungszweck von JavaScript ist Web-Scripting innerhalb von
-Browsern, was auch nicht weiter verwunderlich ist, da die Sprache ursprünlich für diesen Zweck
-entwickelt wurde und lange Zeit ausschließlich in diesem Kontext benutzt wurde. Dabei stellt der
+Browsern. Dies ist nicht weiter verwunderlich ist, da die Sprache ursprünglich für diesen Zweck
+entwickelt und lange Zeit ausschließlich in diesem Kontext benutzt wurde. Dabei stellt der
 Webbrowser die Host-Umgebung, also die Objekte und Funktionen zu Kommunikation mit der Applikation,
 in der die Scripts ausgeführt werden. Im Webbrowser sind solche Objekte beispielsweise das
 Browserfenster (\lstinline{window}), Popupfenster (Rückgabewert von \lstinline{window.open()}),
 die Browserhistory (\lstinline{history}), das aktuelle HTML-Dokument (\lstinline{document}).
 Ebenfalls vom Browser bereitgestellt werden Objekte, die die einzelnen HTML-Elemente repräsentieren,
-also beispielsweise Hpyerlinks, Formulare und Bilder. Darüberhinaus bietet der Browser Methoden, um
+also zum Beispiel Hyperlinks, Formulare und Bilder. Darüber hinaus bietet der Browser Methoden, um
 über verschiedene Ereignisse wie Klicks, Mausbewegungen und Änderungen an Formularfeldern
 benachrichtigt zu werden.
 \citep[Kap. 4.1]{ecmascript}
@@ -161,18 +162,18 @@ benachrichtigt zu werden.
 Ein weiteres Anwendungsgebiet ist \emph{Server-Side JavaScript} (\emph{SSJS}). Dabei wird JavaScript
 direkt auf den (Web-)Server ausgeführt und kann beispielsweise direkt auf Datenbanken und Dateien
 (des Servers) zugreifen. Während \emph{SSJS} erstmalig 1996 im \emph{Netscape Enterprise HTTP Server}
-zum Einsatz kam, erlebte es erst fast 15 Jahre danach seinen Durchbruch. Mit
+zum Einsatz kam, erlebte es erst fast 15 Jahre später seinen Durchbruch. Mit
 \emph{node.js}\footnote{\href{http://nodejs.org}{http://nodejs.org}} existiert ein quelloffenes,
-plattformunabhängiges Framework welches leichtgewichtig ist und dank einer eventbasierten Architektur
+plattformunabhängiges Framework, welches leichtgewichtig ist und dank einer eventbasierten Architektur
 auch bei einer sehr großen Anzahl gleichzeitiger Clientverbindungen noch performant ist - eine
 Eigenschaft die in klassischen prozess- oder threadbasierten Webservern wie \emph{Apache} oftmals
 nicht gegeben ist. Die serverseitige Host-Umgebung unterscheidet sich logischerweise stark von der
 eines Browsers, da ein Webserver weder mit Fenstern noch HTML-Dokumenten arbeitet - dafür kennt er
 beispielsweise HTTP-Requests und Formular\emph{daten}. Die Ereignisse, auf die Scripte reagieren
-können, sind dabei primär netzwerkbezogen - beispielsweise die neue Verbindung eines Clients oder
+können, sind dabei primär netzwerkbezogen - zum Beispiel die neue Verbindung eines Clients oder
 der vorzeitige Abbruch eines Seitenaufrufs. Es ist allerdings durchaus möglich, dass mit
 entsprechendem Code Teile der Browserumgebung serverseitig nachgebildet werden. So ist es denkbar,
-ein HTML-Dokument nicht als String darzustellen sondern als DOM-Tree. Dieser könnte dann dieselben
+ein HTML-Dokument nicht als String sondern als DOM-Tree darzustellen. Dieser könnte dann dieselben
 Methoden wie der Browser zur Verfügung stellen, sodass Operationen die sowohl clientseitig als auch
 serverseitig sinnvoll sind, denselben Code nutzen können.
 
@@ -295,7 +296,7 @@ müssen definiert und gewisse Invarianten erfüllt sein.
 Das Verhalten dieser Objekte ist jedoch nicht
 spezifiziert: \enquote{Host objects may implement these internal methods in any manner unless specified
 otherwise} \citep[Kap. 8.6.2]{ecmascript}; die \enquote{internal methods} sind beispielsweise die Getter
-und Setter von Objekteigenschaften. Darüberhinaus dürfen auch die Auswirkungen von internen
+und Setter von Objekteigenschaften. Darüber hinaus dürfen auch die Auswirkungen von internen
 Eigenschaften erweitert werden: \enquote{Host objects may support these internal properties with any
 implementation-dependent behaviour as long as it is consistent with the specific host object
 restrictions stated in this document.} \citep[Kap. 8.6.2]{ecmascript}

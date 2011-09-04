@@ -5,7 +5,7 @@ JavaScript ist aus einer modernen Webanwendung inzwischen aus vielerlei Gründen
 wegzudenken. Es ermöglicht sowohl eine bessere \emph{User Experience} als auch erhöhte Performance.
 Beispielsweise kann ein Formular bereits vor dem Abschicken an den Server validiert werden, was dem
 Benutzer ein sofortiges Feedback gibt - möglicherweise sogar noch während der Eingabe - und
-gleichzeitig keine Server-Ressourcen beansprucht. Darüberhinaus ist es auch möglich Aktionen
+gleichzeitig keine Server-Ressourcen beansprucht. Darüber hinaus ist es auch möglich Aktionen
 auszuführen, ohne dass die komplette Seite neu geladen werden muss. Dies erhöht zum einen das
 mögliche Arbeitstempo des Benutzers, da er mehrere Aktionen parallel starten kann, ohne jeweils darauf
 warten zu müssen, dass eine Aktion beendet und die Seite neu geladen ist. Zum anderen spart es
@@ -126,7 +126,7 @@ Vorträge - enthalten können. Ein Event wiederum kann diverse Elemente enthalte
 hängt vom Typ des Events ab, so kann beispielsweise nur eine Konferenz ein Registrierungsformular
 besitzen.
 
-Im Folgenden sind die wichtigsten Bestandteile von Events aufgelistet:
+Die folgende Auflistung beinhaltet die wichtigsten Bestandteile von Events:
 
 \begin{itemize}
 \item Audio-/Videokonferenzen
@@ -144,12 +144,12 @@ Der serverseitige Code von Indico ist in Python geschrieben und nutzt
 ZODB\footnote{\href{http://www.zodb.org}{http://www.zodb.org}} als Datenbank. Der Code ist in einer
 Multi-Tier-Architektur organisiert: Die Anfrage des Webservers wird über
 WSGI\footnote{\href{http://www.python.org/dev/peps/pep-0333/}{Web Server Gateway Interface}} an die
-Applikation weitergegeben, wo die \emph{Request Handler (RH)}-Ebene die Geschäftlogik ausführt. Sie
-prüft die Zugangsberechtigung des Benutzers, verarbeitet GET- bzw. POST-Daten, baut die
+Applikation weitergegeben, in der die \emph{Request Handler (RH)}-Ebene die Geschäftlogik ausführt.
+Sie prüft die Zugangsberechtigung des Benutzers, verarbeitet GET- bzw. POST-Daten, baut die
 Datenbankverbindung auf und führt letztendlich auch die gewünschte Aktion aus. Um eine HTML-Seite
-auszugeben nutzt der \emph{RequestHandler} die \emph{Web Pages (WP)}-Ebene. Dort werden diverse
+auszugeben, nutzt der \emph{RequestHandler} die \emph{Web Pages (WP)}-Ebene. Dort werden diverse
 Aktionen ausgeführt, welche die Anzeige der Daten beeinflussen - zum einen werden die benötigten
-JavaScript- bzw. CSS-Packages geladen, zum anderen werden falls vorhanden Tabs als aktiv markiert
+JavaScript- bzw. CSS-Packages geladen, zum anderen werden, falls vorhanden, Tabs als aktiv markiert
 oder Daten sortiert. Die eigentliche Erzeugung der HTML-Datei übernimmt die \emph{Components
 (W)}-Ebene. Jede Klasse dieser Ebene repräsentiert ein Template mit demselbem Namen. In der Regel
 werden in dieser Ebene nur die aus der WP-Ebene übergebenen Daten an das Template weitergereicht und
@@ -157,6 +157,6 @@ falls nötig aufbereitet.
 
 \img{indico-layers.png}{200px}{Die Architektur von Indico \citep{indicoarch}}{Indico-Architektur}
 
-Wie man in \autoref{img.indico-layers.png} sieht, hat sich Indico im Laufe der Zeit verändert: Statt
+Wie \autoref{img.indico-layers.png} verdeutlicht, hat sich Indico im Laufe der Zeit verändert: Statt
 dem obsoleten \emph{mod\_python}\footnote{\href{http://www.modpython.org}{http://www.modpython.org}}
 wird inzwischen WSGI verwendet.

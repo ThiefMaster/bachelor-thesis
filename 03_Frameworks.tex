@@ -96,11 +96,11 @@ Funktionen zum Verarbeiten von diverser Datentypen wie \lstinline{Date}-Objekten
 
 Das größte und im weiteren Verlauf dieser Arbeit wichtigste Modul ist das \emph{UI}-Modul.
 Es enthält die in Kapitel 2 erwähnte Kapselung der teilweise browserspezifischen Methoden um auf das
-Dokument zuzugreifen und Komfortmethoden zur Erzeugung von DOM-Elementen. Darüberhinaus hat das
+Dokument zuzugreifen und Komfortmethoden zur Erzeugung von DOM-Elementen. Darüber hinaus hat das
 Modul verschiedene Submodule: \emph{Draw} abstrahiert das Erstellen von SVG-Grafiken bzw. im
 Internet Explorer VRML-Grafiken. \emph{Extensions} und \emph{Styles} erweitern einige Objekte des
 \emph{UI}-Moduls um nützliche Methoden. Das \emph{Widgets}-Submodul enthält Funktionen, um
-HTML-Elemenet mit häufig benutzen Funktionen bzw. Eventhandlern zu verknüpfen oder mehrere
+HTML-Elemente mit häufig benutzen Funktionen bzw. Eventhandlern zu verknüpfen oder mehrere
 HTML-Elemente in einer bestimmten Art und Weise zusammenzufügen.
 
 \begin{description}
@@ -168,7 +168,7 @@ ist nur über den Prototypen des Mixins möglich: \\
 
 \item[Hilfsfunktionen] \hfill \\
 Mit Funktionen wie \lstinline{each}, \lstinline{map} und \lstinline{filter} bietet das
-Indico-Framework einige Standardfunktionen zur funktionalen Programmierung. Darüberhinaus enthält es
+Indico-Framework einige Standardfunktionen zur funktionalen Programmierung. Darüber hinaus enthält es
 viele Klassen bzw. Mixins, um \emph{Observer}, \emph{Getter} und \emph{Setter} zu ermöglichen, wobei
 letztere jeweils durch einen \emph{Observer} überwacht werden können. Es werden außerdem diverse
 Stringfunktionen zur Verfügung gestellt, wobei einige davon als globale Funktionen implementiert
@@ -187,7 +187,7 @@ jeweils innerhalb der \emph{draw}-Methode statt, wodurch viel \emph{duplicate co
 Neben dem Button-Widget werden auch die meisten anderen Formularelement von HTML durch Widgets
 repräsentiert. Ebenfalls enthalten sind Funktionen zur Erzeugung und Validierung von
 HTML-Formularen. Diese sind allerdings nicht komplett fehlerfrei; beispielsweise wird bei einer
-Gruppe von Radiobuttons im Fehlerfall nur der erste Button als fehlerhaft markiert. Darüberhinaus
+Gruppe von Radiobuttons im Fehlerfall nur der erste Button als fehlerhaft markiert. Darüber hinaus
 enthält das Indico-Framework ein Kalenderwidget, welches jedoch nur ein Wrapper für einen
 \emph{Third-Party}-JavaScript-Kalender ist.
 \imga{indico-calendar.png}{Das Kalenderwidget von Indico}{Indico-Kalenderwidget}
@@ -283,7 +283,7 @@ explizit der Zugriff auf ein Attribut gewünscht ist, kann man die Methoden
 \lstinline{readAttribute()} bzw. \lstinline{writeAttribute()} nutzen. Für den Zugriff auf diverse
 Eigenschaften wie der CSS-Klasse (hinzufügen, entfernen, \emph{contains}), der Sichtbarkeit und bei
 Formularelementen dem Wert und dem \emph{Disabled}-Flag  stellt Prototype ebenfalls Methoden zur
-Verfügung. Darüberhinaus können auch CSS-Eigenschaften über ein Objekt gesetzt werden, sodass
+Verfügung. Darüber hinaus können auch CSS-Eigenschaften über ein Objekt gesetzt werden, sodass
 mehrere Eigenschaften auf einmal geändert werden können. Ein insbesondere für grafiklastige oder
 pixelgenau arbeitende Webapplikationen nützliches Feature ist die \lstinline{measure()}-Methode.
 Diese gibt ein Objekt zurück, welches Zugriff auf alle Größen- und Positionsinformationen bietet.
@@ -364,7 +364,7 @@ allerdings überschreibt die \lstinline{$A}-Funktion von Indico die aus Prototyp
 Konflikte gibt, da beide Funktionen denselben Zweck haben und auch von den Parametern her
 identisch sind. Neben diesem Konflikt gibt keien weiteren Probleme, obwohl Prototype sehr invasiv
 ist: Wie auch das Indico-Framework definiert es mehrere globale Objekte mit \enquote{Standardnamen}
-wie \emph{Event} oder \emph{Element}. Darüberhinaus erweitert es die Prototypen sowohl von nativen
+wie \emph{Event} oder \emph{Element}. Darüber hinaus erweitert es die Prototypen sowohl von nativen
 Objekten wie \lstinline{Array}, \lstinline{Number} und \lstinline{String} - jedoch nicht den
 \lstinline{Object}-Prototypen, da Veränderungen an diesem mit hoher Wahrscheinlichkeit Probleme
 verursachen; beispielsweise verändert sich das Verhalten von \lstinline{for(var elem in object)}
@@ -431,7 +431,7 @@ erzeugen. Wenn man \lstinline{$()} ohne Parameter aufruft, wird ein leeres jQuer
 
 Um an in einem jQuery-Objekt enhaltene DOM-Objekte zu kommen, kann man die Arraysyntax
 \lstinline{obj[index]} nutzen, um das das jeweilige Element zu erhalten. Alternativ kann man auch
-mit der \lstinline{get([index])}-Methode nutzen. Sofern ein Index angegeben wird, gibt sie das
+die \lstinline{get([index])}-Methode nutzen. Sofern ein Index angegeben wird, gibt sie das
 jeweilige Element zurück, ansonsten ein Array aller im jQuery-Objekt enthaltenen Elemente.
 
 jQuery nutzt \emph{Sizzle} zur Suche von Elementen anhand eines CSS-Selektors.
@@ -440,7 +440,7 @@ jQuery nutzt \emph{Sizzle} zur Suche von Elementen anhand eines CSS-Selektors.
 Zum Erstellen neuer Elemente nutzt man in jQuery ebenfalls die \lstinline{$}-Funktion, indem man den
 gewünschten HTML-Code - dabei kann es sich sowohl um ein einzelnes Tag als auch eine beliebig
 komplexe HTML-Struktur handeln - als Parameter übergibt. Als zusätzlichen Parameter kann man
-entweder ein DOM-Dokument angeben, in dem die Elemente erstellt werden solle, oder aber ein Objekt,
+entweder ein DOM-Dokument angeben, in dem die Elemente erstellt werden sollen, oder aber ein Objekt,
 welches die Attribute, die dem neuen Element zugewiesen werden sollen, als Strings enthält.
 
 Bei der Verwendung von jQuery ist es eigentlich niemals notwendig, direkt auf DOM-Elemente
@@ -462,21 +462,21 @@ Funktionen \lstinline{hide()} und \lstinline{show()} akzeptieren einen optionale
 Alternativ können Elemente auch mit den \emph{slide}-Funktionen ein- und ausgelbendet werden, wobei
 sie dabei am oberen Rand der Seite hinaus- bzw. hineinbewegt werden.
 
-Zur Veränderung der Struktur des DOM-Trees - also dem Einfügen, Entfernen und umsortieren von
-Elementen - bietet jQuery viele Funktionen, die eigentlich alle sinnvolle Möglichkeiten abdecken.
+Zur Veränderung der Struktur des DOM-Trees - also dem Einfügen, Entfernen und Umsortieren von
+Elementen - bietet jQuery viele Funktionen, die eigentlich alle sinnvollen Möglichkeiten abdecken.
 Neben der inzwischen relativ verbreiteten \lstinline{wrap()}-Funktion enthält jQuery mit
 \lstinline{unwrap()} auch das genaue Gegenteil dieser Funktion, d.h. das Entfernen des
 Parent-Elements eines Elements und dem Einfügen selbigens an dieser Stelle. Das Einfügen von
 Elementen kann in beide Richtungen geschehen: zusätzlich zu Methoden wie \lstinline{append(elem)},
-die das übergebene Element in das im jQuery-Objekt enthaltene Element einfügen existieren mit
+die das übergebene Element in das im jQuery-Objekt enthaltene Element einfügen, existieren mit
 Methoden wie \lstinline{appendTo(elem)} Methoden, die das im jQuery-Objekt enthaltene Element in das
 übergebene Element einfügen. Der komplette Inhalt von Elementen lässt sich durch die Methode
 \lstinline{empty()} löschen; beim Ersetzen durch neuen Inhalt gibt es mit \lstinline{html()} und
 \lstinline{text()} sowohl die Möglichkeit, HTML einzufügen, als auch einen String als Plaintext
-einzufügen, sodass möglicherweise enthaltener HTML-Code nicht ausgeführt wid.
+einzufügen, sodass möglicherweise enthaltener HTML-Code nicht ausgeführt wird.
 
 Wenn ein jQuery-Objekt mehrere Element enthält, hängt das Verhalten von der aufgerufenen Funktion
-ab. Sofern es möglich und sinnvoll ist, wirkt sich die Funktion aus jedes Element aus. Bei anderen
+ab. Sofern es möglich und sinnvoll ist, wirkt sich die Funktion auf jedes Element aus. Bei anderen
 Operationen wie beispielsweise dem lesenden Zugriff mittels \lstinline{attr()} wird ausschließlich
 auf das erste Element zugegriffen.
 
@@ -485,15 +485,15 @@ Wie bereits zuvor erwähnt, kann der \lstinline{$}-Funktion ein Kontext übergeb
 ausgehend von einem Element anhand eines Selektors andere Elemente zu suchen. Neben dieser
 Möglichkeit bietet jQuery diverse Methoden um Elemente ausgehend von einem Element auszuwählen -
 alle dieser Methoden akzeptieren einen CSS-Selektor zum Filtern der gefundenen Elemente. Neben den
-Geschwisterelementen, wobei diese auf Elemenet vor bzw. nach dem aktuellen Element eingeschränkt
+Geschwisterelementen, wobei diese auf Elemente vor bzw. nach dem aktuellen Element eingeschränkt
 werden können, können mit diesen Methoden auch die Parent-Elemente selektiert werden, wobei dort je
 nach Funktion das direkte Parent-Element, alle Parent-Elemente oder alle Parent-Elemente bis zu
 einem bestimmten Element zurückgegeben werden. Mit \lstinline{closest(selector)} bietet jQuery eine
 Komfortmethode, um sich ausgehend vom aktuellen Element im DOM-Tree nach oben durchzuarbeiten, bis
-das gewünschte Element gefunden wurde - dabei kann es sich auch um das aktuelle element selbst
+das gewünschte Element gefunden wurde - dabei kann es sich auch um das aktuelle Element selbst
 handeln.
 
-Der Inhalt von jQuery-Objekten lässt sich darüberhinaus filtern und erweitern: man kann die
+Der Inhalt von jQuery-Objekten lässt sich darüber hinaus filtern und erweitern: man kann die
 Elementliste anhand eines CSS-Selektors filtern, bestimmte Elemente entfernen, die vor einer
 Suche enthaltenen Elemente der Elementliste wieder hinzufügen und einzelne Elemente hinzufügen. Auch
 das Reduzieren eines jQuery-Objekts auf ein einzelnes Element ist möglich - dabei kann es
@@ -514,7 +514,7 @@ zu benutzen können die jeweiligen Eventnamen mit Leerzeichen getrennt angegeben
 Vorteil bei der Benutzung von \lstinline{bind()} ist jedoch, dass man die Events in Namespaces
 unterteilen kann indem man \lstinline{'eventname.something'} als Eventname verwendet. Dies hat den
 Vorteil dass man diese Events separat auslösen oder entfernen kann, ohne andere Events dasselben
-Typs auszulösen oder zu entfernen. Darüberhinaus kann man mit dieser Funktion beliebige Events
+Typs auszulösen oder zu entfernen. Darüber hinaus kann man mit dieser Funktion beliebige Events
 erstellen, d.h. nicht nur die standardmäßig unterstützen DOM-Events. Neben den regulären DOM-Events
 unterstützt jQuery die Internet Explorer-spezifischen Events \emph{mouseenter} und
 \emph{mouseleave}, welche logischerweise emuliert werden, wenn sie nicht vom Browser unterstützt
@@ -549,12 +549,12 @@ Seite). Wenn dieses Verhalten nicht erwünscht ist, bietet die Funktion \lstinli
 die Möglichkeit, nur per jQuery registrierte Eventhandler auszulösen und den Rückgabewert des
 letzten Handlers dieses Events zu verarbeiten.
 
-An die Eventhandler-Funktionen übergibt jQuery jeweils ein Event-Objekt und falls das Event manuell
-ausgelöst wurde und zusätzliche Parameter übergeben wurden ebendiese. Beim Event-Objekt handelt es
+An die Eventhandler-Funktionen übergibt jQuery jeweils ein Event-Objekt und im Falle einer manuellen
+Auslösung des Events alle zusätzlich angegebenen Parameter. Beim Event-Objekt handelt es
 sich um ein von jQuery erstelltes Objekt, in welches die Eigenschaften des ursprünglichen
 Event-Objekts kopiert wurden. Dabei stellt jQuery sicher, dass browserspezifische Eigenschaften wie
 der gedrückten Taste bei einem Tastatur-Event oder der Mausposition bei einem Maus-Event
-normalisiert werden und immer über dieselben Eigenschaften verfügbar sind. Darüberhinaus enthält das
+normalisiert werden und immer über dieselben Eigenschaften verfügbar sind. Darüber hinaus enthält das
 Event-Objekt browserunabhändige Methoden, um die weitere Verarbeitung des Events zu beeinflussen und
 beispielsweise das Ausführen der Standardaktion zu verhindern.
 
@@ -585,7 +585,7 @@ müssen beim Laden jeder Seite ausgeführt werden, weshalb die Anzahl möglichst
 \item[UI-Elemente] \hfill \\
 jQuery selbst enthält keinerlei Widgets, allerdings existiert mit \emph{jQuery
 UI}\footnote{\href{http://jqueryui.com}{http://jqueryui.com}} eine Erweiterung, die diverse Widgets
-und UI-bezogene Features wie Drag\&Drop und vergrößer- und verkleinerbare, auswählbare und
+und UI-bezogene Features wie Drag\&Drop und vergrößerbare, verkleinerbare, auswählbare und
 sortierbare Elemente enthält. Die Widgets bieten Dialogfenster, Buttons, Kalender,
 Fortschrittsbalken, Tabs und Slider. Neben diesen Standardwidgets gibt es noch ein
 \emph{Accordion}-Widget, welches ein \enquote{Akkordion}-Menü bzw. -Panel ermöglicht. Ebenfalls
@@ -594,9 +594,9 @@ versehen.
 
 \imga{jquery-ui-calendar.png}{Der jQuery UI Datepicker}{jQuery UI-Datepicker}
 
-Erwähnenswert ist ist einfache Anpassbarkeit der jQuery UI-Widgets - mit dem
+Erwähnenswert ist die einfache Anpassbarkeit der jQuery UI-Widgets - mit dem
 \emph{ThemeRoller}\footnote{\href{http://jqueryui.com/themeroller/}{http://jqueryui.com/themeroller/}}
-gibt es eine Webapplikation, über die man mit wenigen Klicks ein neues Farbtheme für alle Widgets
+gibt es eine Webapplikation, über die man mit wenigen Klicks ein neues Farbschema für alle Widgets
 zusammenstellen kann und auch direkt sieht, wie die Widgets mit dem neuen Theme aussehen. Neben den
 Farben lassen sich auch viele weitere Aspekte per CSS anpassen - entweder global für alle Widgets
 oder über die widgetspezifischen CSS-Klassen \lstinline{.ui-<widgetname>} nur für einzelne Widgets.
@@ -613,7 +613,7 @@ erstellten Dialog zu öffnen.
 jQuery exportiert nur zwei globale Funktionen: \lstinline{jQuery} und \lstinline{$}, wobei es
 sich bei letzterer um einen Alias für \lstinline{jQuery} handelt. Falls \lstinline{$} bereits
 anderweitig verwendet wird, kann man die \lstinline{jQuery.noConflict()}-Funktion nutzen, um das
-ursprünliche \lstinline{$} wiederherzustellen. Um trotzdem nicht immer \lstinline{jQuery} statt
+ursprüngliche \lstinline{$} wiederherzustellen. Um trotzdem nicht immer \lstinline{jQuery} statt
 \lstinline{$} schreiben zu müssen, kann man seinen Code einfach in eine Funktion wrappen, die
 \lstinline{$} als Parameter zur Verfügung stellt.
 \begin{lstlisting}[caption=Verwendung von \$.noConflict]
@@ -649,7 +649,7 @@ von Callbacks, wobei diese in drei verschiedenen Kategorien registriert werden k
 \emph{fail} und \emph{always}. Das Deferred-Objekt kann entweder \emph{fail} oder \emph{done} zu
 einer beliebigen Zeit auslösen - es gilt dann als \emph{resolved}. Nach dem Ausführen der Callbacks
 werden automatisch die \emph{always}-Callbacks aufgerufen. Sobald das Objekt \emph{resolved} ist
-kann sich sein Status nicht mehr ändern, d.h. es ist ausgeschlossen dass sowohl die
+kann sich sein Status nicht mehr ändern, d.h. es ist ausgeschlossen, dass sowohl die
 \emph{fail}-Callbacks als auch die \emph{done}-Callbacks ausgeführt werden. Der große Vorteil des
 Deferred-Objekts ist, dass Callbacks auch registriert werden können, wenn das Objekt bereits
 \emph{resolved} ist - die entsprechende Callbackfunktion wird in diesem Fall sofort ausgeführt.
@@ -661,7 +661,7 @@ beispielsweise von den AJAX-Funktionen von jQuery genutzt; sie geben ein solches
 \emph{Promise}-Objekt zurück.
 
 jQuery kann einfach mit eigenen Funktionen erweitert werden. Über \lstinline{jQuery.fn} kann auf den
-Prototypen der jQuery-Objekte zugegriffen werden sodass man diesem einfach eine eigene Funktion
+Prototypen der jQuery-Objekte zugegriffen werden, sodass man diesem einfach eine eigene Funktion
 hinzufügen kann. Um jQuery uanbhängig von einem bestimmten jQuery-Objekt zu erweitern -
 beispielsweise um eine Funktion hinzuzufügen, die keine HTML-Elemente verwendet - kann man eine
 Funktion auch direkt dem globalen \lstinline{jQuery}-Objekt hinzufügen.
@@ -680,12 +680,12 @@ in einer IDE, die das Format unterstützt, importieren könnte.
 
 Während die Produktivversion von jQuery minimiert ist, kann man auf der jQuery-Website eine lesbare
 Entwicklungsversion herunterladen. Dabei handelt es sich um eine ca. 230 KB große JavaScript-Datei
-die von der Funktionalität her mit der Produktiversion identisch ist. Sofern man lieber einzelne,
+die von der Funktionalität her mit der Produktivversion identisch ist. Sofern man lieber einzelne,
 nach Aufgabenbereich unterteilte, Dateien möchte, kann man sich auch den \enquote{Quellcode} auf der
 GitHub-Seite\footnote{\href{https://github.com/jquery/jquery}{https://github.com/jquery/jquery}} von
 jQuery herunterladen. Unabhängig davon welche Entwicklungsversion man herunterlädt ist der
 enthaltene Code kommentiert, wobei es sich bei den Kommentaren strikt um technikbezogene Hinweise
-handelt - ale Dokumentation sind diese nicht brauchbar, was dank der Onlinedokumentation aber auch
+handelt - als Dokumentation sind diese nicht brauchbar, was dank der Onlinedokumentation aber auch
 nicht notwendig ist.
 
 \item[Lizenz] \hfill \\
@@ -717,7 +717,7 @@ Funktionen auch in jQuery vorhanden sind. Sowohl Indico als auch jQuery enthalte
 wobei sie sich in einigen grundlegenden Aspekten unterscheiden: Die Widgets von Indico sind darauf
 ausgelegt, sowohl Struktur als auch Inhalt selbst zu generieren, während jQuery UI dazu gedacht ist,
 bestehenden HTML-Code zu erweitern - letzteres hat den Vorteil, dass auch ohne JavaScript eine
-gewisse Grundfunktionalität vorhanden ist, in Indico derzeit nicht der Fall ist und auch nicht
+gewisse Grundfunktionalität vorhanden ist, was in Indico derzeit nicht der Fall ist und auch nicht
 vorgesehen ist. Abgesehen von diesem Nachteil enthält jQuery UI mit den Widgets \emph{Dialog} und
 \emph{Tabs} die beiden Widgets, die für Indico am wichtigsten sind - das in Indico vorhandene
 Dialog-Widget hat insbesondere beim Anzeigen modaler Dialogfenster einige Probleme. Ein weiterer
@@ -782,8 +782,8 @@ zugewiesen oder als Parameter einer anonymen Funktion genutzt werden, um innerha
 \lstinline{Class} benutzen zu können.
 
 \item[Dokumentation] \hfill \\
-Classy besitzt eine Onlinedokumentation, in der die Benutzung anhand von Beispielen beschrieben
-wird und jede Funktion dokumentiert ist. Der Quellcode ist an Stellen, wo es zum Verständnis
+Classy besitzt eine Onlinedokumentation, in der die Benutzung anhand von Beispielen beschrieben wird
+und jede Funktion dokumentiert ist. Der Quellcode ist an Stellen, bei denen es zum Verständnis
 notwendig ist, kommentiert.
 
 \item[Lizenz] \hfill \\
@@ -802,8 +802,8 @@ sondern nur eine Parent-Klasse und mehrere Mixins, die ausschließlich Funktione
 Classy zwischen Mixins und der Parent-Klasse unterscheidet, ist keine echte Mehrfachvererbung
 möglich - der manuelle Aufruf einer als Konstruktor verwendeten Funktion ist problematisch, da jedes
 Mixin einen einzigartigen Namen für diese Funktion benutzen müsste. Allerdings wäre es durchaus
-möglich, diese Funktion genau wie das Mixin zu nennen, sodass der Unterschied zum Indico-Code, wo
-der Konstruktor einer Parentklasse mittels \lstinline{this.NameOfTheClass()} aufgerufen wird, nicht
+möglich, diese Funktion genau wie das Mixin zu nennen, sodass der Unterschied zum Indico-Code, der
+den Konstruktor einer Parentklasse mittels \lstinline{this.NameOfTheClass()} aufruft, nicht
 so gravierend wäre. Der große Nachteil gegenüber dem Objektsystem von Indico besteht jedoch darin,
 dass Mixins nicht eigenständig benutzt werden können - sie sind reine Sammlungen von Funktionen.
 Kompatibilitätsprobleme zwischen Indico und Classy bestehen nicht, da der Name \lstinline{Class}
