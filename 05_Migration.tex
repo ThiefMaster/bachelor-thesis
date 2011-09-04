@@ -154,14 +154,14 @@ per dateiübergreifendem \emph{Suchen\&Ersetzen} jedes Vorkommen von \lstinline{
 
 \subsection{Entwicklung des DateRange-Widgets}
 
-Das \emph{Room Booking}-Modul von Indico ermöglicht es bestimmten Personen, Konferenzzimmer über
+Das \emph{Room Booking}-Modul von Indico ermöglicht es bestimmten Benutzern Konferenzzimmer über
 eine gewisse Zeit zu blockieren, sodass diese nur von ausgewählten Gruppen reserviert werden können.
 Beim Erstellen einer solchen Blockade müssen sowohl Start- als auch Enddatum ausgewählt werden.
 Dazu werden zwei Textfelder benutzt, die jeweils beim Klick auf den nebenstehenden Button einen
 Kalender zur Auswahl des Datums öffnen. Diese Datumsfelder werden durch ein Indico-Widget erstellt.
 Komfortabler wäre es allerdings, statt der Textfelder dauerhaft zwei Kalender anzuzeigen. Da das von
 Indico verwendete Kalender-Widget mehrere gleichzeitig sichtbare Kalender nicht unterstützt und es
-von Vorteil wäre, kein separates \emph{Third-Party}-Script für den Kalender zu bnötigen, bietet es
+von Vorteil wäre, kein separates \emph{Third-Party}-Script für den Kalender zu benötigen, bietet es
 sich hier an, den \emph{DatePicker} von jQuery UI zu nutzen.
 
 \subsubsection{Funktionsanalyse des Datepickers}
@@ -171,7 +171,7 @@ Felds automatisch öffnet und nach Auswahl eines Datums wieder schließt. Es ist
 möglich, ihn mit einem \lstinline[language=HTML]{<div>} zu verknüpfen. In diesem Fall ist er
 dauerhaft sichtbar und stellt das ausgewählte Datum lediglich über seine API zur Verfügung. Viele
 Eigenschaften des Datepickers können individuell konfiguriert werden; insbesondere ist es möglich,
-Daten in der Vergangenheit bzw. vor oder nach einem bestimmten Datum zum sperren und die
+Daten in der Vergangenheit bzw. vor oder nach einem bestimmten Datum zu sperren und die
 auswählbaren Jahre zu beschränken. Das Widget bietet auch eine Option, um mehrere Monate
 gleichzeitig anzuzeigen. Hierbei sind allerdings nur mehrere aufeinanderfolgende Monate möglich und
 es kann unabhängig von der Anzahl der angezeigten Monate nur ein Datum ausgewählt werden. Daher muss
@@ -193,7 +193,7 @@ für einzelne.
 
 \subsubsection{Implementierung}
 
-Da es das DateRange-Widget vollständig auf jQuery basieren soll und keinerlei Funktionen aus dem
+Da das DateRange-Widget vollständig auf jQuery basieren soll und keinerlei Funktionen aus dem
 alten Indico-Framework benötigt, bietet es sich an, es als \emph{UI Widget} zu realisieren. Dabei
 handelt es sich um eine Sammlung von Funktionen, die über eine einzelne jQuery-Funktion zugänglich
 gemacht werden, und verschiedene Basisfunktionen standardmäßig enthalten. Innerhalb der Funktionen
@@ -245,8 +245,8 @@ Indico nutzt Dialogfenster, im Code normalerweise als \emph{Popup} bzw. \emph{Ex
 bezeichnet, um Informationen und Formulare in einem separaten Fenster darzustellen, welches
 allerdings auf der Seite integriert ist - diese wird während ein solches Fenster geöffnet ist durch
 ein graues Overlay als inaktiv dargestellt und lässt keine Benutzerinteraktion zu. Diese Fenster
-haben den Vorteil, dass sie fest mit der Seite verknüpft sind und - da es sich nicht um echte
-Fenster handelt - nicht durch Popup-Blocker blockiert werden können.
+haben den Vorteil, dass sie fest mit der Seite verknüpft sind und - da es sich nicht um neue
+Browserfenster handelt - nicht durch Popup-Blocker blockiert werden können.
 
 \subsubsection{Aktuelle Situation}
 
@@ -258,7 +258,7 @@ von einer der gerade genannten Klassen ab und überschreibt dort die \lstinline{
 falls nötig - den Konstruktor. In \lstinline{draw()} generiert man die DOM-Elemente, die im Dialog
 angezeigt werden sollen und - falls man \lstinline{ExclusivePopupWithButtons} nutzt - den Inhalt der
 Buttonleiste. Beides wird danach an die \lstinline{draw}-Methode der Parent-Klasse übergeben.
-Teilweise werden in von \lstinline{ExclusivePopup} erbenden Dialogfenstern Buttons erstellt welche
+Teilweise werden in von \lstinline{ExclusivePopup} abgeleiteten Dialogfenstern Buttons erstellt welche
 zwar problemlos funktionieren, sich jedoch im Aussehen von der korrekten Implementierung
 unterscheiden.
 
@@ -295,22 +295,22 @@ und Weise zu erstellen.
 Beim Erstellen von Dialogfenstern - sowohl mit als auch ohne Buttons - handelt es sich um eine
 Standardaufgabe. Während der Workflow für ein Dialogfenster ohne Buttons bereits frei von
 \emph{duplicate code} ist, besteht bei den Buttons Änderungsbedarf. Ein Button kann mit vier
-Eigenschaften charakterisiert werden: Titel, Aktion, Position, Zustand. Titel, Aktion und Zustand
-sidn dabei buttonspezifisch während die Position bzw. Reihenfolge der Buttons dialogspezifisch ist.
+Eigenschaften charakterisiert werden: Titel, Aktion, Position und Zustand. Titel, Aktion und Zustand
+sind dabei buttonspezifisch während die Position bzw. Reihenfolge der Buttons dialogspezifisch ist.
 Daher bietet es sich an, die Buttons in einem Array zu speichern, wobei es sich bei jedem Button um
 ein Objekt oder Array handelt. Da der Zustand (aktiv/inaktiv) eines Buttons in der Regel per Code
-nachträglich geändert wird, muss dieser nicht unbedingt schon bei der Definition es Buttons
+nachträglich geändert wird, muss dieser nicht unbedingt schon bei der Definition des Buttons
 angegeben werden - die meisten Buttons sind dauerhaft aktiv. Damit gibt es pro Button noch zwei
 Attribute - ein Array bietet sich also an, da der Entwickler dabei nicht immer die Namen der
 Eigenschaften angeben muss.
 
 Um die \lstinline{draw}-Funktion zu entschlacken - bei komplexeren Dialogen enthält sie oftmals
-einen Großteil der Logik des Dialogs - und auch um voneinander unabhängige Codeabschnitte zu trennen
-ist es sinnvoll, die Buttondefinition in eine separate Funktion auszulagern.
+einen Großteil der Logik des jeweiligen Dialogs - und auch um voneinander unabhängige Codeabschnitte
+zu trennen ist es sinnvoll die Buttondefinition in eine separate Funktion auszulagern.
 \autoref{lst:confirmpopup-new} zeigt dabei den Code des jQuery-basierten Dialogs. Die
 \lstinline{draw}-Funktion reicht nun ausschließlich den (an den Konstruktor übergebenen) Inhalt des
 Dialogfensters an die Parent-Funktion weiter; \lstinline{_getButtons()} gibt ein Array mit den
-Buttons drück, wobei ein Button jeweils ein 2-Tupel aus Titel und Callbackfunktion ist. Die Variable
+Buttons zurück, wobei ein Button jeweils ein 2-Tupel aus Titel und Callbackfunktion ist. Die Variable
 \lstinline{self} wird genutzt, da innerhalb des Callbacks \lstinline{this} nicht mehr auf die
 aktuelle Objektinstanz sondern auf das globale Objekt \lstinline{window} zeigt.
 
@@ -363,8 +363,8 @@ Indico verwendet zwei Arten von Tabs, was primär damit zusammenhängt, dass in 
 kein JavaScript verwendet wurde. Bei den \enquote{dynamischen} Tabs handelt es sich um eine Klasse,
 an die für jedes Tab Titel und Generatorfunktion übergeben werden und daraus ein Tab-Widget erzeugt
 wird. Die \enquote{statischen} Tabs hingegen werden im serverseiten Python-Code erzeugt und laden
-beim Auswählen eines Tabs eine neue Seite. Um Designanpassungen möglichst einfach zu machen ist an
-verschiedenen Stellen vorhandener Code, der jeweils dieselbe Aufgabe hat zu vermeiden - Tabs sollten
+beim Auswählen eines Tabs eine neue Seite. Um Designanpassungen möglichst einfach zu machen ist
+darauf zu achten, dass nicht mehrere Codestellen dieselbe Aufgabe ausführen. Tabs sollten
 also ausschließlich an einer Stelle generiert werden. Da das Tab-Widget aus jQuery UI verwendet
 werden soll, bietet es sich an, dieses auch für die statischen Tabs zu nutzen. Dazu gibt es
 prinzipiell zwei Möglichkeiten: Man könnte das Template, welches für die statischen Tabs genutzt
@@ -381,11 +381,11 @@ Um das klassische Verhalten zu erreichen muss sowohl verhindert werden dass ein 
 abgesendet wird als auch dass versucht wird, einen nicht vorhandenen Tab-Container anzuzeigen. Dies
 lässt sich am einfachsten dadurch erzielen, dass die Links der einzelnen Tabs als Linkziel die dem
 Tab zugehörige Seite enthalten und keinerlei \emph{click}-Events ausgeführt werden. Für ersteres
-wird bei Tab-Link in einem \lstinline{data}-Attribut die Ziel-URL gespeichert, da das Tab-Widget das
-Linkziel verändert, und nach dem Erstellen des Widgets wieder als \lstinline{href} zugewiesen. Um
-das Tab-Widget daran zu hindern, den Tab-Inhalt per AJAX zu laden, werden einfach die
-\emph{click}-Events gelöscht - dank der Nutzung von Namespaces betrifft dies ausschließlich die
-durch das Tab-Widget hinzugefügten Eventhandler.
+wird beim Tab-Link in einem \lstinline{data}-Attribut die Ziel-URL gespeichert, da das Tab-Widget
+das Linkziel verändert; nach dem Erstellen des Widgets wird die gespeicherte URL wieder als
+\lstinline{href} zugewiesen. Um das Tab-Widget daran zu hindern, den Tab-Inhalt per AJAX zu laden,
+werden einfach die \emph{click}-Events gelöscht - dank der Nutzung von Namespaces betrifft dies
+ausschließlich die durch das Tab-Widget hinzugefügten Eventhandler.
 
 Der Code, um die Links anzupassen, ist in \autoref{lst:static-tabs} zu sehen. \lstinline{this} zeigt
 dabei jeweils auf den äußersten Container des Tab-Widgets, sodass nur die Links innerhalb eines
