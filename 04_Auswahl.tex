@@ -6,15 +6,15 @@ spezifische Vor- und Nachteile. Im Folgenden werden sowohl der vollständige Ums
 bestimmtes Framework als auch Kombinationen mehrerer Frameworks vorgestellt und bewertet.
 
 \subsection{Vollständige Migration zu Prototype}
-Da Prototype bereits in einingen Bereichen von Indico integriert ist, muss es nur global
+Da Prototype bereits in einigen Bereichen von Indico integriert ist, muss es nur global
 eingebunden werden; Konflikte sind dabei eher unwahrscheinlich. Danach muss der Code nach und nach
 vom alten System auf Prototype umgestellt werden - dies bedeutet, dass alle ca. 240 Klassen in der
 Struktur angepasst werden müssen und sofern Mehrfachvererbung genutzt auch redesignt werden müssen,
 sodass sie das Objektsystem von Prototype nutzen können. Um die Erzeugung von HTML auf Prototype
-umzustellen, müssen die ca. 2000 Aufrufe von \lstinline{Html.*}-Funktionen angepasst werden und da
-der \lstinline{XElement}-Wrapper wegfällt alle darauf aufbauenden Funktionen modifiziert werden. Da
+umzustellen, müssen die ca. 2000 Aufrufe von \lstinline{Html.*}-Funktionen angepasst werden und, da
+der \lstinline{XElement}-Wrapper wegfällt, alle darauf aufbauenden Funktionen modifiziert werden. Da
 JSON-RPC-Aufrufe in Indico über eine zentrale Funktion laufen, kann diese relativ einfach auf die
-AJAX-Funktionen vno Prototype umgestellt werden. Bei der Migration von Hilfsfunktionen wie
+AJAX-Funktionen von Prototype umgestellt werden. Bei der Migration von Hilfsfunktionen wie
 \lstinline{each()} oder \lstinline{curry()} kann aufgrund der größtenteils identischen Parametern
 mit \emph{Search\&Replace} eines modernen Editors gearbeitet werden oder es können unter den alten
 Funktionsnamen Wrapper bereitgestellt werden, sodass dabei nur wenige Codestellen geändert werden
@@ -41,12 +41,12 @@ Nutzung von Komfortfunktionen wie \lstinline{wrap()} und \lstinline{closest()}. 
 Hilfsfunktionen können teilweise direkt durch jQuery-Äquivalente ersetzt werden - dabei reicht es
 oftmals aus, \lstinline{func} durch \lstinline{$.func} zu ersetzen; diverse in jQuery nicht
 vorhandenen Funktionen müssen dabei neu implementiert werden, sofern sie nicht unabhängig vom
-restlichen Indico-Framework funktionsfähig sind. jQuery unterstützt leider genau wie Prototype kein
+restlichen Indico-Framework funktionsfähig sind. jQuery unterstützt genau wie Prototype kein
 \emph{Data Binding}, weshalb dort eine Eigenentwicklung notwendig ist. Allerdings bietet jQuery
 durch \lstinline{val([newValue])} eine Methode um den Wert eines Formularelements auszulesen und zu
 ändern - an einigen Stellen könnte man diese Funktion an ein bestimmtes Element binden und als
 \emph{Accessor} an eine andere Funktion übergeben - wenn man diese Funktionen in einem Objekt
-speichert hat man ein sauberes Interface zum Zugriff auf die Werte und Änderungen wirken sich
+speichert, hat man ein sauberes Interface zum Zugriff auf die Werte und Änderungen wirken sich
 logischerweise direkt auf das zugehörige Formularelement aus.
 
 Der Komplettumstieg auf jQuery ist genau wie der Umstieg auf Prototype sehr aufwändig und
@@ -57,7 +57,7 @@ bereits Erfahrung damit hat.
 
 \subsection{Vollständige Migration auf jQuery und Prototype}
 Theoretisch wäre es möglich, sowohl jQuery als auch Prototype einzubinden, wobei in diesem Fall die
-\lstinline{$}-Funktion von jQuery unter einem anderen Namen - beispielswiese \lstinline{$j} -
+\lstinline{$}-Funktion von jQuery unter einem anderen Namen - beispielsweise \lstinline{$j} -
 aufgerufen werden müsste, da Prototype ebenfalls \lstinline{$} nutzt. Da beide Frameworks einen
 ähnlichen Funktionsumfang besitzen gibt es keinen sinnvollen Grund, beide zu benutzen.
 
@@ -66,8 +66,8 @@ aufgerufen werden müsste, da Prototype ebenfalls \lstinline{$} nutzt. Da beide 
 Neben der vollständigen Migration auf ein Framework besteht auch die Möglichkeit, das bestehende
 Framework vorerst beizubehalten und nur durch Prototype zu erweitern, was ja dadurch, dass einige
 Seiten teilweise Prototype nutzen, bereits der Fall ist. Neben der globalen Einbindung von Prototype
-werden dabei Teile von Indico auf Prototype umgestellt, wo es sich besonders anbietet. Ein solcher
-Teil ist das Eventsystem - für die Umstellung muss lediglich der Code des Indico-Frameworks
+werden dabei Teile von Indico auf Prototype umgestellt, bei denen es sich besonders anbietet. Ein
+solcher Teil ist das Eventsystem - für die Umstellung muss lediglich der Code des Indico-Frameworks
 bearbeitet werden; daneben bietet es sich an, die Hilfsmethoden zum browserunabhängigen Zugriff auf
 bestimmte Eigenschaften des Eventobjekts zu entfernen, sofern Prototype diese bereits normalisiert.
 Ein weiterer Bereich, in dem die Umstellung auf Prototype sinnvoll ist, ist Drag\&Drop - teilweise
@@ -82,7 +82,7 @@ dabei der Aufwand mit dem Nutzen verglichen werden - es gibt über 1200 Aufrufe 
 Diese müssten alle angepasst werden. Dasselbe gilt für die über 2000 Aufrufe der
 \lstinline{Html.*}-Funktionen zur Erstellung neuer DOM-Elemente. Unabhängig davon, ob man diesen
 Bereich migriert oder nicht sollte neuer Code ausschließlich Prototype nutzen, sodass die Verwendung
-der alten Funktionen nicht zunimmt. Durch das Beibebalten der alten Funktionen ist es jedoch
+der alten Funktionen nicht zunimmt. Durch das Beibehalten der alten Funktionen ist es jedoch
 notwendig, dass neuer Code überprüft, ob es sich bei einem Objekt bereits um ein
 (Prototype-erweitertes) DOM-Element handelt oder um ein \lstinline{XElement}-Objekt und in letzterem
 Fall durch \lstinline{$(obj.dom)} das enthaltene DOM-Element mit den Prototype-spezifischen
@@ -110,7 +110,7 @@ umgestellt werden sollten und welche nicht. Das Eventsystem kann zwar relativ ei
 werden, allerdings bietet es sich dort an, den bestehenden Code nicht zu verändern sondern nur in
 neuem Code jQuery zur Eventregistrierung zu nutzen, sodass man die Vorteile von jQuery vollständig
 nutzen kann statt die jQuery-Methoden in den vorhandenen Funktionen einzubauen, die beispielsweise
-kein \emph{Chaining} ermöglichen. Da jQuery UI ein Dialog-Widget enthält sollte die Dialogklasse von
+kein \emph{Chaining} ermöglichen. Da jQuery UI ein Dialog-Widget enthält, sollte die Dialogklasse von
 Indico auf jeden Fall angepasst werden um dieses Widget zu nutzen. Dabei ist es sinnvoll, die
 Kompatibilität mit bestehendem Code möglichst beizubehalten, da diese Klasse eine der am häufigsten
 genutzen Klassen in ganz Indico ist. Neben den Dialogen ist es auch sinnvoll, das Tab-Widget zu
@@ -120,7 +120,7 @@ Aufwand mit dem Nutzen zu vergleichen. Ebenfalls zu beachten ist die Kompatibili
 Funktionen: Eine Funktion, die jQuery nutzt, muss überprüfen, ob es sich bei einem Objekt um ein
 DOM-Element bzw. jQuery-Objeklt handelt oder ob ein \lstinline{XElement}-Wrapper übergeben wurde und
 in diesem Fall mittels \lstinline{$(obj.dom)} das enthaltene Element in ein jQuery-Element
-kopieren. Auch andersrum muss auf Kompatibilität geachtet werde, indem Funktionen keine
+kopieren. Auch in die andere Richtung muss auf Kompatibilität geachtet werden, indem Funktionen keine
 jQuery-Objekte sondern DOM-Objekte zurückgeben - dies ist dank des Arrayzugriffs auf jQuery-Objekte
 jedoch problemlos möglich.
 
@@ -141,7 +141,7 @@ Unabhängig davon, ob man komplett auf ein neues Framework umstellt oder das Ind
 beibehält und nur durch ein anderes Framework erweitert - es existieren diverse HilfsFunktionen im
 Indico-Framework, die dort unsauber oder unperformant implementiert sind, aber im neuen Framework
 nicht vorhanden sind. Die Chance ist jedoch groß, dass eine äquivalente Funktion in der
-Underscore.js-Bibliothek verfügbar ist. Der Nachteil dabei ist jedoch dass dadurch einige Funktionen
+Underscore.js-Bibliothek verfügbar ist. Der Nachteil dabei ist jedoch, dass dadurch einige Funktionen
 mehrfach verfügbar sind - zum einen in Prototype bzw. jQuery, zum anderen in Underscore.js. Daher
 ist in diesem Fall auf eine entsprechende Dokumentation zu achten, sodass Entwickler wissen, welche
 Funktion sie bevorzugen sollen, falls sie mehrfach vorhanden ist.
@@ -157,7 +157,7 @@ Zeit erneut die Technologie zu wechseln und man damit auch die übrigen Entwickl
 sich wieder mit einem neuen Framework auseinanderzusetzen.
 
 Die Idee, das Indico-Framework vollständig zu ersetzen, ist zwar diskussionswürdig, kann aber gerade
-bei einem von einer Vielzahl an Benutzern aktiv verwendeten System, wo es häufig kleinere
+bei einem von einer Vielzahl an Benutzern aktiv verwendeten System, bei dem es häufig kleinere
 Fehler-Reports aber auch Feature-Requests gibt, nicht wirklich in die Tat umgesetzt werde, da ein
 Entwickler nicht langfristig ausschließlich an einer solchen Migration arbeiten kann - und die große
 Zahl zu ändernder Klassen und Funktionen würde möglicherweise sogar die Mitarbeit weiterer

@@ -13,9 +13,9 @@ zu diesem Zeitpunkt noch keine Migration statt.
 
 Um JavaScript-Dateien in Indico einzubinden fügt man nicht wie üblich
 \lstinline[language=HTML]{<script>}-Tags in einem HTML-Template ein sondern erweitert die Funktion
-\lstinline{getJSFiles()} der Basisklasse für HTML-Seiten \lstinline{WPBase} sodass sie die
-notwendigen Dateien einbindet. Im Falle von jQuery, wo neben jQuery selbst auch jQuery UI und später
-diverse Plugins eingebunden werden müssen, bietet sich eine separate Funktion an. Da Indico im
+\lstinline{getJSFiles()} der Basisklasse für HTML-Seiten \lstinline{WPBase}, sodass sie die
+notwendigen Dateien einbindet. Im Falle von jQuery - dort muss neben jQuery selbst auch jQuery UI
+und später diverse Plugins eingebunden werden - bietet sich eine separate Funktion an. Da Indico im
 Produktivmodus einzelne JavaScript-Dateien zu komprimierten Paketen \enquote{kompiliert}, muss
 zusätzlich zur Python-Funktion die Konfigurationsdatei von \emph{jsmin} angepasst werden, damit die
 neuen Dateien in einem solchen Paket zusammengefasst werden.
@@ -33,7 +33,7 @@ def _includeJQuery(self):
 \subsection{Beheben von Konflikten}
 
 Nachdem jQuery und Underscore.js nun eingebunden sind, muss überprüft werden, ob es Konflikte gibt.
-Diese gibt es durch das gleichzeitige Vorhandensein von jQuery und Prototype in der Tat - unabhängig
+Diese treten es durch das gleichzeitige Vorhandensein von jQuery und Prototype in der Tat auf - unabhängig
 davon, dass dieser Konflikt bereits aus der Analysephase bekannt ist, zeigt er sich auf Seiten, die
 Prototype nutzen - auf diesen funktionieren die JavaScripts nicht mehr korrekt. Der Konflikt
 entsteht dadurch, dass jQuery und Prototype beide \lstinline{$} für sich beanspruchen und daher das
@@ -92,8 +92,8 @@ Codeblocks.
 \end{lstlisting}
 
 Neben dem \emph{Room Booking}-System verwendet auch der \emph{Badge Editor}, ein Tool zum Erstellen
-von Namensschildern für Konferenzen, Prototype. Dort wird es primär zur Unterstützung von Drag\&Drop
-eingesetzt.
+von Namensschildern für Konferenzen, das Prototype-Framework. Dort wird es primär zur Unterstützung
+von Drag\&Drop eingesetzt.
 
 \img{indico-badge-editor.png}{400px}{Der Indico Badge Editor}{Indico Badge Editor}
 
@@ -101,8 +101,8 @@ Nebem dem Migrieren des Prototype/Scriptaculous-basierten Drag\&Drop-Systems bie
 vollständige Migration an, da zum einen eine Mischung aus Indico- und Prototype-Code benutzt wird
 und zum anderen selbiger Code ausschließlich DOM-Operationen ausführt. Wie auch auf dem \emph{Room
 Booking}-Seiten bietet sich auch hier an, ungültigen und unsauberen Code zu korrigieren bzw.
-aufzupolieren. In diesem Fall beinhaltet dies die Benutzung korrekter IDs - Leerzeichen sind dort
-nicht zulässig - und das Entfernen von Inline-Eventhandlern. Die Uploadfunktion für
+aufzupolieren. In diesem Fall beinhaltet dies die Benutzung korrekter IDs (Leerzeichen sind dort
+nicht zulässig) und das Entfernen von Inline-Eventhandlern. Die Uploadfunktion für
 Hintergrundbilder erstellt einen IFrame, um das Uploadformular dorthin abzusenden, sodass die Seite
 selbst nicht neugeladen werden muss. Für diese unsaubere Methode bieten sich zwei Lösungen an: Durch
 die Integration des \emph{jQuery Form}-Plugins ließe sich der IFrame-Code in jQuery-Plugin
@@ -120,7 +120,7 @@ gefunden werden können. Um diese zu finden könnte man entweder eine Liste alle
 enthaltenen Methoden erstellen und danach suchen oder aber nach der Entfernung von Prototype testen,
 wo es Probleme gibt. Da Prototype nur auf relativ wenigen Seiten eingebunden wird, bietet sich
 letztere Methode aufgrund des geringeren Aufwands an, obwohl dabei nicht sichergestellt ist, dass
-alle Problemstellen gefunden werden - dazu wäre parallel dazu eine \emph{Code Coverage}-Analyte
+alle Problemstellen gefunden werden - dafür wäre parallel dazu eine \emph{Code Coverage}-Analyse
 notwendig, die sich jedoch ausschließlich auf die Codeteile erstrecken dürfte, die möglicherweise
 Prototype nutzen, da ansonsten mangels automatischer Tests möglichst alle JavaScripts in Indico
 manuell ausgeführt werden müssten, obwohl ein großer Teil garnicht in der Lage ist, Prototype zu
