@@ -1,6 +1,6 @@
 \chapter{Migration zu jQuery}
 
-Bei der (teilweisen) Migration zu jQuery sind einige Schritte am Anfang zwingend notwendig, während
+Bei der Migration zu jQuery sind einige Schritte am Anfang zwingend notwendig, während
 andere optional sind und in relativ beliebiger Reihenfolge ausgeführt werden können. Im Folgenden
 werden die Migrationsschritte in der Reihenfolge beschrieben, wie sie durchgeführt wurden.
 
@@ -11,14 +11,15 @@ zu diesem Zeitpunkt noch keine Migration statt.
 
 \subsection{Einbinden von jQuery}
 
-Um JavaScript-Dateien in Indico einzubinden fügt man nicht wie üblich
-\lstinline[language=HTML]{<script>}-Tags in einem HTML-Template ein sondern erweitert die Funktion
+Um JavaScript-Dateien in Indico einzubinden, fügt man nicht wie üblich
+\lstinline[language=HTML]{<script>}-Tags in einem HTML-Template ein, sondern erweitert die Funktion
 \lstinline{getJSFiles()} der Basisklasse für HTML-Seiten \lstinline{WPBase}, sodass sie die
-notwendigen Dateien einbindet. Im Falle von jQuery - dort muss neben jQuery selbst auch jQuery UI
-und später diverse Plugins eingebunden werden - bietet sich eine separate Funktion an. Da Indico im
-Produktivmodus einzelne JavaScript-Dateien zu komprimierten Paketen \enquote{kompiliert}, muss
-zusätzlich zur Python-Funktion die Konfigurationsdatei von \emph{jsmin} angepasst werden, damit die
-neuen Dateien in einem solchen Paket zusammengefasst werden.
+notwendigen Dateien einbindet. Dazu bietet sich eine separate Funktion an, da neben jQuery selbst
+auch jQuery UI und Underscore.js eingebunden werden müssen. Diese Liste wird später noch durch
+diverse jQuery-Plugins erweitert. Da Indico im Produktivmodus einzelne JavaScript-Dateien zu
+komprimierten Paketen \enquote{kompiliert}, muss zusätzlich zur Python-Funktion die
+Konfigurationsdatei von \emph{jsmin} angepasst werden, damit die neuen Dateien in einem solchen
+Paket zusammengefasst werden.
 
 \begin{lstlisting}[language=Python,caption=Einbinden von jQuery und Underscore.js in Indico]
 def _includeJQuery(self):
@@ -32,29 +33,28 @@ def _includeJQuery(self):
 
 \subsection{Beheben von Konflikten}
 
-Nachdem jQuery und Underscore.js nun eingebunden sind, muss überprüft werden, ob es Konflikte gibt.
-Diese treten es durch das gleichzeitige Vorhandensein von jQuery und Prototype in der Tat auf - unabhängig
-davon, dass dieser Konflikt bereits aus der Analysephase bekannt ist, zeigt er sich auf Seiten, die
-Prototype nutzen - auf diesen funktionieren die JavaScripts nicht mehr korrekt. Der Konflikt
-entsteht dadurch, dass jQuery und Prototype beide \lstinline{$} für sich beanspruchen und daher das
-zuletzt eingebundene Framework die vorherige Variable überschreibt. Da jQuery nach Prototype
-eingebunden wird, ist dieses Problem einfach zu lösen - mittels
-\lstinline{var $j = jQuery.noConflict();} wird die Prototype-Funktion wiederhergestellt und jQuery
-via \lstinline{$j} verfügbar gemacht. Dabei handelt es sich allerdings um eine temporäre Lösung um
-Prototype so lange beizubehalten, bis der darauf basierende Code vollständig migriert wurde. Sie hat
-den Vorteil, dass der Prototype-Code teilweise zeilenweise migriert werden und währenddessen immer
-wieder auf korrekte Funktion geprüft werden kann.
+Nachdem jQuery und Underscore.js eingebunden sind, muss überprüft werden, ob es Konflikte gibt. Ein
+Konflikt tritt durch das gleichzeitige Vorhandensein von jQuery und Prototype auf. Dieser Konflikt
+ist bereits aus der Analysephase bekannt und hat zur Folge, dass auf den Seiten, die Prototype
+nutzen, diverse JavaScripts nicht mehr korrekt funktionieren. Der Konflikt entsteht dadurch, dass
+jQuery und Prototype beide \lstinline{$} für sich beanspruchen und daher das zuletzt eingebundene
+Framework die vorherige Variable überschreibt. Da jQuery nach Prototype eingebunden wird, ist dieses
+Problem einfach zu lösen - mittels \lstinline{var $j = jQuery.noConflict();} wird die
+Prototype-Funktion wiederhergestellt und jQuery via \lstinline{$j} verfügbar gemacht. Dabei handelt
+es sich allerdings um eine temporäre Lösung, um Prototype so lange beizubehalten, bis der darauf
+basierende Code vollständig migriert wurde. Sie hat den Vorteil, dass der Prototype-Code teilweise
+zeilenweise migriert und währenddessen immer wieder auf korrekte Funktion geprüft werden kann.
 
 \subsection{Migration von Prototype-basiertem Code}
 
 Einige Bereiche des \emph{Room Booking}-Systems von Indico nutzen Prototype zum Registrieren von
 Events. Darüber hinaus wird Prototype dort zur Formularvalidierung genutzt: Mithilfe des Objekts
 \lstinline{Form.Observer} werden die Formulare alle 400ms auf Änderungen überprüft und wenn nötig
-erneut validiert. Die häufige Prüfung auf Änderungen ist weder effizient noch notwendig -
+erneut validiert. Die häufige Prüfung auf Änderungen ist weder effizient noch notwendig.
 Formularelemente können über die \lstinline{change}-, \lstinline{click}- und
 \lstinline{keyup}-Events bei jeder Änderung validiert werden ohne mehrmals pro Sekunde alle
 Formularelemente auf Änderungen zu überprüfen. Um den Validierungscode mit jQuery möglichst
-effizient zu machen werden die Events nicht für alle Formularelemente registriert sondern nur für
+effizient zu machen, werden die Events nicht für alle Formularelemente registriert, sondern nur für
 das Formular selbst, wobei ein \emph{Delegate} genutzt wird, um speziell auf Events der enthaltenen
 Formularelemente zu reagieren. \autoref{lst:jquery-validation-events} zeigt die Registrierung der
 Events; im \emph{submit}-Event wird das Formular erneut validiert und, sofern es nicht gültig ist,
@@ -72,9 +72,9 @@ $j('#bookingForm').delegate(':input', 'keyup change', function() {
 \end{lstlisting}
 
 Ebenfalls Änderungsbedarf besteht bei den in \autoref{lst:rb-inline-events} verwendeten
-Inline-Events. Da die betroffenen Formularelemente bereits IDs besitzen kann ihnen über jQuery
-mühelos ein Eventhandler zugewiesen werden - dadurch können alle Scripts an derselben Stelle im
-HTML-Code stehen, was den Code lesbarer macht; unabhängig davon muss der Code geändert werden, da
+Inline-Events. Da die betroffenen Formularelemente bereits IDs besitzen, kann ihnen über jQuery
+mühelos ein Eventhandler zugewiesen werden. Dadurch können alle Scripts an derselben Stelle im
+HTML-Code stehen, was den Code lesbarer macht. Unabhängig davon muss der Code geändert werden, da
 die dort verwendete \lstinline{$}-Funktion aus Prototype stammt.
 
 \begin{lstlisting}[language=HTML,label=lst:rb-inline-events,caption=Inline-Eventhandler]
@@ -82,7 +82,7 @@ die dort verwendete \lstinline{$}-Funktion aus Prototype stammt.
 <input id="onlyPrebookings" type="checkbox" onchange="if (this.checked) $('onlyBookings').checked = false;" />
 \end{lstlisting}
 
-An vielen Stellen zahlt es sich aus, dass Prototype und jQuery gewisse Ähnlichkeiten besitzen;
+An vielen Stellen ist es von Vorteil, dass Prototype und jQuery gewisse Ähnlichkeiten besitzen;
 \autoref{lst:prototype-jquery-diff} zeigt die Änderungen eines von Prototype zu jQuery migrierten
 Codeblocks.
 
@@ -97,18 +97,19 @@ von Drag\&Drop eingesetzt.
 
 \img{indico-badge-editor.png}{400px}{Der Indico Badge Editor}{Indico Badge Editor}
 
-Nebem dem Migrieren des Prototype/Scriptaculous-basierten Drag\&Drop-Systems bietet sich dort eine
-vollständige Migration an, da zum einen eine Mischung aus Indico- und Prototype-Code benutzt wird
-und zum anderen selbiger Code ausschließlich DOM-Operationen ausführt. Wie auch auf dem \emph{Room
-Booking}-Seiten bietet sich auch hier an, ungültigen und unsauberen Code zu korrigieren bzw.
-aufzupolieren. In diesem Fall beinhaltet dies die Benutzung korrekter IDs (Leerzeichen sind dort
-nicht zulässig) und das Entfernen von Inline-Eventhandlern. Die Uploadfunktion für
-Hintergrundbilder erstellt einen IFrame, um das Uploadformular dorthin abzusenden, sodass die Seite
-selbst nicht neugeladen werden muss. Für diese unsaubere Methode bieten sich zwei Lösungen an: Durch
-die Integration des \emph{jQuery Form}-Plugins ließe sich der IFrame-Code in jQuery-Plugin
+Nebem dem Konvertieren des Prototype/Scriptaculous-basierten Drag\&Drop-Systems bietet sich dort
+eine vollständige Migration an, da eine Mischung aus Indico- und Prototype-Code benutzt wird, die
+ausschließlich DOM-Operationen ausführt. Wie auch auf dem \emph{Room Booking}-Seiten bietet sich
+auch hier an, ungültigen und unsauberen Code zu korrigieren. In diesem Fall beinhaltet dies die
+Benutzung korrekter IDs (Leerzeichen sind dort nicht zulässig) und das Entfernen von
+Inline-Eventhandlern. Die Uploadfunktion für Hintergrundbilder erstellt einen unsichtbaren IFrame
+für das Uploadformular, damit die Seite beim Abschicken das Formulars nicht neugeladen werden muss.
+Für diesen Use Case bieten sich zwei Lösungen an, die beide besser als die bestehende sind: Durch
+die Integration des \emph{jQuery Form}-Plugins lässt sich der IFrame-Code in jQuery-Plugin
 auslagern, sodass der Code übersichtlicher gehalten wird und gleichzeitig die Kompatibilität mit
-allen Browsern bestehen bleibt. Sofern letzteres nicht notwendig wäre, könnte man auch die Fähigkeit
-moderner Browser nutzen, über AJAX Dateien hochzuladen - aufgrund der Zielgruppe von Indico ist dies
+allen Browsern bestehen bleibt. Sofern letzteres nicht notwendig ist, kann man auch die Fähigkeit
+moderner Browser nutzen, über AJAX Dateien hochzuladen. Aufgrund der Zielgruppe von Indico, die zu
+einem nicht zu vernachlässigenden Teil veraltete \emph{Internet Explorer}-Versionen nutzt, ist dies
 jedoch nicht praktikabel. Da in der aktuellen Phase jedoch das Ziel Prototype zu entfernen im
 Vordergrund steht und das Form-Plugin auch noch nicht eingebunden ist, bleibt der IFrame-Code
 zunächst erhalten.
@@ -116,11 +117,11 @@ zunächst erhalten.
 An dieser Stelle sind alle anhand der \lstinline{$}-Funktion leicht aufzufindenden Codestellen, die
 Prototype nutzen, angepasst. Durch die Erweiterung der Prototypen nativer Objekte gibt es allerdings
 noch Prototype-Funktionen, die nicht über \lstinline{$} oder eine der globalen Prototype-Klassen
-gefunden werden können. Um diese zu finden könnte man entweder eine Liste aller in Prototype
+gefunden werden können. Um diese aufzuspüren kann man entweder eine Liste aller in Prototype
 enthaltenen Methoden erstellen und danach suchen oder aber nach der Entfernung von Prototype testen,
 wo es Probleme gibt. Da Prototype nur auf relativ wenigen Seiten eingebunden wird, bietet sich
 letztere Methode aufgrund des geringeren Aufwands an, obwohl dabei nicht sichergestellt ist, dass
-alle Problemstellen gefunden werden - dafür wäre parallel dazu eine \emph{Code Coverage}-Analyse
+alle Problemstellen gefunden werden. Dafür wäre parallel dazu eine \emph{Code Coverage}-Analyse
 notwendig, die sich jedoch ausschließlich auf die Codeteile erstrecken dürfte, die möglicherweise
 Prototype nutzen, da ansonsten mangels automatischer Tests möglichst alle JavaScripts in Indico
 manuell ausgeführt werden müssten, obwohl ein großer Teil garnicht in der Lage ist, Prototype zu
@@ -130,20 +131,20 @@ nutzen.
 
 Ähnlich wie beim Einbinden von jQuery muss auch beim Entfernen von Prototype die Methode
 \lstinline{getJSFiles()} modifiziert werden. Da Prototype nicht global integriert ist, überschreiben
-verschiedene Unterklassen von \lstinline{WPBase} diese Methode - sofern dies ausschließlich der
+verschiedene Unterklassen von \lstinline{WPBase} diese Methode. Falls dies ausschließlich der
 Integration von Prototype dient, kann die Methode einfach entfernt werden; falls weitere JavaScripts
 eingebunden werden, muss die Methode entsprechend angepasst werden.
 
 Die im letzten Abschnitt erwähnten Tests zeigen, dass außer einer undefinierten Funktion
 \lstinline{size()} keine Probleme auftreten. Bei der Funktion handelt es sich um eine generische
-Funktion um die Anzahl der Elemente in einem \emph{Enumerable}-Objekt - also einem Array, einem
-Objekt oder einer Argumentliste - zu bestimmen. Während JavaScript bei Arrays über die
+Funktion, um die Anzahl der Elemente in einem \emph{Enumerable}-Objekt, also einem Array, einem
+Objekt oder einer Argumentliste, zu bestimmen. Während JavaScript bei Arrays über die
 \lstinline{length}-Eigenschaft direkten Zugriff auf die Anzahl der Elemente bietet, existiert eine
-solche Eigenschaft bei Objekten nicht. Dies ergibt insofern Sinn, dass es zwei Möglichkeiten gibt,
-die Anzahl zu bestimmen: Zum einen könnte man ausschließlich die Eigenschaften zählen, die das
-Objekt selbst besitzt, zum anderen könnte man auch alle über die Prototypenkette erreichbaren
-Eigenschaften mitzählen. Da Underscore.js mit \lstinline{_.size()} eine solche Funktion enthält,
-kann \lstinline{someObject.size()} einfach durch \lstinline{_.size(someObject)} ersetzt werden.
+solche Eigenschaft bei Objekten nicht, da es zwei verschiedene Möglichkeiten gibt, die Anzahl zu
+bestimmen: Zum einen kann man ausschließlich die Eigenschaften zählen, die das Objekt selbst
+besitzt, zum anderen kann man auch alle über die Prototypenkette erreichbaren Eigenschaften
+mitzählen. Da Underscore.js mit \lstinline{_.size()} eine solche Funktion enthält, kann
+\lstinline{someObject.size()} einfach durch \lstinline{_.size(someObject)} ersetzt werden.
 
 Zusammen mit Prototype kann auch die \lstinline{$j}-Kompatibilitätsschicht entfernt werden, da
 \lstinline{$} nun unbenutzt ist. Dazu wird der Aufruf von \lstinline{jQuery.noConflict} entfernt und
