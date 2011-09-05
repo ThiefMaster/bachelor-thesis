@@ -12,18 +12,18 @@ implementierten CSS-Selektoren auch weitere Selektoren unterstützt werden.
 
 \item[DOM-Manipulation] \hfill \\
 Häufig möchte man mit JavaScript neue HTML-Elemente erstellen oder vorhandene Elemente verändern.
-Dabei kann das Framework den Entwickler unterstützen, indem es beispielsweise das Verknüpfen von
-Elementen und die Veränderung von CSS-Attributen vereinfacht.
+Dabei kann das Framework den Entwickler unterstützen, indem es z.B. das Verknüpfen von Elementen und
+die Veränderung von CSS-Attributen vereinfacht.
 
 \item[DOM Traversal] \hfill \\
-Unter \emph{DOM Traversal} versteht man das Navigieren durch den DOM-Tree ausgehend von einem
-bestimmten Element. Dabei gibt es sowohl einige Standardfunktionen die man in jedem Framework
-erwarten kann als auch Komfortfunktionen.
+Unter \emph{DOM Traversal} versteht man das Navigieren durch den DOM-Tree, ausgehend von einem
+bestimmten Element. Dabei gibt es sowohl einige Standardfunktionen, die man in jedem Framework
+erwarten kann, als auch Komfortfunktionen.
 
 \item[Events] \hfill \\
-Wie bereits in \autoref{js-events} gezeigt unterscheiden sich die Eventsysteme der Browser
-teilweise. Daher ist dies ein Bereich wo ein Framework sowohl die Browserunterschiede verbergen als
-auch den Komfort erhöhen sollte.
+Wie bereits in \autoref{js-events} gezeigt, unterscheiden sich die Eventsysteme der Browser
+teilweise. Daher ist dies ein Bereich, in dem ein Framework sowohl die Browserunterschiede verbergen
+als auch den Komfort erhöhen sollte.
 
 \item[Objektsystem] \hfill \\
 Manche JavaScript-Frameworks bringen ein eigenes Objektsystem mit, sodass die Arbeit mit Prototypen
@@ -33,11 +33,11 @@ Aufruf einer überschriebenen Method der Parent-Klasse komfortabel möglich ist.
 \item[Hilfsfunktionen] \hfill \\
 Die meisten JavaScript-Frameworks bieten neben der bereits genannten Funktionalität weitere
 Funktionen, die oftmals einen funktionalen Programmierstil vereinfachen oder komfortabler machen.
-Allerdings sind nicht nur die funktionalen Funktionen sondern auch jegliche anderen Hilfsfunktionen
+Allerdings sind nicht nur die funktionalen Funktionen, sondern auch jegliche anderen Hilfsfunktionen
 betrachtenswert.
 
 \item[UI-Elemente] \hfill \\
-Einige JavaScript-Frameworks enthalten UI-Elemente, um beispielsweise Dialoge oder Buttons zu
+Einige JavaScript-Frameworks enthalten UI-Elemente, um z.B. Dialoge oder Buttons zu
 erzeugen. Die Frameworks unterscheiden sich dort sowohl im Umfang als auch in der Anpassbarkeit.
 
 \item[Kompatibilität] \hfill \\
@@ -52,21 +52,21 @@ Frameworks nicht vorhanden sind.
 Die unterschiedlichen Frameworks sind bei verschiedenen Operationen wie beispielsweise dem Zugriff
 auf Elemente anhand eines CSS-Selektors unterschiedlich schnell. Allerdings spielt die Performance
 im Rahmen dieser Arbeit nur eine untergeordnete Rolle, da Indico nirgends extrem viele Aktionen auf
-einmal ausführt und Performanceunterschiede somit - auch dank den immer schnelleren
-JavaScript-Engines - für den Endbenutzer nicht spürbar sind.
+einmal ausführt und Performanceunterschiede somit für den Endbenutzer nicht spürbar sind, was auch
+den immer schnelleren JavaScript-Engines zu verdanken ist.
 
 \item[Dokumentation] \hfill \\
 Da mehrere Entwickler mit dem Framework arbeiten müssen und starke Fluktuation herrscht, da oftmals
 Studenten für 3 bis 12 Monate an Indico arbeiten, ist eine gute Dokumentation wichtig, da es nicht
-produktiv ist, wenn man erst den Quellcode des Frameworks lesen und verstehen muss um es benutzen zu
-können. Insbesondere ist eine Dokumentation hilfreich, wenn sie für alle Funktionen des Frameworks
-Beispielcode enthält.
+sehr produktiv ist, wenn man erst den Quellcode des Frameworks lesen und verstehen muss, um es
+benutzen zu können. Insbesondere ist eine Dokumentation hilfreich, wenn sie für alle Funktionen des
+Frameworks Beispielcode enthält.
 
 \item[Lizenz] \hfill \\
 Die meisten Frameworks sind unter einer OpenSource-Lizenz verfügbar.
 Da Indico unter der
 GNU~GPL\footnote{\href{http://www.gnu.org/licenses/gpl-2.0.txt}{http://www.gnu.org/licenses/gpl-2.0.txt}}
-steht ist auf Kompatibilität mit dieser Lizenz zu achten. \autoref{img.floss-license-slide.png}
+steht, ist auf Kompatibilität mit dieser Lizenz zu achten. \autoref{img.floss-license-slide.png}
 bietet einen kurzen Überblick über die verbreitetsten Open Source-Lizenzen und zeigt die
 Kompatibilität: \enquote{To see if software can be combined, just start at their respective
 licenses, and find a common box you can reach following the arrows.} \citep{osslic} \\
@@ -75,7 +75,7 @@ later version}, lizenziert ist, sind alle Open Source-Lizenzen außer der \emph{
 GPL}\footnote{GPL mit der Erweiterung, dass auch bei einem Netzwerkzugriff auf das laufende Programm
 eine \enquote{Verbreitung} stattfindet und der Quellcode zugänglich gemacht werden muss.}
 kompatibel.
-\img{floss-license-slide.png}{400px}{Kompatibilitätsdiagramm der verschiedenen Open
+\img{floss-license-slide.png}{400px}{Kompatibilitätsdiagramm div. Open
 Source-Lizenzen \citep{osslic}}{OpenSource-Lizenz-Kompatibilität}
 \end{description}
 
@@ -113,8 +113,8 @@ passenden Namen haben. Neben diesen beiden Funktionen gibt es mit
 \lstinline{getElementsByClassName(class)} eine weitere Funktion, die alle Elemente mit der
 angegebenen CSS-Klasse zurückgibt. Eine Funktion, um Elemente anhand eines CSS-Selektors zu finden,
 existiert nicht. Das Wrapper-Objekt \lstinline{XElement}, in welches alle drei Funktionen die
-gefundenen DOM-Elemente verpackt, enthält neben der Referenz auf das DOM-Element diverse
-Hilfsmethoden um die Arbeit mit dem Element zu erleichtern.
+gefundenen DOM-Elemente verpacken, enthält neben der Referenz auf das DOM-Element diverse
+Hilfsmethoden, um die Arbeit mit dem Element zu erleichtern.
 
 \item[DOM-Manipulation] \hfill \\
 Indico besitzt ein globales Objekt \lstinline{Html}, welches Methoden für die meisten HTML-Elemente
@@ -145,8 +145,8 @@ suchen.
 einige häufig genutze Events wie \emph{click}, \emph{change} und \emph{keypress} gibt es spezielle
 Funktionen; für alle anderen Events gibt es die Funktion \lstinline{observeEvent()}, welche ein
 Callback für ein beliebiges Event registrieren kann. Statt die DOM-Funktion
-\lstinline{addEventListener()} zu nutzen wird hierbei jedoch die \lstinline{onEVENTNAME}-Eigenschaft
-des DOM-Elements benutzt, was den Nachteil hat, dass der Aufruf mehrerer Handler vom Framework
+\lstinline{addEventListener()} zu nutzen, wird hierbei jedoch die \lstinline{onEVENTNAME}-Eigenschaft
+des DOM-Elements benutzt mit dem Nachteil, dass der Aufruf mehrerer Handler vom Framework
 gehandhabt werden muss, da die Eigenschaft jeweils immer nur auf eine Funktion zeigen kann. Das
 Framework stellt sicher, dass das erste Argument der Funktion jeweils das Event-Objekt ist, jedoch
 zeigt \lstinline{this} nicht auf das Element. Dadurch, dass das Event-Objekt unverändert
@@ -161,7 +161,7 @@ ebenfalls um theoretisch eigenständig verwendbare Klassen handelt. Objekte werd
 und \lstinline{mixins} eine Liste der Mixin-Klassen ist. \lstinline{members} ist ein Objekt, welches
 alle Funktionen enthält, die Memberfunktionen der Klasse werden sollen. \lstinline{ctor} ist die
 Konstruktorfunktion. Bei der Verwendung von Mixins werden die Konstruktoren dieser Klassen nicht
-ausgeführt; sie müssen mit \lstinline{this.NameDesMixins(...)} falls benötigt manuell ausgeführt
+ausgeführt; sie müssen ggf. mit \lstinline{this.NameDesMixins(...)} manuell ausgeführt
 werden. Der Aufruf von Methoden eines Mixins, die durch eine Memberfunktionen überschrieben wurden,
 ist nur über den Prototypen des Mixins möglich: \\
 \lstinline{this.<mixin>.prototype.<func>.call(this, ...)}
@@ -172,8 +172,8 @@ Indico-Framework einige Standardfunktionen zur funktionalen Programmierung. Dar�
 viele Klassen bzw. Mixins, um \emph{Observer}, \emph{Getter} und \emph{Setter} zu ermöglichen, wobei
 letztere jeweils durch einen \emph{Observer} überwacht werden können. Es werden außerdem diverse
 Stringfunktionen zur Verfügung gestellt, wobei einige davon als globale Funktionen implementiert
-sind und andere dem \lstinline{String}-Prototypen hinzugefügt wurden - ein Zeichen dafür, dass
-mehrere Entwickler am Framework gearbeitet haben ohne sich an einheitliche Standards zu halten.
+sind und andere dem \lstinline{String}-Prototypen hinzugefügt wurden. Dies ist ein Zeichen dafür, dass
+mehrere Entwickler am Framework gearbeitet haben, ohne sich an einheitliche Standards zu halten.
 
 \item[UI-Elemente] \hfill \\
 Indico enthält einige UI-Widgets, die teilweise im Framework enthalten sind oder darauf basieren und
@@ -182,29 +182,30 @@ sind, kann man sie zum Framework dazuzählen. Das Dialog-Widget ermöglicht Inli
 Inhalt und Buttons; zur Verwendung erstellt man eine Klasse, die von der Dialogklasse abgeleitet
 ist und eine \lstinline{draw()}-Methode implementiert, welche sowohl den Inhalt als auch die Buttons
 generiert. Letztere werden ebenfalls durch ein Widget erstellt, welches jedoch nur den Button
-erstellt und einen \emph{click}-Handler hinzufügt - die Positionierung innerhalb des Dialogs findet
+erstellt und einen \emph{click}-Handler hinzufügt. Die Positionierung innerhalb des Dialogs findet
 jeweils innerhalb der \emph{draw}-Methode statt, wodurch viel \emph{duplicate code} entsteht.
 Neben dem Button-Widget werden auch die meisten anderen Formularelement von HTML durch Widgets
 repräsentiert. Ebenfalls enthalten sind Funktionen zur Erzeugung und Validierung von
-HTML-Formularen. Diese sind allerdings nicht komplett fehlerfrei; beispielsweise wird bei einer
+HTML-Formularen. Diese sind allerdings nicht komplett fehlerfrei: so wird bei einer
 Gruppe von Radiobuttons im Fehlerfall nur der erste Button als fehlerhaft markiert. Darüber hinaus
 enthält das Indico-Framework ein Kalenderwidget, welches jedoch nur ein Wrapper für einen
 \emph{Third-Party}-JavaScript-Kalender ist.
 \imga{indico-calendar.png}{Das Kalenderwidget von Indico}{Indico-Kalenderwidget}
 
+\newpage
 \item[Kompatibilität] \hfill \\
-Da es sich um das aktuelle Framework von Indico handelt gibt es logischerweise keine
+Da es sich um das aktuelle Framework von Indico handelt, gibt es logischerweise keine
 Kompatibilitätsprobleme mit Indico. Allerdings ist das Risiko von Konflikten mit anderen Frameworks
 relativ groß, da es sehr viele globale Funktionen besitzt und teilweise kein \lstinline{var}
 verwendet wird, wodurch Variablen, die eigentlich lokal sein sollten, global werden. Auf der anderen
 Seite nutzt Indico keine einbuchstabigen Funktionsnamen, wodurch das Konfliktrisiko mit einigen
-Frameworks wieder verringert wird - Details dazu finden sich in den folgenden Abschnitten bei den
+Frameworks wieder verringert wird. Details dazu finden sich in den folgenden Abschnitten bei den
 jeweiligen Frameworks.
 
 \item[Sonstige Features] \hfill \\
-Das Indico-Framework enthält \emph{Data Binding}-Funktionen die es ermöglichen, beispielsweise den
+Das Indico-Framework enthält \emph{Data Binding}-Funktionen, die es ermöglichen, beispielsweise den
 Inhalt eines Formularfeldes mit dem eines Objekts, welches \emph{Getter} und \emph{Setter}
-implementiert automatisch zu synchronisieren. Während AJAX und die Unterstützung verschiedener
+implementiert, automatisch zu synchronisieren. Während AJAX und die Unterstützung verschiedener
 Datentypen wie JSON und XML ein Standardfeature von JavaScript-Frameworks ist, unterstützt das
 Indico-Framework ausschließlich JSON-RPC. Da das Framework auf Indico zugeschnitten ist und dort nur
 JSON-RPC benutzt wird, ist dies jedoch kein Problem. Ein weiteres Feature ist die Erzeugung von
@@ -215,7 +216,7 @@ Das JavaScript-Framework von Indico besitzt keine externe Dokumentation. Einige 
 jedoch im JavaDoc-Stil kommentiert, wobei die Funktionsbeschreibungen dort nicht sehr ausführlich
 sind. Viele Funktionen - insbesondere nachträglich hinzugefügte - sind jedoch nicht kommentiert,
 obwohl man ihren Zweck nicht auf den ersten Blick erkennt. Abgesehen vom Indico-Code, der die
-meisten im Framework vorhandenen Funktionen nutzt, existieret kein Beispielcode.
+meisten im Framework vorhandenen Funktionen nutzt, existiert kein Beispielcode.
 
 \item[Lizenz] \hfill \\
 Da das Framework speziell für Indico entwickelt wurde und auch nicht \emph{standalone} verfügbar
