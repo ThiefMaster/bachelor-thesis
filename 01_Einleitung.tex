@@ -3,9 +3,9 @@
 
 JavaScript ist aus einer modernen Webanwendung inzwischen aus vielerlei Gründen nicht mehr
 wegzudenken. Es ermöglicht sowohl eine bessere \emph{User Experience} als auch erhöhte Performance.
-Beispielsweise kann ein Formular bereits vor dem Abschicken an den Server validiert werden, was dem
-Benutzer ein sofortiges Feedback gibt - möglicherweise sogar noch während der Eingabe - und
-gleichzeitig keine Server-Ressourcen beansprucht. Darüber hinaus ist es auch möglich Aktionen
+Beispielsweise kann ein Formular schon vor dem Abschicken an den Server validiert werden; dies gibt
+dem Benutzer ein sofortiges Feedback - möglicherweise sogar noch während der Eingabe - und
+beansprucht gleichzeitig keine Server-Ressourcen. Darüber hinaus ist es auch möglich Aktionen
 auszuführen, ohne dass die komplette Seite neu geladen werden muss. Dies erhöht zum einen das
 mögliche Arbeitstempo des Benutzers, da er mehrere Aktionen parallel starten kann, ohne jeweils darauf
 warten zu müssen, dass eine Aktion beendet und die Seite neu geladen ist. Zum anderen spart es
@@ -35,7 +35,7 @@ Integration zu achten, sodass kein Framework Konflikte mit dem jeweils anderen v
 bestehender Code weiterhin funktioniert und möglichst wenig angepasst werden muss.
 
 Dabei muss zuerst analysiert werden, welche Funktionalität das bestehende Framework zur Verfügung
-stellt und welche Probleme es gibt, sodass bei der Wahl des neuen Frameworks insbesondere darauf
+stellt und welche Probleme es gibt, damit bei der Wahl des neuen Frameworks insbesondere darauf
 geachtet werden kann, dass diese Probleme dort nicht ebenfalls vorhanden sind. Sofern das Framework
 User-Interface-Elemente (\enquote{Widgets}) wie beispielsweise Buttons, Dialoge und Tableisten
 enthält, ist zu prüfen, ob diese sinnvoll genutzt und an das bestehende Design angepasst werden können.
@@ -78,8 +78,8 @@ kurz auf mögliche zukünftige Erweiterungen eingegangen.
 
 \section{CERN}
 
-Beim CERN, der Europäischen Organisation für Kernforschung, handelt es sich um eine
-Forschungseinrichtung im schweizer Kanton Genf. Der Hauptaufgabenbereich liegt in der Erforschung
+Beim CERN (Europäische Organisation für Kernforschung), handelt es sich um eine
+Forschungseinrichtung im Schweizer Kanton Genf. Der Hauptaufgabenbereich liegt in der Erforschung
 von Grundlagen der Physik, wobei der weltgrößte Teilchenbeschleuniger \emph{LHC} zum Einsatz kommt.
 
 Neben der physikalischen Forschung wird am CERN auch Software entwickelt, die zwar in erster Linie
@@ -94,7 +94,7 @@ Rooms} am CERN ist zuständig für die Verwaltung und Einrichtung von video- und
 Konferenzsystemen, Aufzeichnung und Onlinestreaming von Vorträgen, Meetings und Konferenzen und die
 Software zur Planung von selbigen. Ebenfalls im Zuständigkeitsbereich der Abteilung sind
 die Informationsbildschirme, die in verschiedenen Gebäuden des CERN aufgebaut sind und beispielsweise
-den Status des \emph{LHC}\footnote{\emph{Large Hadron Collider}, der Teilchenbeschleuniger am CERN} und
+den Status des \emph{LHC}\footnote{Large Hadron Collider, der Teilchenbeschleuniger am CERN} und
 für die Mitarbeiter relevante Neuigkeiten anzeigen.
 
 
@@ -113,21 +113,21 @@ Im Laufe der Zeit wurden immer mehr Funktionen hinzugefügt, sodass diese Featur
 nicht mehr aktuell ist. Inzwischen enthält Indico beispielsweise ein Buchungs- und
 Reservierungssystem für Konferenzzimmer, sodass beim Erstellen eines Events sichergestellt werden
 kann, dass der gewünschte Raum auch verfügbar ist und nicht gerade anderweitig benutzt wird.
-Ebenfalls in Indico integriert sind die am CERN genutzten Audio-/Videokonferenzsysteme, sodass diese
+Ebenfalls in Indico integriert sind die am CERN genutzten Audio- und Videokonferenzsysteme, sodass diese
 vollautomatisch eingerichtet und aktiviert werden können sofern diese Systeme im gewählten Raum
 verfügbar sind. Eins der neuesten Features ist die Möglichkeit, sich die Konferenzzimmer auf einer
 \href{http://maps.google.com/}{\emph{Google Maps}}-basierten Karte anzeigen zu lassen und
-beispielsweise anhand der Nähe zu einem bestimmten Gebäude zu filtern.
+beispielsweise anhand der Nähe zu einem bestimmten Gebäude auszuwählen.
 
 \subsection{Aufbau}
 Events in Indico sind Teil einer Baumstruktur: Auf der Top-Level-Ebene finden sich ausschließlich
-Kategorien, die jeweils wieder Kategorien oder beliebige Events - also Konferenzen, Meetings und
-Vorträge - enthalten können. Ein Event wiederum kann diverse Elemente enthalten - welche das sind
+Kategorien, die jeweils wieder Kategorien oder beliebige Events (Konferenzen, Meetings und
+Vorträge) enthalten können. Ein Event wiederum kann diverse Elemente enthalten; welche das sind
 hängt vom Typ des Events ab, so kann beispielsweise nur eine Konferenz ein Registrierungsformular
 besitzen.
 
+\newpage
 Die folgende Auflistung beinhaltet die wichtigsten Bestandteile von Events:
-
 \begin{itemize}
 \item Audio-/Videokonferenzen
 \item \emph{Call for Abstracts}
@@ -147,7 +147,7 @@ WSGI\footnote{\href{http://www.python.org/dev/peps/pep-0333/}{Web Server Gateway
 Applikation weitergegeben, in der die \emph{Request Handler (RH)}-Ebene die Geschäftlogik ausführt.
 Sie prüft die Zugangsberechtigung des Benutzers, verarbeitet GET- bzw. POST-Daten, baut die
 Datenbankverbindung auf und führt letztendlich auch die gewünschte Aktion aus. Um eine HTML-Seite
-auszugeben, nutzt der \emph{RequestHandler} die \emph{Web Pages (WP)}-Ebene. Dort werden diverse
+auszugeben, nutzt der \emph{Request Handler} die \emph{Web Pages (WP)}-Ebene. Dort werden diverse
 Aktionen ausgeführt, welche die Anzeige der Daten beeinflussen - zum einen werden die benötigten
 JavaScript- bzw. CSS-Packages geladen, zum anderen werden, falls vorhanden, Tabs als aktiv markiert
 oder Daten sortiert. Die eigentliche Erzeugung der HTML-Datei übernimmt die \emph{Components
@@ -155,8 +155,9 @@ oder Daten sortiert. Die eigentliche Erzeugung der HTML-Datei übernimmt die \em
 werden in dieser Ebene nur die aus der WP-Ebene übergebenen Daten an das Template weitergereicht und
 falls nötig aufbereitet.
 
-\img{indico-layers.png}{200px}{Die Architektur von Indico \citep{indicoarch}}{Indico-Architektur}
-
+\newpage
 Wie \autoref{img.indico-layers.png} verdeutlicht, hat sich Indico im Laufe der Zeit verändert: Statt
 dem obsoleten \emph{mod\_python}\footnote{\href{http://www.modpython.org}{http://www.modpython.org}}
 wird inzwischen WSGI verwendet.
+
+\img{indico-layers.png}{200px}{Die Architektur von Indico \citep{indicoarch}}{Indico-Architektur}
