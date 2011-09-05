@@ -160,10 +160,10 @@ eine gewisse Zeit zu blockieren, sodass diese nur von ausgewählten Gruppen rese
 Beim Erstellen einer solchen Blockade müssen sowohl Start- als auch Enddatum ausgewählt werden.
 Dazu werden zwei Textfelder benutzt, die jeweils beim Klick auf den nebenstehenden Button einen
 Kalender zur Auswahl des Datums öffnen. Diese Datumsfelder werden durch ein Indico-Widget erstellt.
-Komfortabler wäre es allerdings, statt der Textfelder dauerhaft zwei Kalender anzuzeigen. Da das von
+Komfortabler ist es allerdings, statt der Textfelder dauerhaft zwei Kalender anzuzeigen. Da das von
 Indico verwendete Kalenderwidget mehrere gleichzeitig sichtbare Kalender nicht unterstützt und es
-von Vorteil wäre, kein separates \emph{Third-Party}-Script für den Kalender zu benötigen, bietet es
-sich hier an, den \emph{DatePicker} von jQuery UI zu nutzen.
+von Vorteil ist, kein separates \emph{Third-Party}-Script für den Kalender zu benötigen, bietet es
+sich hier an, den \emph{Datepicker} von jQuery UI zu nutzen.
 
 \subsubsection{Funktionsanalyse des Datepickers}
 
@@ -171,50 +171,50 @@ Der Datepicker wird in der Regel mit einem Textfeld verknüpft, sodass er sich b
 Felds automatisch öffnet und nach Auswahl eines Datums wieder schließt. Es ist allerdings auch
 möglich, ihn mit einem \lstinline[language=HTML]{<div>} zu verknüpfen. In diesem Fall ist er
 dauerhaft sichtbar und stellt das ausgewählte Datum lediglich über seine API zur Verfügung. Viele
-Eigenschaften des Datepickers können individuell konfiguriert werden; insbesondere ist es möglich,
+Eigenschaften des Datepickers können individuell konfiguriert werden. Insbesondere ist es möglich,
 Daten in der Vergangenheit bzw. vor oder nach einem bestimmten Datum zu sperren und die
 auswählbaren Jahre zu beschränken. Das Widget bietet auch eine Option, um mehrere Monate
 gleichzeitig anzuzeigen. Hierbei sind allerdings nur mehrere aufeinanderfolgende Monate möglich und
 es kann unabhängig von der Anzahl der angezeigten Monate nur ein Datum ausgewählt werden. Daher muss
-das DateRange-Widget zwei separate DatePicker nutzen.
+das DateRange-Widget zwei separate Datepicker nutzen.
 
 \subsubsection{Anforderungen}
 
-Das DateRange-Widget soll zwei DatePicker nebeneinander anzeigen und ausschließlich die Auswahl
+Das DateRange-Widget soll zwei Datepicker nebeneinander anzeigen und ausschließlich die Auswahl
 gültiger Daten zulassen. Die ausgewählten Daten sollen optional in versteckten Formularfeldern
 gespeichert werden, sodass sie beim Absenden des zugehörigen Formulars mitgesendet werden. Es soll
-möglich sein, bereits beim Erstellen des Widgets ein Start- und Enddatum anzugeben welches
-standardmäßig ausgewählt ist. Das Datum soll über die DatePicker jeweils änderbar sein, sofern das
-Widget nicht deaktiviert ist. Um den Benutzerkomfort zu erhöhen soll jedes gültige Datum auswählbar
-sein, sodass (sofern Jahr und Monat bereits ausgewählt sind) es immer möglich ist, mit zwei Klicks
-die gewünschten Daten auszuwählen. Es soll eine Option geben, um die Auswahl von Daten in der
-Vergangenheit zu verhindern - um das Widget so allgemein wie möglich zu halten, soll es allerdings
-möglich sein, beliebige Datepicker-Optionen zu verändern - sowohl für beide Datepicker als auch nur
-für einzelne.
+möglich sein, bereits beim Erstellen des Widgets ein Start- und Enddatum anzugeben, das
+standardmäßig ausgewählt ist. Das Datum soll über die Datepicker jeweils änderbar sein, sofern das
+Widget nicht deaktiviert ist. Um den Benutzerkomfort zu erhöhen, soll jedes gültige Datum auswählbar
+sein, sodass es immer möglich ist, mit zwei Klicks die gewünschten Daten auszuwählen, falls Jahr und
+Monat bereits ausgewählt sind. Es soll eine Option geben, um die Auswahl von Daten in der
+Vergangenheit zu verhindern. Um das Widget so allgemein wie möglich zu halten, soll es allerdings
+möglich sein, beliebige Datepicker-Optionen zu verändern und zwar sowohl für beide Datepicker als
+auch nur für einzelne.
 
 \subsubsection{Implementierung}
 
-Da das DateRange-Widget vollständig auf jQuery basieren soll und keinerlei Funktionen aus dem
-alten Indico-Framework benötigt, bietet es sich an, es als \emph{UI Widget} zu realisieren. Dabei
-handelt es sich um eine Sammlung von Funktionen, die über eine einzelne jQuery-Funktion zugänglich
-gemacht werden, und verschiedene Basisfunktionen standardmäßig enthalten. Innerhalb der Funktionen
-eines Widgets zeigt \lstinline{this} auf das Widget-Objekt und \lstinline{this.element} enthält das
-jQuery-Element, in welchem das Widget erstellt wurde - wenn ein Widget über ein jQuery-Objekt
-erstellt wird, welches mehrere Elemente enthält werden separate Widgets erstellt, sodass
+Da das DateRange-Widget vollständig auf jQuery basieren soll und keinerlei Funktionen aus dem alten
+Indico-Framework benötigt, bietet es sich an, es als \emph{UI Widget} zu realisieren. Dabei handelt
+es sich um eine Sammlung von Funktionen, die über eine einzelne jQuery-Funktion zugänglich gemacht
+werden, und verschiedene Basisfunktionen standardmäßig enthalten. Innerhalb der Funktionen eines
+Widgets zeigt \lstinline{this} auf das Widget-Objekt und \lstinline{this.element} enthält das
+jQuery-Element, in welchem das Widget erstellt wurde. Wenn ein Widget über ein jQuery-Objekt
+erstellt wird, das mehrere Elemente enthält, werden separate Widgets erstellt, sodass
 \lstinline{this.element} immer exakt ein Element enthält. Einzelne Funktionen im Widget werden durch
-jQuery automatisch aufgerufen; beispielsweise wird \lstinline{_init()} bei jedem Aufruf der
-Widgetfunktion ausgeführt und \lstinline{_create()} ausgeführt, wenn die Widgetfunktion ein neues
-Widget erstellt.
+jQuery automatisch aufgerufen. So wird \lstinline{_init()} bei jedem Aufruf der Widgetfunktion
+ausgeführt. \lstinline{_create()} hingegen wird nur dann ausgeführt, wenn die Widgetfunktion ein
+neues Widget erstellt.
 
 Im DateRange-Widget wird die \lstinline{_create}-Funktion genutzt, um die Datepicker zu erstellen
-und zu konfigurieren. Sofern versteckte Formularfelder verwendet werden sollen, werden sie ebenfalls
+und zu konfigurieren. Sollen versteckte Formularfelder verwendet werden, werden sie ebenfalls
 in dieser Funktion erstellt. Um die geforderte Flexibilität bei der Konfiguration der einzelnen
 Datepicker zu erreichen, wird die Methode \lstinline{$.extend()} von jQuery genutzt. Sie erweitert
 das erste übergebene Objekt mit den Eigenschaften der übrigen Objekte, wobei bereits vorhandene
 Eigenschaften überschrieben werden. Wie in \autoref{lst:daterange-picker-cfg} zu sehen ist, wird als
-erstes das frühstmögliche Datum festgelegt. Da es unabhängig von \lstinline{allowPast} möglich sein
+erstes das frühestmögliche Datum festgelegt. Da es unabhängig von \lstinline{allowPast} möglich sein
 soll, ein anderes frühestes Datum vorzugeben, werden die zusätzlichen Datepicker-Optionen erst
-danach festgelegt, sodass sie \lstinline{minDate} überschreiben können. Zuletzt werden die Optionen
+danach festgelegt, damit sie \lstinline{minDate} überschreiben können. Zuletzt werden die Optionen
 für das Standarddatum und das versteckte Formularfeld übergeben. Diese können nicht überschrieben
 werden, da beide durch die API des DateRange-Widgets ausreichend konfigurierbar sind.
 
@@ -232,22 +232,22 @@ self.startPicker.datepicker($.extend({
 Um ungültige Daten zu verhindern, wird ein Eventhandler für die \emph{onSelect}-Events der beiden
 Datepicker registriert. In diesem wird im Falle eines ungültigen Datums, d.h.
 \lstinline{startDate > endDate}, das Datum des Datepickers, der gerade nicht verändert wurde, auf
-das des anderen Datepickers gesetzt. Eine andere Möglichkeit wäre in diesem Eventhandler jeweils
+das des anderen Datepickers gesetzt. Eine andere Möglichkeit ist, in diesem Eventhandler jeweils
 \lstinline{minDate} und \lstinline{maxDate} des anderen Datepickers anzupassen, sodass
-ausschließlich gültige Daten ausgewählt werden können. Dies würde jedoch den Benutzerkomfort
-verringern, da ein an sich gültiges Datum in diesem Fall möglicherweise nicht auswählbar ist ohne
-zuvor das andere Datum anzupassen.
+ausschließlich gültige Daten ausgewählt werden können. Dies verringert jedoch den Benutzerkomfort,
+da ein an sich gültiges Datum in diesem Fall u.U. nicht auswählbar ist, ohne zuvor das andere Datum
+anzupassen.
 
 
 
 \subsection{Migration der Dialogfenster}
 
 Indico nutzt Dialogfenster, im Code normalerweise als \emph{Popup} bzw. \emph{ExclusivePopup}
-bezeichnet, um Informationen und Formulare in einem separaten Fenster darzustellen, welches
-allerdings auf der Seite integriert ist - diese wird während ein solches Fenster geöffnet ist durch
-ein graues Overlay als inaktiv dargestellt und lässt keine Benutzerinteraktion zu. Diese Fenster
-haben den Vorteil, dass sie fest mit der Seite verknüpft sind und - da es sich nicht um neue
-Browserfenster handelt - nicht durch Popup-Blocker blockiert werden können.
+bezeichnet, um Informationen und Formulare in einem separaten Fenster darzustellen, das allerdings
+auf der Seite integriert ist. Während ein solches Fenster geöffnet ist, wird diese Seite durch ein
+graues Overlay als inaktiv dargestellt und lässt keine Benutzerinteraktion zu. Diese Fenster haben
+den Vorteil, dass sie fest mit der Seite verknüpft sind und, da es sich nicht um neue
+Browserfenster handelt, nicht durch Popup-Blocker blockiert werden können.
 
 \subsubsection{Aktuelle Situation}
 
@@ -255,15 +255,15 @@ Dialogfenster werden durch die Klasse \lstinline{ExclusivePopup} erstellt. Diese
 HTML-Struktur des Dialogs und seines Inhalts. Neben \lstinline{ExclusivePopup} gibt es mit
 \lstinline{ExclusivePopupWithButtons} eine davon abgeleitete Klasse, die am unteren Ende des
 Dialogs eine Buttonzeile erstellt. Um ein Dialogfenster zu erstellen, leitet man eine neue Klasse
-von einer der gerade genannten Klassen ab und überschreibt dort die \lstinline{draw}-Methode und -
-falls nötig - den Konstruktor. In \lstinline{draw()} generiert man die DOM-Elemente, die im Dialog
-angezeigt werden sollen und - falls man \lstinline{ExclusivePopupWithButtons} nutzt - den Inhalt der
+von einer der gerade genannten Klassen ab und überschreibt dort die \lstinline{draw}-Methode und
+ggf. den Konstruktor. In \lstinline{draw()} generiert man die DOM-Elemente, die im Dialog
+angezeigt werden sollen und, sofern man \lstinline{ExclusivePopupWithButtons} nutzt, den Inhalt der
 Buttonleiste. Beides wird danach an die \lstinline{draw}-Methode der Parent-Klasse übergeben.
 Teilweise werden in von \lstinline{ExclusivePopup} abgeleiteten Dialogfenstern Buttons erstellt welche
 zwar problemlos funktionieren, sich jedoch im Aussehen von der korrekten Implementierung
 unterscheiden.
 
-\begin{lstlisting}[label=lst:confirmpopup-old,caption=Indico-Code zum Erstellen eines simplen Dialogfensters]
+\begin{lstlisting}[label=lst:confirmpopup-old,caption=Indico-Code zum Erstellen eines einfachen Dialogfensters]
 draw: function() {
     var self = this;
     var okButton = Html.input('button', {style:{marginRight: pixels(3)}}, $T(this.buttonTitle));
@@ -285,7 +285,7 @@ draw: function() {
 }
 \end{lstlisting}
 
-In \autoref{lst:confirmpopup-old} sieht man die Implementation eines simplen
+In \autoref{lst:confirmpopup-old} sieht man die Implementation eines einfachen
 \enquote{OK/Abbrechen}-Dialogs. Für beide Buttons werden manuell HTML-Buttons erstellt und mit CSS
 der Abstand zwischen ihnen festgelegt. Ähnlicher Code ist für alle Dialogfenster mit Buttons
 notwendig, da das Indico-Framework keine Möglichkeit bietet, Dialog-Buttons in einer abstrakten Art
@@ -293,7 +293,7 @@ und Weise zu erstellen.
 
 \subsubsection{Gewünschte Situation}
 
-Beim Erstellen von Dialogfenstern - sowohl mit als auch ohne Buttons - handelt es sich um eine
+Beim Erstellen von Dialogfenstern, mit oder ohne Buttons, handelt es sich um eine
 Standardaufgabe. Während der Workflow für ein Dialogfenster ohne Buttons bereits frei von
 \emph{duplicate code} ist, besteht bei den Buttons Änderungsbedarf. Ein Button kann mit vier
 Eigenschaften charakterisiert werden: Titel, Aktion, Position und Zustand. Titel, Aktion und Zustand
@@ -301,22 +301,22 @@ sind dabei buttonspezifisch während die Position bzw. Reihenfolge der Buttons d
 Daher bietet es sich an, die Buttons in einem Array zu speichern, wobei es sich bei jedem Button um
 ein Objekt oder Array handelt. Da der Zustand (aktiv/inaktiv) eines Buttons in der Regel per Code
 nachträglich geändert wird, muss dieser nicht unbedingt schon bei der Definition des Buttons
-angegeben werden - die meisten Buttons sind dauerhaft aktiv. Damit gibt es pro Button noch zwei
-Attribute - ein Array bietet sich also an, da der Entwickler dabei nicht immer die Namen der
+angegeben werden; die meisten Buttons sind dauerhaft aktiv. Damit gibt es pro Button noch zwei
+Attribute. Ein Array bietet sich also an, da der Entwickler dabei nicht immer die Namen der
 Eigenschaften angeben muss.
 
-Um die \lstinline{draw}-Funktion zu entschlacken - bei komplexeren Dialogen enthält sie oftmals
-einen Großteil der Logik des jeweiligen Dialogs - und auch um voneinander unabhängige Codeabschnitte
-zu trennen ist es sinnvoll die Buttondefinition in eine separate Funktion auszulagern.
+Die \lstinline{draw}-Funktion enthält bei komplexeren Dialogen oftmals einen Großteil der Logik des
+jeweiligen Dialogs. Um sie zu entschlacken bietet es sich an, die Buttondefinition in eine separate
+Funktion auszulagern. Dies dient auch dem Zweck, voneinander unabhängige Codeabschnitte zu trennen.
 \autoref{lst:confirmpopup-new} zeigt dabei den Code des jQuery-basierten Dialogs. Die
 \lstinline{draw}-Funktion reicht nun ausschließlich den (an den Konstruktor übergebenen) Inhalt des
 Dialogfensters an die Parent-Funktion weiter; \lstinline{_getButtons()} gibt ein Array mit den
 Buttons zurück, wobei ein Button jeweils ein 2-Tupel aus Titel und Callbackfunktion ist. Die Variable
 \lstinline{self} wird genutzt, da innerhalb des Callbacks \lstinline{this} nicht mehr auf die
-aktuelle Objektinstanz sondern auf das globale Objekt \lstinline{window} zeigt.
+aktuelle Objektinstanz, sondern auf das globale Objekt \lstinline{window} zeigt.
 
 
-\begin{lstlisting}[label=lst:confirmpopup-new,caption=jQuery-Code zum Erstellen eines simplen Dialogfensters]
+\begin{lstlisting}[label=lst:confirmpopup-new,caption=jQuery-Code zum Erstellen eines einfachen Dialogfensters]
 draw: function() {
     return this.ExclusiveWithButtonsPopup.prototype.draw.call(
         this, this.content);
@@ -344,14 +344,14 @@ Schließen. Da das Dialog-Widget von jQuery UI diese Aufgaben übernimmt, muss d
 lediglich ein leeres \lstinline[language=HTML]{<div>}-Element erstellen und es mit der
 jQuery-Methode \lstinline{dialog()} in einen Dialog umwandeln. Danach muss nur noch der Inhalt des
 Dialogs eingefügt werden, wobei eine Kompatibilitätsschicht dafür sorgt, dass auch
-\lstinline{XElement}-Objekte des Indico-Frameworks als Dialog-Inhalt übergeben werden können. Wie
-auch das Datepicker-Widget akzeptiert der jQuery UI-Dialog ein Objekt mit verschiedenen Optionen. Um
+\lstinline{XElement}-Objekte des Indico-Frameworks als Dialoginhalt übergeben werden können. Wie
+auch das Datepicker-Widget, akzeptiert der jQuery UI-Dialog ein Objekt mit verschiedenen Optionen. Um
 Unterklassen zu ermöglichen, \enquote{ihren} Dialog zu beeinflussen, können die Optionen durch das
 Überschreiben einer weiteren Funktion beeinflusst werden. Dies ist insbesondere für die Klasse
 \lstinline{ExclusivePopupWithButtons} notwendig, da sie dem Dialog Buttons hinzufügen muss.
 
 Aufgrund der einfachen Erweiterbarkeit der Dialog-Optionen besteht die erweiterte Dialogklasse
-\lstinline{ExclusivePopupWithButtons} primär aus Code um das Button-Array ist das vom Dialog-Widget
+\lstinline{ExclusivePopupWithButtons} primär aus Code, um das Button-Array in das vom Dialog-Widget
 benötige Format zu konvertieren.
 
 \img{indico-dialog-old.png}{300px}{Klassisches Dialogfenster in Indico}{Indico-Dialogfenster (klassisch)}
@@ -364,28 +364,28 @@ Indico verwendet zwei Arten von Tabs, was primär damit zusammenhängt, dass in 
 kein JavaScript verwendet wurde. Bei den \enquote{dynamischen} Tabs handelt es sich um eine Klasse,
 an die für jedes Tab Titel und Generatorfunktion übergeben werden und daraus ein Tab-Widget erzeugt
 wird. Die \enquote{statischen} Tabs hingegen werden im serverseiten Python-Code erzeugt und laden
-beim Auswählen eines Tabs eine neue Seite. Um Designanpassungen möglichst einfach zu machen ist
+beim Auswählen eines Tabs eine neue Seite. Um Designanpassungen möglichst einfach zu machen, ist
 darauf zu achten, dass nicht mehrere Codestellen dieselbe Aufgabe ausführen. Tabs sollten
 also ausschließlich an einer Stelle generiert werden. Da das Tab-Widget aus jQuery UI verwendet
 werden soll, bietet es sich an, dieses auch für die statischen Tabs zu nutzen. Dazu gibt es
-prinzipiell zwei Möglichkeiten: Man könnte das Template, welches für die statischen Tabs genutzt
+prinzipiell zwei Möglichkeiten: Man kann das Template, das für die statischen Tabs genutzt
 wird, so anpassen, dass es dieselbe Struktur und CSS-Klassen wie die jQuery-Tabs verwendet. Dies
-würde zwar das Aussehen vereinheitlichen und CSS-Änderungen würden alle Tabs betreffen, allerdings
-würde es zu Problemen führen falls sich die Struktur in einer zukünftigen Version von jQuery UI
-ändert. Daher ist es sinnvoll, im Template ausschließlich die vom Tab-Widget benötigte Struktur zu
-erzeugen und danach per JavaScript das eigentliche Tab-Widget zu erzeugen.
+vereinheitlicht zwar das Aussehen und CSS-Änderungen betreffen alle Tabs, allerdings kann es zu
+Problemen führen falls sich die Struktur in einer zukünftigen Version von jQuery UI ändert. Daher
+ist es sinnvoll, im Template ausschließlich die vom Tab-Widget benötigte Struktur zu erzeugen und
+danach per JavaScript das eigentliche Tab-Widget zu erzeugen.
 
 Dazu wird der HTML-Code der statischen Tabs mit einer speziellen CSS-Klasse versehen, sodass er via
 JavaScript einfach gefunden werden und in ein Tab-Widget umgewandelt werden kann. Normalerweise ist
 vorgesehen, dass der Inhalt von Tabs entweder bereits vorhanden ist oder per AJAX nachgeladen wird.
-Um das klassische Verhalten zu erreichen muss sowohl verhindert werden dass ein AJAX-Request
-abgesendet wird als auch dass versucht wird, einen nicht vorhandenen Tab-Container anzuzeigen. Dies
+Um das klassische Verhalten zu erreichen, muss sowohl verhindert werden, dass ein AJAX-Request
+abgesendet wird, als auch dass versucht wird, einen nicht vorhandenen Tab-Container anzuzeigen. Dies
 lässt sich am einfachsten dadurch erzielen, dass die Links der einzelnen Tabs als Linkziel die dem
 Tab zugehörige Seite enthalten und keinerlei \emph{click}-Events ausgeführt werden. Für ersteres
 wird beim Tab-Link in einem \lstinline{data}-Attribut die Ziel-URL gespeichert, da das Tab-Widget
 das Linkziel verändert; nach dem Erstellen des Widgets wird die gespeicherte URL wieder als
 \lstinline{href} zugewiesen. Um das Tab-Widget daran zu hindern, den Tab-Inhalt per AJAX zu laden,
-werden einfach die \emph{click}-Events gelöscht - dank der Nutzung von Namespaces betrifft dies
+werden einfach die \emph{click}-Events gelöscht - wegen der Nutzung von Namespaces betrifft dies
 ausschließlich die durch das Tab-Widget hinzugefügten Eventhandler.
 
 Der Code, um die Links anzupassen, ist in \autoref{lst:static-tabs} zu sehen. \lstinline{this} zeigt
@@ -404,11 +404,11 @@ $('> .ui-tabs-nav a', this).each(function() {
 \section{Probleme bei der Migration}
 
 Die Migration zu jQuery lief größtenteils unproblematisch ab, die einzigen Probleme gab es durch die
-Verwendung von HTML-Elementen an Stellen, an denen man reinen Text erwarten würde - insbesondere in
+Verwendung von HTML-Elementen an Stellen, an denen man reinen Text erwarten würde, insbesondere in
 Dialogtiteln. Da diese direkt an das jQuery UI-Dialog-Widget durchgereicht werden, müssen sie
 entweder reiner Text oder aber ein DOM-Element bzw. jQuery-Objekt sein. Aufgrund der Verwendung der
 \lstinline{Html.*}-Funktionen wurden jedoch \lstinline{XElement}-Wrapper übergeben, sodass es je
-nach Browser zu einer Fehlermeldung oder einem leeren Titel kam. Um diesen Fehler auszuschließen
+nach Browser zu einer Fehlermeldung oder einem leeren Titel kam. Um diesen Fehler auszuschließen,
 wäre es nützlich, wenn jQuery beliebige Objekte unterstützen würde, sofern sie eine Methode
 enthalten, die HTML oder ein DOM-Element zurückgibt. Allerdings hat das Fehlen dieses Features auch
 seine Vorteile, da unsauberer Code so sofort auffällt und überarbeitet werden kann.
