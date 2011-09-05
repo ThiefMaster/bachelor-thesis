@@ -161,7 +161,7 @@ ebenfalls um theoretisch eigenständig verwendbare Klassen handelt. Objekte werd
 und \lstinline{mixins} eine Liste der Mixin-Klassen ist. \lstinline{members} ist ein Objekt, welches
 alle Funktionen enthält, die Memberfunktionen der Klasse werden sollen. \lstinline{ctor} ist die
 Konstruktorfunktion. Bei der Verwendung von Mixins werden die Konstruktoren dieser Klassen nicht
-ausgeführt; sie müssen ggf. mit \lstinline{this.NameDesMixins(...)} manuell ausgeführt
+ausgeführt; diese müssen gegebenenfalls mit \lstinline{this.NameDesMixins(...)} manuell ausgeführt
 werden. Der Aufruf von Methoden eines Mixins, die durch eine Memberfunktionen überschrieben wurden,
 ist nur über den Prototypen des Mixins möglich: \\
 \lstinline{this.<mixin>.prototype.<func>.call(this, ...)}
