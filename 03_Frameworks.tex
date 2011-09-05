@@ -426,7 +426,7 @@ In jQuery findet der Zugriff auf das DOM über die \lstinline{$(...)}-Funktion s
 Parameter einen CSS-Selektor übergibt, werden alle durch diesen Selektor ausgewählten Element in
 einem neuen jQuery-Objekt verpackt und dieses wird zurückgegeben. Optional kann als zusätzlicher
 Parameter der Kontext in Form eines DOM-Elements, DOM-Dokuments oder jQuery-Objekts angegeben
-werden, um ausgehend von diesem Element zu suchen. Statt eines Selektors kann man auch ein
+werden, um dieses Element als Basis der Suche zu verwenden. Statt eines Selektors kann man auch ein
 DOM-Element oder ein Array solcher Elemente übergeben, um aus selbigen ein neues jQuery-Objekt zu
 erzeugen. Wenn man \lstinline{$()} ohne Parameter aufruft, wird ein leeres jQuery-Objekt erstellt.
 
@@ -439,8 +439,8 @@ jQuery nutzt \emph{Sizzle} zur Suche von Elementen anhand eines CSS-Selektors.
 
 \item[DOM-Manipulation] \hfill \\
 Zum Erstellen neuer Elemente nutzt man in jQuery ebenfalls die \lstinline{$}-Funktion, indem man den
-gewünschten HTML-Code - dabei kann es sich sowohl um ein einzelnes Tag als auch eine beliebig
-komplexe HTML-Struktur handeln - als Parameter übergibt. Als zusätzlichen Parameter kann man
+gewünschten HTML-Code als Parameter übergibt. Dabei kann es sich sowohl um ein einzelnes Tag als
+auch eine beliebig komplexe HTML-Struktur handeln. Als zusätzlichen Parameter kann man
 entweder ein DOM-Dokument angeben, in dem die Elemente erstellt werden sollen, oder aber ein Objekt,
 welches die Attribute, die dem neuen Element zugewiesen werden sollen, als Strings enthält.
 
@@ -456,7 +456,7 @@ welches mehrere Eigenschaften und Werte enthält. Dabei kann der Name sowohl in 
 Eigenschaften kann anstelle eines absoluten Werts auch ein Offset in der Form \lstinline{+=number}
 angegeben werden, um \emph{number} zum aktuellen Wert zu addieren.
 
-Für häufig genutzte Manipulationen wie dem Ein- und Ausblenden von Elementen stellt jQuery
+Für häufig genutzte Manipulationen, wie dem Ein- und Ausblenden von Elementen, stellt jQuery
 komfortabel nutzbare Funktionen zur Verfügung, sodass man dabei Entwicklungszeit einspart. Die
 Funktionen \lstinline{hide()} und \lstinline{show()} akzeptieren einen optionalen
 \emph{duration}-Parameter, der aus dem sofortigen Aus- und Einblenden eine Animation macht.
@@ -467,11 +467,11 @@ Zur Veränderung der Struktur des DOM-Trees - also dem Einfügen, Entfernen und 
 Elementen - bietet jQuery viele Funktionen, die eigentlich alle sinnvollen Möglichkeiten abdecken.
 Neben der inzwischen relativ verbreiteten \lstinline{wrap()}-Funktion enthält jQuery mit
 \lstinline{unwrap()} auch das genaue Gegenteil dieser Funktion, d.h. das Entfernen des
-Parent-Elements eines Elements und dem Einfügen selbigens an dieser Stelle. Das Einfügen von
+Parent-Elements eines Elements und dessen Einfügen an dieser Stelle. Das Einfügen von
 Elementen kann in beide Richtungen geschehen: zusätzlich zu Methoden wie \lstinline{append(elem)},
 die das übergebene Element in das im jQuery-Objekt enthaltene Element einfügen, existieren mit
 Methoden wie \lstinline{appendTo(elem)} Methoden, die das im jQuery-Objekt enthaltene Element in das
-übergebene Element einfügen. Der komplette Inhalt von Elementen lässt sich durch die Methode
+übergebene Element einfügen. Der komplette Inhalt von Elementen lässt sich durch
 \lstinline{empty()} löschen; beim Ersetzen durch neuen Inhalt gibt es mit \lstinline{html()} und
 \lstinline{text()} sowohl die Möglichkeit, HTML einzufügen, als auch einen String als Plaintext
 einzufügen, sodass möglicherweise enthaltener HTML-Code nicht ausgeführt wird.
@@ -484,26 +484,25 @@ auf das erste Element zugegriffen.
 \item[DOM Traversal] \hfill \\
 Wie bereits zuvor erwähnt, kann der \lstinline{$}-Funktion ein Kontext übergeben werden, um
 ausgehend von einem Element anhand eines Selektors andere Elemente zu suchen. Neben dieser
-Möglichkeit bietet jQuery diverse Methoden um Elemente ausgehend von einem Element auszuwählen -
-alle dieser Methoden akzeptieren einen CSS-Selektor zum Filtern der gefundenen Elemente. Neben den
+Möglichkeit bietet jQuery diverse Methoden um Elemente ausgehend von einem Element auszuwählen.
+Alle diese Methoden akzeptieren einen CSS-Selektor zum Filtern der gefundenen Elemente. Neben den
 Geschwisterelementen, wobei diese auf Elemente vor bzw. nach dem aktuellen Element eingeschränkt
 werden können, können mit diesen Methoden auch die Parent-Elemente selektiert werden, wobei dort je
 nach Funktion das direkte Parent-Element, alle Parent-Elemente oder alle Parent-Elemente bis zu
 einem bestimmten Element zurückgegeben werden. Mit \lstinline{closest(selector)} bietet jQuery eine
 Komfortmethode, um sich ausgehend vom aktuellen Element im DOM-Tree nach oben durchzuarbeiten, bis
-das gewünschte Element gefunden wurde - dabei kann es sich auch um das aktuelle Element selbst
+das gewünschte Element gefunden wurde. Bei diesem kann es sich auch um das aktuelle Element selbst
 handeln.
 
-Der Inhalt von jQuery-Objekten lässt sich darüber hinaus filtern und erweitern: man kann die
-Elementliste anhand eines CSS-Selektors filtern, bestimmte Elemente entfernen, die vor einer
-Suche enthaltenen Elemente der Elementliste wieder hinzufügen und einzelne Elemente hinzufügen. Auch
-das Reduzieren eines jQuery-Objekts auf ein einzelnes Element ist möglich - dabei kann es
-beispielsweise sich um das Element mit einem bestimmten Index oder um das erste bzw. letzte Element
-handeln.
+Der Inhalt von jQuery-Objekten lässt sich darüber hinaus modifizieren: man kann die Elementliste
+anhand eines CSS-Selektors filtern, bestimmte Elemente entfernen, die vor einer Suche enthaltenen
+Elemente der Elementliste wieder hinzufügen und einzelne Elemente hinzufügen. Auch das Reduzieren
+eines jQuery-Objekts auf ein einzelnes Element ist möglich. Dabei kann es sich z.B. um das Element
+mit einem bestimmten Index oder um das erste bzw. letzte Element handeln.
 
 Eine sehr spezielle, aber für die absolute Positionierung von Elementen sehr nützliche Methode ist
 \lstinline{offsetParent()}. Diese sucht das erste übergeordnete Element, welches positioniert ist
-und damit das Referenzelement für die absolute Positionierung ist.
+und damit das Referenzelement für die absolute Positionierung darstellt.
 
 \item[Events] \hfill \\
 jQuery bietet verschiedene Möglichkeiten, Eventhandler zu registrieren. Der einfachste und
@@ -518,13 +517,12 @@ Vorteil dass man diese Events separat auslösen oder entfernen kann, ohne andere
 Typs auszulösen oder zu entfernen. Darüber hinaus kann man mit dieser Funktion beliebige Events
 erstellen, d.h. nicht nur die standardmäßig unterstützen DOM-Events. Neben den regulären DOM-Events
 unterstützt jQuery die Internet Explorer-spezifischen Events \emph{mouseenter} und
-\emph{mouseleave}, welche logischerweise emuliert werden, wenn sie nicht vom Browser unterstützt
-werden.
+\emph{mouseleave}, welche emuliert werden, wenn sie nicht vom Browser unterstützt werden.
 
 Mit \lstinline{delegate(selector, eventType, handler)} erlaubt jQuery die Delegation von Events an
 ein übergeordnetes Element. Dies hat den Vorteil, dass nicht alle von \lstinline{selector}
 ausgewählte Elemente bereits zum Zeitpunkt der Eventhandler-Registrierung existieren müssen und
-beispielsweise bei einer Liste mit vielen Elementen nur ein einziger Eventhandler registriert werden
+z.B. bei einer Liste mit vielen Elementen nur ein einziger Eventhandler registriert werden
 muss, was die Performance erhöht. Sofern man kein Basis-Element kennt, sondern Events von Elementen
 an einer \emph{beliebigen} Position im Dokument verarbeiten möchte, kann man die
 \lstinline{live}-Methode nutzen; ihre Parameter sind mit denen von \lstinline{bind()} identisch.
@@ -542,11 +540,11 @@ Events aus dem angegebenen Namespace zu löschen.
 Um Events manuell auszulösen bietet jQuery genau wie bei der regulären Registrierung von
 Eventhandlern zwei Möglichkeiten. Zum einen kann man die Shortcut-Methode die dem Eventnamen
 entspricht ohne Parameter aufrufen, zum anderen kann man die Methode
-\lstinline{trigger(eventType[, params])} nutzen. Diese erlaubt nebem der Möglichkeit, einen Namespace
+\lstinline{trigger(eventType[, params])} nutzen. Diese erlaubt neben der Möglichkeit, einen Namespace
 anzugeben, die Übergabe weiterer Parameter an den Eventhandler. Durch \lstinline{trigger()}
-ausgelöste Events verhalten sich wie durch Benutzerinteraktion ausgelöste Events; sie steigen im
-DOM-Tree auf und lösen die Standardaktion des Browsers aus (beispielsweise das Laden einer neuen
-Seite). Wenn dieses Verhalten nicht erwünscht ist, bietet die Funktion \lstinline{triggerHandler()}
+ausgelöste Events verhalten sich wie durch Benutzerinteraktion ausgelöste. Sie steigen im
+DOM-Tree auf und lösen die Standardaktion des Browsers aus (z.B. Laden einer neuen Seite).
+Wenn dieses Verhalten nicht erwünscht ist, bietet die Funktion \lstinline{triggerHandler()}
 die Möglichkeit, nur per jQuery registrierte Eventhandler auszulösen und den Rückgabewert des
 letzten Handlers dieses Events zu verarbeiten.
 
@@ -573,14 +571,14 @@ jQuery bietet eine Vielzahl an Funktionen, die jeweils über \lstinline{$.funcNa
 Neben den üblichen funktionalen Funktionen wie \lstinline{map()} und \lstinline{each} bietet jQuery
 auch Funktionen, um eine Variable auf einen bestimmten Typ zu testen und mit \lstinline{trim()} auch
 eine Funktion, um Whitespace am Anfang oder Ende eines Strings zu entfernen. Auch ein JSON-Parser
-ist enthalten - dieser wird jedoch nur genutzt, wenn der verwendete Browser JSON nicht nativ
+ist enthalten, der jedoch nur genutzt wird, wenn der verwendete Browser JSON nicht nativ
 unterstützt.
 
 Mit \lstinline{$.browser} besitzt jQuery ein Objekt, welches Informationen zum verwendeten Browser
 und dessen Version enthält. Dieses ist jedoch als \emph{deprecated} markiert, da es im Falle von
 browserspezifischen Problemen und Features sinnvoller ist, auf das Vorhandensein ebendieser zu
 prüfen. Dazu besitzt jQuery das \lstinline{$.support}-Objekt. Es enthält Informationen zu allen
-Browserfeatures, die jQuery selbst benötigt - die Tests, ob die jeweiligen Features vorhanden sind
+Browserfeatures, die jQuery selbst benötigt. Die Tests, ob die jeweiligen Features vorhanden sind
 müssen beim Laden jeder Seite ausgeführt werden, weshalb die Anzahl möglichst gering gehalten wird.
 
 \item[UI-Elemente] \hfill \\
@@ -589,7 +587,7 @@ UI}\footnote{\href{http://jqueryui.com}{http://jqueryui.com}} eine Erweiterung, 
 und UI-bezogene Features wie Drag\&Drop und vergrößerbare, verkleinerbare, auswählbare und
 sortierbare Elemente enthält. Die Widgets bieten Dialogfenster, Buttons, Kalender,
 Fortschrittsbalken, Tabs und Slider. Neben diesen Standardwidgets gibt es noch ein
-\emph{Accordion}-Widget, welches ein \enquote{Akkordion}-Menü bzw. -Panel ermöglicht. Ebenfalls
+\emph{Accordion}-Widget, das ein \enquote{Akkordion}-Menü bzw. -Panel ermöglicht. Ebenfalls
 enthalten ist ein \emph{Autocomplete}-Widget, um HTML-Textfelder mit Autovervollständigung zu
 versehen.
 
@@ -635,9 +633,9 @@ entspricht. Ein weiteres Feature in diesen Bereich ist die interne Verkettung vo
 Wenn ein jQuery-Objekt, welches Element enthält, gefiltert wird oder Elemente hinzugefügt werden,
 wird intern ein neues Objekt erstellt, sodass die alte Elementliste erhalten bleibt. Mit der
 \lstinline{end()}-Methode kann man in der Aufrufkette zum vorherigen Objekt zurückspringen.
-Allerdings ist dabei zu beachten, dass der Code lesbar und verständlich bleibt - teilweise ist es
-sinnvoll, eine neue Aufrufkette zu beginnen statt stur zu versuchen, möglichst viele Aktionen
-innerhalb derselben Kette auszuführen.
+Allerdings ist dabei zu beachten, dass der Code lesbar und verständlich bleibt. Es kann sinnvoll
+sein, eine neue Aufrufkette zu beginnen statt stur zu versuchen, möglichst viele Aktionen innerhalb
+derselben Kette auszuführen.
 
 Die meisten Funktionen in jQuery, die Werte verändern, akzeptieren statt eines Werts auch eine
 Funktion. Diese wird durch jQuery mit dem Index des Elements innerhalb des jQuery-Objekts und dem
@@ -653,7 +651,7 @@ werden automatisch die \emph{always}-Callbacks aufgerufen. Sobald das Objekt \em
 kann sich sein Status nicht mehr ändern, d.h. es ist ausgeschlossen, dass sowohl die
 \emph{fail}-Callbacks als auch die \emph{done}-Callbacks ausgeführt werden. Der große Vorteil des
 Deferred-Objekts ist, dass Callbacks auch registriert werden können, wenn das Objekt bereits
-\emph{resolved} ist - die entsprechende Callbackfunktion wird in diesem Fall sofort ausgeführt.
+\emph{resolved} ist. Die entsprechende Callbackfunktion wird in diesem Fall sofort ausgeführt.
 Da externer Code oftmals nur die Möglichkeit haben soll, Callbacks zu registrieren, diese aber nicht
 selbst auslösen können soll, bietet das Deferred-Objekt mit der \lstinline{promise()}-Methode eine
 Möglichkeit, nur die entsprechenden Methoden zurückzugeben, sodass das Deferred-Objekt selbst
@@ -668,7 +666,7 @@ beispielsweise um eine Funktion hinzuzufügen, die keine HTML-Elemente verwendet
 Funktion auch direkt dem globalen \lstinline{jQuery}-Objekt hinzufügen.
 
 \item[Dokumentation] \hfill \\
-jQuery besitzt eine ausführliche Online-Dokumentatino, die nach Aufgabenbereichen wie
+jQuery besitzt eine ausführliche Online-Dokumentation, die nach Aufgabenbereichen wie
 \emph{Events}, \emph{Traversing}, \emph{Manipulation} und \emph{forms} gegliedert ist. Jede
 Funktionsbeschreibung besitzt mindestens ein Codebeispiel; wenn eine Funktion je nach Parameter
 unterschiedliche Aktionen ausführt, gibt es für jede Funktionalität ein eigenes Beispiel. Diese
@@ -684,9 +682,9 @@ Entwicklungsversion herunterladen. Dabei handelt es sich um eine ca. 230 KB gro�
 die von der Funktionalität her mit der Produktivversion identisch ist. Sofern man lieber einzelne,
 nach Aufgabenbereich unterteilte, Dateien möchte, kann man sich auch den \enquote{Quellcode} auf der
 GitHub-Seite\footnote{\href{https://github.com/jquery/jquery}{https://github.com/jquery/jquery}} von
-jQuery herunterladen. Unabhängig davon welche Entwicklungsversion man herunterlädt ist der
+jQuery herunterladen. Unabhängig davon welche Entwicklungsversion man herunterlädt, ist der
 enthaltene Code kommentiert, wobei es sich bei den Kommentaren strikt um technikbezogene Hinweise
-handelt - als Dokumentation sind diese nicht brauchbar, was dank der Online-Dokumentation aber auch
+handelt. Diese sind als Dokumentation nicht brauchbar, was dank der Online-Dokumentation aber auch
 nicht notwendig ist.
 
 \item[Lizenz] \hfill \\
@@ -700,7 +698,7 @@ jQuery ist auf DOM-Operationen und AJAX spezialisiert, wobei letzteres allgemein
 sodass JSON-RPC selbst implementiert werden müsste. Der Zugriff auf DOM-Elemente ist in jQuery
 deutlich komfortabler als in Indico, da man durch die Nutzung von CSS-Selektoren flexibler ist und
 es oftmals nicht notwendig ist, automatisch generierte IDs zu vergeben, um ein Element später noch
-referenzieren zu können - in jQuery nutzt man die Methoden zum Durchsuchen des DOM-Trees um
+referenzieren zu können: In jQuery nutzt man die Methoden zum Durchsuchen des DOM-Trees um
 beispielsweise ausgehend vom angeklickten Element die dazugehörige Tabellenzeile zu finden. Beim
 Verändern von Elementen führt jQuery ebenfalls: die Möglichkeit, Objekte und Funktionen als Wert zu
 nutzen erhöht die Flexibilität extrem und auch die große Menge an Funktionen zum Verändern der
@@ -711,27 +709,27 @@ der durch das \emph{Method Chaining} aber unumgänglich ist, ist das Fehlen eine
 Eventhandler-Objekts, welches eine komfortable Möglichkeit bietet, das Event wieder zu löschen. Man
 kann eine solche Funktion aber leicht selbst erstellen, indem man beim Registrieren des Events
 Eventname und Funktion in einer Closure speichert und damit den entsprechenden Eventhandler löscht.
-Ein Objektsystem ist in jQuery nicht vorhanden - daher müsste dort auf das bestehende System oder
+Ein Objektsystem ist in jQuery nicht vorhanden, daher müsste dort auf das bestehende System oder
 eine separate Bibliothek zurückgegriffen werden. Genau wie das Indico-Framework unterstützt auch
 jQuery Standardmethoden zur funktionalen Programmierung, wobei nicht alle in Indico verwendeten
 Funktionen auch in jQuery vorhanden sind. Sowohl Indico als auch jQuery enthalten ein UI-Framework,
 wobei sie sich in einigen grundlegenden Aspekten unterscheiden: Die Widgets von Indico sind darauf
 ausgelegt, sowohl Struktur als auch Inhalt selbst zu generieren, während jQuery UI dazu gedacht ist,
-bestehenden HTML-Code zu erweitern - letzteres hat den Vorteil, dass auch ohne JavaScript eine
+bestehenden HTML-Code zu erweitern. Dies hat den Vorteil, dass auch ohne JavaScript eine
 gewisse Grundfunktionalität vorhanden ist, was in Indico derzeit nicht der Fall ist und auch nicht
 vorgesehen ist. Abgesehen von diesem Nachteil enthält jQuery UI mit den Widgets \emph{Dialog} und
 \emph{Tabs} die beiden Widgets, die für Indico am wichtigsten sind - das in Indico vorhandene
 Dialog-Widget hat insbesondere beim Anzeigen modaler Dialogfenster einige Probleme. Ein weiterer
-Pluspunkt für jQuery bzw. jQuery UI ist die Anpassbarkeit der Widgets - da das Design von Indico
-schlicht und seriös ist, sollten die Widgets nicht durch bunte Balken hervortreten sondern sich
-sauber in das Design integrieren. Durch die widgetübergreifenden CSS-Klassen wäre dies problemlos
-möglich. Da Prototype derzeit auf einigen Seiten von Indico integriert wird, steht dessen
+Pluspunkt für jQuery bzw. jQuery UI ist die Anpassbarkeit der Widgets. Da das Design von Indico
+einfach gehalten ist, sollten die Widgets nicht durch bunte Balken hervortreten sondern sich
+sauber in das Design integrieren. Durch die widgetübergreifenden CSS-Klassen ist dies problemlos
+möglich. Da Prototype derzeit auf einigen Seiten von Indico integriert ist, steht dessen
 \lstinline{$}-Funktion mit der gleichnamigen Funktion aus jQuery im Konflikt. Indico nutzt derzeit
 an einigen Stellen \emph{Preloader}-Mixins, die zuerst einen oder mehrere AJAX-Requests ausführen
 und danach das Objekt selbst initialisieren. Dabei könnte das \emph{Deferred}-Objekt von jQuery
 nützlich sein. \emph{Data Binding} wird von jQuery nicht unterstützt. Die ausführliche Dokumentation
 von jQuery ermöglicht es insbesondere auch neuen Entwicklern, sich schnell einzuarbeiten, während
-man beim JavaScript-Framework von Indico viel vorhandenen Code studieren muss um sich mit seinen
+man beim JavaScript-Framework von Indico viel vorhandenen Code studieren muss, um sich mit seinen
 Funktionen vertraut zu machen. Beide Lizenzen von jQuery sind mit für die Nutzung in Indico
 geeignet.
 
@@ -752,15 +750,15 @@ DOM-Funktionen.
 
 \item[Objektsystem] \hfill \\
 Das Objektmodell von Classy orientiert sich an dem der Scriptsprache Python. Jede Klasse erbt von
-einer Basisklasse - in Python ist das (bei \emph{new-style}-Klassen)
+einer Basisklasse. In Python ist das bei \emph{new-style}-Klassen
 \lstinline[language=Python]{object}, in Classy ist es \lstinline{Class}. Um eine neue Klasse zu
 definieren, erstellt man also eine neue Klasse, die von \lstinline{Class} erbt, indem man deren
-statische Methode \lstinline{$extend(props)} aufruft, wobei \lstinline{props} ein Objekt ist,
-welches die neue Klasse definiert: die Methode \lstinline{__init__()} wird zum Konstruktor der neuen
+statische Methode \lstinline{$extend(props)} aufruft, wobei \lstinline{props} ein Objekt ist, das
+die neue Klasse definiert: die Methode \lstinline{__init__()} wird zum Konstruktor der neuen
 Klasse, alle weiteren Methoden werden zu Instanzmethoden der Klasse.
 
 Um einer Klasse Mixins hinzuzufügen, definiert man beim Erstellen der Klasse ein Array
-\lstinline{__include__}, welches die Mixins enthält - dabei handelt es sich um JavaScript-Objekte,
+\lstinline{__include__}, welches die Mixins enthält. Bei diesen handelt es sich um JavaScript-Objekte,
 die Funktionen enthalten. Ein weiteres optionales Objekt, welches man beim Erstellen der Klasse
 übergeben kann, ist \lstinline{__classvars__}. Die darin gespeicherten Werte sind innerhalb der
 Klasse über \lstinline{this.$class.<name>} verfügbar und nicht instanzspezifisch.
@@ -769,8 +767,8 @@ Sofern beim Erstellen einer Klasse eine Methode der Parent-Klasse überschrieben
 Methode in \lstinline{this.$super} verfügbar, sodass sie komfortabel aufgerufen werden kann.
 
 Genau wie in Python ist auch bei Classy der \lstinline{new}-Operator optional. Dies wird dadurch
-erreicht, dass in der Konstruktorfunktion überprüft wird, ob \lstinline{this === window} ist. Falls
-dem so ist, erstellt die Funktion ein neues Objekt und gibt dieses zurück.
+erreicht, dass in der Konstruktorfunktion überprüft wird, ob \lstinline{this === window} ist. In
+diesem Fall erstellt die Funktion ein neues Objekt und gibt dieses zurück.
 
 \item[Hilfsfunktionen] \hfill \\
 Classy bietet neben dem Objektsystem keine weitere Funktionalität.
@@ -797,18 +795,18 @@ verglichen werden kann. Sowohl Indico als auch Classy ermöglichen die Definitio
 Erben von einer anderen Klasse. Classy hat dabei den Vorteil, dass überschriebene Methoden
 komfortable aufgerufen werden können, ohne den Namen der ursprünglichen Klasse im Aufruf verwenden
 zu müssen. Dies bedeutet aber gleichzeitig, dass man jeweils nur eine gleichnamige Parent-Methode
-aufrufen kann, was in Classy aber kein Problem ist, da es keine Mehrfachvererbung unterstützt
-sondern nur eine Parent-Klasse und mehrere Mixins, die ausschließlich Funktionen enthalten - dabei
+aufrufen kann. Dies stellt in Classy aber kein Problem dar, da es keine Mehrfachvererbung unterstützt,
+sondern nur eine Parent-Klasse und mehrere Mixins, die ausschließlich Funktionen enthalten. Dabei
 überschreiben gleichnamige Funktionen innerhalb von Mixins die vorherige Funktion. Dadurch, dass
 Classy zwischen Mixins und der Parent-Klasse unterscheidet, ist keine echte Mehrfachvererbung
-möglich - der manuelle Aufruf einer als Konstruktor verwendeten Funktion ist problematisch, da jedes
+möglich. Der manuelle Aufruf einer als Konstruktor verwendeten Funktion ist problematisch, da jedes
 Mixin einen einzigartigen Namen für diese Funktion benutzen müsste. Allerdings wäre es durchaus
 möglich, diese Funktion genau wie das Mixin zu nennen, sodass der Unterschied zum Indico-Code, der
 den Konstruktor einer Parent-Klasse mittels \lstinline{this.NameOfTheClass()} aufruft, nicht
 so gravierend wäre. Der große Nachteil gegenüber dem Objektsystem von Indico besteht jedoch darin,
-dass Mixins nicht eigenständig benutzt werden können - sie sind reine Sammlungen von Funktionen.
+dass Mixins nicht eigenständig benutzt werden können. Sie sind reine Sammlungen von Funktionen.
 Kompatibilitätsprobleme zwischen Indico und Classy bestehen nicht, da der Name \lstinline{Class}
-nirgends verwendet wird. Classy ist deutlich besser dokumentiert als das Objektsystem von Indico,
+nirgendwo verwendet wird. Classy ist deutlich besser dokumentiert als das Objektsystem von Indico,
 allerdings gibt es aufgrund der starken Nutzung von Klassen in Indico extrem viele Codebeispiele des
 aktuellen Objektsystems. Die BSD-Lizenz ist mit der von Indico genuzten GPL kompatibel.
 
@@ -847,9 +845,10 @@ Standardfunktionen wie \lstinline{indexOf()} und \lstinline{range()} gibt es dor
 zum Verknüpfen oder Vergleichen von Arrays; beispielsweise \lstinline{zip()} und
 \lstinline{union()}.
 
-\emph{Functions} enthält Funktionen, die mit Funktionen arbeiten. Während viele dieser Funktionen in
-JavaScript-Bibliotheken und -Frameworks üblich sind - beispielsweise \lstinline{bind()} zum Fixieren
-von \lstinline{this} und optional auch von Argumenten (\emph{Currying}) - enthält die Kategorie auch
+\emph{Functions} enthält Funktionen, die mit Funktionen arbeiten\footnote{\enquote{Function (uh,
+ahem) Functions} um die Underscore.js-Dokumentation zu zitieren}. Während viele dieser Funktionen in
+JavaScript-Bibliotheken und -Frameworks üblich sind, so z.B. \lstinline{bind()} zum Fixieren
+von \lstinline{this} und optional auch von Argumenten (\emph{Currying}), enthält die Kategorie auch
 komplexere Funktionen wie \lstinline{memoize()} zum Cachen des Rückgabewerts einer Funktion bei
 gleichbleibenden Aufrufparametern oder \lstinline{debounce()} und \lstinline{throttle()} um viele
 kurz hintereinander erfolgende Funktionsaufrufe zu reduzieren.
@@ -878,7 +877,7 @@ Name in bestehendem Code verwendet wird ist zwar relativ hoch, allerdings existi
 Variablenname in der Regel nur innerhalb von Funktionen, wodurch der Konflikt ignoriert werden kann,
 sofern keine Funktionen von Underscore.js innerhalb dieser Funktion genutzt werden sollen. Ein
 weiterer häufiger Verwendungszweck des Namens \lstinline{_} für eine Funktion ist bei der
-internationalisierung - dort nutzt man oftmals \lstinline{_('something')} um Text zu lokalisieren.
+Internationalisierung. Dort nutzt man oftmals \lstinline{_('something')} um Text zu lokalisieren.
 In diesem Fall muss man die \lstinline{_.noConflict()}-Funktion nutzen und Underscore.js unter einem
 anderen Namen zugänglich zu machen und die urspröngliche Variable bzw. Funktion wiederherzustellen.
 
@@ -895,12 +894,12 @@ Underscore.js steht unter der MIT-Lizenz.
 Underscore.js bietet sehr viele Hilfsfunktionen, die auch in Indico vorhanden sind. Da einige
 Funktionen wie \lstinline{each}, \lstinline{filter} und \lstinline{map} in der aktuellsten
 ECMAScript-Spezifikation standardisiert sind und von manchen Browsern bereits nativ unterstützt
-werden, nutzt Underscore.js diese nativen Funktionen, sofern sie verfügbar sind - da sie in C oder
+werden, nutzt Underscore.js diese nativen Funktionen, sofern sie verfügbar sind. Da sie in C oder
 C++ implementiert sind, erhöht dies die Performance. Damit ist Underscore.js in der Lage, einen
-Großteil der in Indico vorhandenen Hilfsfunktionen durch performantere, besser dokumentierte
-Funktionen zu ersetzen. Der globale Name \lstinline{_} kollidiert auf globaler Ebene mit keinen
-anderen Variablen/Funktionen; in einzelnen Funktionen wird \lstinline{_} als temporäre lokale
-Variable genutzt - man könnte diese Variablen aber ohne Weiteres umbenennen was unabhängig von
+Großteil der in Indico vorhandenen Hilfsfunktionen durch performantere und besser dokumentierte
+Funktionen zu ersetzen. Der Name \lstinline{_} kollidiert auf globaler Ebene mit keinen
+anderen Variablen/Funktionen. In einzelnen Funktionen wird \lstinline{_} als temporäre lokale
+Variable genutzt. Man könnte diese Variablen aber ohne Weiteres umbenennen, was unabhängig von
 Underscore.js sinnvoll wäre, da \lstinline{_} nicht wirklich aussagekräftig ist und \lstinline{tmp}
-für eine temporäre Variable genausogut geeignet ist. Die MIT-Lizenz von Underscore.js ist mit der
+für eine temporäre Variable ebenso gut geeignet ist. Die MIT-Lizenz von Underscore.js ist mit der
 GPL kompatibel.
