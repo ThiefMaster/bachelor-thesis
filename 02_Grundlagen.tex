@@ -274,21 +274,21 @@ function makeFunction() {
 
 
 \subsection{Native Objekte}
-Wie zuvor erwähnt sind beispielsweise Strings und Arrays Objekte. Diese sind jedoch nicht in
-JavaScript selbst implementiert sondern in der Sprache der JavaScript-Engine, also beispielsweise C
+Wie zuvor erwähnt, sind Strings und Arrays Objekte. Diese sind jedoch nicht in
+JavaScript selbst implementiert, sondern in der Sprache der JavaScript-Engine, also beispielsweise C
 oder C++. Ihr Verhalten ist durch die ECMAScript-Spezifikation \citep{ecmascript} vollständig
-definiert. Dies bedeutet beispielsweise dass es prinzipiell sicher ist, gewisse Operationen mit
-diesen Objekten auszuführen - beispielsweise sie um eigene Methoden zu erweitern. Sofern ein natives
-Objekt eine Operation nicht unterstützt wird eine entsprechende Fehlermeldung ausgegeben.
+definiert. Dies bedeutet, dass es prinzipiell sicher ist, gewisse Operationen mit
+diesen Objekten auszuführen, um sie z.B. mit eigenen Methoden zu erweitern. Sofern ein natives
+Objekt eine Operation nicht unterstützt, wird eine entsprechende Fehlermeldung ausgegeben.
 
 
 
 \subsection{Host-Objekte}
 
-Bei Host-Objekten handelt es sich um von der Host-Umgebung zur Verfügung gestellte Objekte die in
-der Regel nicht in JavaScript sondern in der Sprache der Host-Umgebung oder der JavaScript-Engine
+Bei Host-Objekten handelt es sich um von der Host-Umgebung zur Verfügung gestellte Objekte, die in
+der Regel nicht in JavaScript, sondern in der Sprache der Host-Umgebung oder der JavaScript-Engine
 geschrieben sind. Diese Objekte sind auf die Umgebung zugeschnitten in der das Script läuft - im
-Browser werden beispielsweise die DOM-Elemente durch Host-Objekte repräsentiert.
+Browser werden z.B. die DOM-Elemente durch Host-Objekte repräsentiert.
 Während native Objekte durch die ECMAScript-Spezifikation definiert sind, gibt es für Host-Objekte
 lediglich einige Anforderungen und Einschränkungen, die notwendig sind, damit die JavaScript-Engine
 korrekt mit ihnen arbeiten und die Codeausführung optimieren kann: Alle internen Objekteigenschaften
@@ -316,7 +316,7 @@ In diesem Beispiel wird auf nicht vorhandene Eigenschaften bzw. Methoden von zwe
 Host-Objekten lesend zugegriffen. Native und benutzerdefinierte Objekte würden in diesem Fall
 einfach \lstinline{undefined} zurückgeben statt eine Exception auszulösen.
 Es ist auch durchaus möglich, dass eine Wertzuweisung keine Fehlermeldung bzw. Exception auslöst,
-jedoch stillschweigend ignoriert wird und die Eigenschaft des betroffenen Objekts ihren alten Wert
+sondern stillschweigend ignoriert wird und die Eigenschaft des betroffenen Objekts ihren alten Wert
 beibehält.
 
 
@@ -327,7 +327,7 @@ nur über ein Objekt sichtbar sind. Wenn keine Funktionen zur Laufzeit definiert
 diese Variablentypen auch aus. Wenn man jedoch Funktionen zur Laufzeit definiert, besteht die
 Möglichkeit, dass dies in einer Funktion geschieht, die bereits lokale Variablen besitzt. In der
 inneren Funktion sind diese Variablen nun ebenfalls verfügbar. Daher dürfen sie vom Garbage
-Collector nicht gelöscht werden obwohl es funktions-lokale Variablen sind und die Funktion, in der
+Collector nicht gelöscht werden, obwohl es \emph{funktionslokale} Variablen sind und die Funktion, in der
 sie definiert wurden, bereits verlassen wurde. Die Kombination aus einer Funktion und ihrer Umgebung
 (also den außerhalb definierten Variablen) bezeichnet man als \emph{Closure}. Die innerhalb der
 Funktion verfügbaren Variablen, die weder lokal noch global sind, bezeichnet man als
@@ -351,12 +351,13 @@ Anwendungsbereich wird später zusammen mit dem Objektmodell von JavaScript vorg
 
 
 \subsection{Objekte, Konstruktoren und Prototypen}
-Anders als objektorientierte Sprachen wie Java oder C++ ist JavaScript objekt\emph{basiert}. Wie
-bereits bei der Vorstellung der Programmierparadigmen erwähnt bedeutet dies, dass JavaScript keine
-Klassen besitzt. Um dennoch ein neues Objekt zu erstellen, was in etwa der \emph{Instanz} einer
+Anders als objektorientierte Sprachen wie Java oder C++ ist JavaScript objekt\emph{basiert}.
+Dies bedeutet, dass JavaScript keine Klassen besitzt wie bereits bei der Vorstellung der
+Programmierparadigmen erwähnt wurde.
+Um dennoch ein neues Objekt zu erstellen, was in etwa der \emph{Instanz} einer
 Klasse entspricht, benutzt man den \lstinline{new}-Operator und eine Konstruktorfunktion
-\lstinline{F}. Dieser erstellt ein neues Objekt \lstinline{obj} und weist seiner internen
-Eigenschaft \emph{[[Prototype]]} den Wert der Eigenschaft \lstinline{F.prototype} zu sofern er
+\lstinline{F}. Der Operator erstellt ein neues Objekt \lstinline{obj} und weist seiner internen
+Eigenschaft \emph{[[Prototype]]} den Wert der Eigenschaft \lstinline{F.prototype} zu, sofern er
 existiert und ein Objekt ist. Danach wird \lstinline{F} ausgeführt, wobei \lstinline{this === obj}
 ist. Der Rückgabewert des \lstinline{new}-Operators ist \lstinline{obj}. \\
 Es besteht also eine Möglichkeit, ein neues Objekt zu erstellen und mittels einer Funktion auf
@@ -364,10 +365,10 @@ dieses Objekt zuzugreifen bzw. es danach einer Variable zuzuweisen.
 
 Da ein Objekt ohne Methoden allerdings kaum mit einer Klasse vergleichbar ist, muss JavaScript
 logischerweise eine Möglichkeit bieten, einem Objekt Methoden zuzuweisen. Eine Möglichkeit wäre, sie
-wie in \autoref{lst:func-in-ctor} im Konstruktor dem Objekt hinzuzufügen - dank der
-\emph{First-Class}-Eigenschaften von Funktionen ist das auch ohne Weiteres möglich. Allerdings hat
+wie in \autoref{lst:func-in-ctor} im Konstruktor dem Objekt hinzuzufügen, was dank der
+\emph{First-Class}-Eigenschaften von Funktionen auch ohne Weiteres möglich ist. Allerdings hat
 diese Herangehensweise einen entscheidenden Nachteil: Für jedes Objekt wird eine neue Funktion
-erstellt - bei vielen Objekten ist diese Lösung also sehr speicherineffizient.
+erstellt, d.h. bei vielen Objekten ist diese Lösung sehr speicherineffizient.
 
 \begin{lstlisting}[label=lst:func-in-ctor,caption=Funktionszuweisung im Konstruktor]
 function SomeClass {
@@ -375,18 +376,18 @@ function SomeClass {
 }
 \end{lstlisting}
 
-Für die effizientere Lösung ist es wichtig zu wissen, was beim Zugriff auf eine Objekteigenschaft
+Für eine effizientere Lösung ist es wichtig zu wissen, was beim Zugriff auf eine Objekteigenschaft
 geschieht: Die JavaScript-Engine führt die interne Methode \emph{[[GetProperty]]} des Objekts aus.
-Diese Methode prüft, ob das Objekt selbst die gewünschte Eigenschaft besitzt und gibt sie zurück
-falls dies der Fall ist. Ansonsten wird überprüft, ob die \emph{[[Prototype]]}-Eigenschaft des
+Diese Methode prüft, ob das Objekt selbst die gewünschte Eigenschaft besitzt und gibt sie ggf. zurück.
+Ansonsten wird überprüft, ob die \emph{[[Prototype]]}-Eigenschaft des
 Objekts \lstinline{null} ist. Falls sie das ist, gibt \emph{[[GetProperty]]} \lstinline{undefined}
 zurück. Existiert jedoch ein Prototyp, so wird die \emph{[[GetProperty]]}-Methode des Prototypen
 ausgeführt und ihr Rückgabewert zurückgegeben. Es werden also alle Prototypen rekursiv durchlaufen,
 bis entweder die Eigenschaft gefunden wurde oder ein Objekt ohne Prototyp erreicht wurde.
 
-Da Methoden ebenfalls Eigenschaften sind wird durch die Nutzung der \emph{prototype chain} sowohl
-der erhöhte Speicherverbrauch verhindert - die Funktion ist ja nur noch in einem einzigen Objekt,
-dem Prototypen - und außerdem Vererbung und Überschreiben von Funktionen ermöglicht.
+Da Methoden ebenfalls Eigenschaften sind, wird durch die Nutzung der \emph{prototype chain} sowohl
+der erhöhte Speicherverbrauch verhindert, als auch Vererbung und Überschreiben von Methoden
+ermöglich, da die Funktion nur noch in einem einzigen Objekt, dem Prototypen, enthalten ist.
 
 \begin{lstlisting}[label=lst:func-in-proto,caption=Funktionszuweisung im Prototypen]
 function SomeClass { }
@@ -440,8 +441,8 @@ Test.prototype.func = function() {
 \end{lstlisting}
 
 Verglichen mit klassenbasierten objektorientierten Sprachen ist das Objektsystem von JavaScript sehr
-flexibel, da alle Operationen - vom Hinzufügen von Methoden zu einer "Klasse" bis zum Erstellen einer
-neuen "Klasse" - zur Laufzeit möglich sind. Diese Flexibilität hat jedoch den Nachteil, dass
+flexibel, da alle Operationen - vom Hinzufügen von Methoden zu einer \enquote{Klasse} bis zum Erstellen einer
+neuen \enquote{Klasse} - zur Laufzeit möglich sind. Diese Flexibilität hat jedoch den Nachteil, dass
 statische Analysen und aus IDEs\footnote{Integrated Development Environment; z.B. Eclipse oder
 Visual Studio} bekannte Funktionen wie Autovervollständigung von Methoden und Eigenschaften nicht
 immer möglich sind, da der Code für solche Funktionen in der Regel nicht ausgeführt sondern nur
@@ -457,6 +458,7 @@ muss, um auf Events zu reagieren, sofern man auch den Internet Explorer 8 (oder 
 möchte. Wie sich dieselbe Funktionalität durch ein Framework realisieren lässt, ist in
 \autoref{lst:js-events-jquery} gezeigt.
 
+\newpage
 \begin{lstlisting}[label=lst:js-events-plain,caption=Event-Handling ohne Abstraktion]
 function handleClick(event) {
     if(!event) {
