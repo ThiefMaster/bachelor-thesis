@@ -19,7 +19,7 @@ wird auch heute noch aktiv verwendet, obwohl es bereits Nachfolger gibt.
 
 Einer der Nachfolger von HTML 4.01 ist XHTML\footnote{eXtensible HyperText Markup Language}, eine
 auf XML basierte Version von HTML. Diese Version wurde entwickelt, da XML es ermöglicht, eigene
-Elemente und Attribute zu definieren und seitens der vieler Entwickler der Bedarf nach einer solchen
+Elemente und Attribute zu definieren und seitens vieler Entwickler der Bedarf nach einer solchen
 Erweitertungsmöglichkeit bestand. Darüber hinaus ermöglichen die Einschränkungen von XML, einfache
 Parser zu entwickeln oder einen bestehenden XML-Parser zu nutzen und XHTML-Dokumente in andere
 Formate zu transformieren; beispielsweise mittels XSLT\footnote{Extensible Stylesheet Language
@@ -27,12 +27,12 @@ Transformations}. \citep{w3c:xhtml}
 
 Die neueste HTML-Version ist HTML5 und basiert auf Elementen von HTML 4.01 und XHTML 1.1.
 Sie befindet sich zwar noch immer in Entwicklung, jedoch werden viele Neuerungen bereits heute von
-den verbreiteten Browsern unterstützt. Neben dem Einführen neuer Features insbesondere im
+den verbreiteten Browsern unterstützt. Neben der Einführung neuer Features insbesondere im
 Multimedia-Bereich spezifiziert HTML5 die Verarbeitung von Dokumenten mit Syntaxfehlern. \citep{w3c:html5}
 Diese Dokumente wurden zuvor von fast allen Browsern angezeigt, allerdings gab es gravierende
 Unterschiede zwischen den verschiedenen Browsern, sodass Seiten oftmals für einzelne Browser
 optimiert wurden und in anderen Browsern nahezu unbenutzbar waren. Durch die Vorgaben von HTML5
-werden Dokumente mit Syntaxfehlern zwar nicht wie in Programmiersprachen mit einer Fehlermeldugn
+werden Dokumente mit Syntaxfehlern zwar nicht wie in Programmiersprachen mit einer Fehlermeldung
 abgelehnt - eine radikale Lösung, die eine Vielzahl von Websites unbenutzbar machen würde - jedoch
 sollen sie in jedem aktuellen Browser identisch aussehen.
 Anders als HTML 4 und XHTML basiert HTML5 weder auf SGML noch auf XML, sondern definiert eigene
@@ -53,7 +53,7 @@ um welche HTML-Version es sich handelt.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 \end{lstlisting}
 
-De Rest des Dokument ist aus \emph{Tags} aufgebaut, die wiederum \emph{Attribute} besitzen und Text
+Der Rest des Dokuments ist aus \emph{Tags} aufgebaut, die wiederum \emph{Attribute} besitzen und Text
 oder weitere Tags enthalten können. Auf der obersten Ebene eines HTML-Dokuments befindet sich immer
 das \lstinline[language=HTML]{<html>}-Tag. Dieses enthält zwei Tags,
 \lstinline[language=HTML]{<head>} und \lstinline[language=HTML]{<body>}.
@@ -142,7 +142,7 @@ des ECMAScript-Standards entspricht dem internationalen Standard \emph{ISO/IEC 1
 
 Auch zum Zeitpunkt der Veröffentlichung dieser Arbeit wird der ECMAScript-Standard und damit die
 Sprache JavaScript weiterentwickelt. Jeder moderne Browser unterstützt die Sprache, allerdings
-nicht zwangsläufig alle Sprachelemente die in der aktuellsten Spezifikation enthalten sind.
+nicht zwangsläufig alle Sprachelemente, die in der aktuellsten Spezifikation enthalten sind.
 
 
 \subsection{Anwendungsgebiete}
@@ -192,9 +192,9 @@ Kapselung und Wiederverwendung von Funktionalität werden Funktionen genutzt.
 \citep[Kap. 1.3.1]{progsprachen}
 
 Da die Host-Umgebung in JavaScript Objekte zur Verfügung stellt und auch Datentypen wie Strings und
-Arrays Objekte sind, lässt sich zwar nicht rein prozedural programmieren, jedoch vollständig
-auf die Nutzung eigener Objekte verzichten. Da dadurch viel Komfort wie die Nutzung assoziativer
-Arrays - die in JavaScript simple Objekte sind - verloren geht, ist dieses Paradigma nicht zu
+Arrays Objekte sind, lässt sich zwar nicht rein prozedural programmieren, es kann jedoch vollständig
+auf die Nutzung eigener Objekte verzichtet werden. Da dadurch viel Komfort, wie die Nutzung assoziativer
+Arrays (die in JavaScript simple Objekte sind), verloren geht, ist dieses Paradigma nicht zu
 empfehlen. Es kann aber durchaus sinnvoll sein, Funktionen außerhalb von Objekten zu definieren,
 sofern sie alleinstehend sind und man keine Namespaces nutzen will: JavaScript unterstützt zwar
 keine Namespace, allerdings sind Funktionen sog. \emph{First-Class-Objekte}, d.h. man kann sie in
@@ -234,8 +234,8 @@ nur die Elemente aus einer Liste zu übernehmen, die von der Filter-Funktion dur
 
 \subsection{First-Class-Objekte}
 In JavaScript handelt es sich bei Funktionen um sogenannte \emph{First-Class-Objekte}. Dies
-bedeutet an sich nur, dass es sich bei Funktionen um Objekte handelt - beispielsweise kann eine
-Funktion wie jedes andere Objekt Attribute und Methoden (die wiederum Funktionen sind) besitzen.
+bedeutet an sich nur, dass es sich bei Funktionen um Objekte handelt. So kann zum Beispiel eine
+Funktion wie jedes andere Objekt Attribute und Methoden, die wiederum Funktionen sind, besitzen.
 Details zu den verschiedenen Objekt-Typen einschließlich Funktionsobjekten finden sich in
 \citep[Kap. 8.6]{ecmascript}.
 
