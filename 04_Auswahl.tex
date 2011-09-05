@@ -8,23 +8,24 @@ bestimmtes Framework als auch Kombinationen mehrerer Frameworks vorgestellt und 
 \subsection{Vollständige Migration zu Prototype}
 Da Prototype bereits in einigen Bereichen von Indico integriert ist, muss es nur global
 eingebunden werden; Konflikte sind dabei eher unwahrscheinlich. Danach muss der Code nach und nach
-vom alten System auf Prototype umgestellt werden - dies bedeutet, dass alle ca. 240 Klassen in der
-Struktur angepasst werden müssen und sofern Mehrfachvererbung genutzt auch redesignt werden müssen,
-sodass sie das Objektsystem von Prototype nutzen können. Um die Erzeugung von HTML auf Prototype
-umzustellen, müssen die ca. 2000 Aufrufe von \lstinline{Html.*}-Funktionen angepasst werden und, da
-der \lstinline{XElement}-Wrapper wegfällt, alle darauf aufbauenden Funktionen modifiziert werden. Da
+vom alten System auf Prototype umgestellt werden. Dies bedeutet, dass ca. 240 Klassen in der
+Struktur angepasst werden müssen. Sofern Mehrfachvererbung genutzt wird, müssen die jeweiligen
+Klassen redesignt werden, um das Objektsystem von Prototype nutzen zu können.
+Um das Generieren von HTML-Elementen auf Prototype
+umzustellen, müssen ca. 2000 Aufrufe von \lstinline{Html.*}-Funktionen angepasst werden und, da
+der \lstinline{XElement}-Wrapper entfällt, alle darauf aufbauenden Funktionen modifiziert werden. Da
 JSON-RPC-Aufrufe in Indico über eine zentrale Funktion laufen, kann diese relativ einfach auf die
 AJAX-Funktionen von Prototype umgestellt werden. Bei der Migration von Hilfsfunktionen wie
 \lstinline{each()} oder \lstinline{curry()} kann aufgrund der größtenteils identischen Parametern
 mit \emph{Search\&Replace} eines modernen Editors gearbeitet werden oder es können unter den alten
 Funktionsnamen Wrapper bereitgestellt werden, sodass dabei nur wenige Codestellen geändert werden
 müssen. Eine größere Hürde bei der Migration ist das \emph{Data Binding}-Framework von Indico. Da
-Prototype keine derartige Funktionalität beinhaltet muss dieses unter Verwendung moderner
+Prototype keine derartige Funktionalität beinhaltet, muss dieses unter Verwendung moderner
 JavaScript-Technologien neu entwickelt werden.
 
-Abschließend kann man sagen, dass es sich bei dieser Migration um ein extrem aufwändiges und
-zeitintensives Unterfangen handelt, was aber am Ende zu sauberem Code führen würde, der sowohl
-leicht wartbar wäre als auch für neue Entwickler einen einfachen Einstieg ermöglichen würde.
+Zusammenfassend kann man sagen, dass es sich bei dieser Migration um ein extrem aufwändiges und
+zeitintensives Unterfangen handelt. Sie führt aber am Ende zu sauberem Code, der sowohl leicht
+wartbar ist als auch für neue Entwickler einen einfachen Einstieg ermöglicht.
 
 
 \subsection{Vollständige Migration zu jQuery + Classy}
@@ -35,19 +36,19 @@ Da jQuery kein Objektsystem besitzt, Indico aber weiterhin objektorientiert aufg
 wird neben jQuery die Classy-Bibliothek eingebunden. Wie Prototype unterstützt allerdings auch
 Classy nur eine echte Parent-Klasse und Mixin-Objekte, weshalb ein Redesign der Objektstruktur von
 Indico notwendig wird. Bei der Migration der DOM-Zugriff und -Manipulationen kann entweder einfach
-auf jQuery gewechselt werden oder aber die Codestruktur angepasst werden, sodass der Code die
-Vorteile von jQuery vollständig ausnutzt - beispielsweise durch \emph{Method Chaining} und die
+auf jQuery gewechselt werden oder aber die Codestruktur angepasst werden, damit der Code die
+Vorteile von jQuery vollständig ausnutzt, z.B. durch \emph{Method Chaining} und die
 Nutzung von Komfortfunktionen wie \lstinline{wrap()} und \lstinline{closest()}. Die funktionalen
-Hilfsfunktionen können teilweise direkt durch jQuery-Äquivalente ersetzt werden - dabei reicht es
-oftmals aus, \lstinline{func} durch \lstinline{$.func} zu ersetzen; diverse in jQuery nicht
+Hilfsfunktionen können teilweise direkt durch jQuery-Äquivalente ersetzt werden. Dabei reicht es
+oftmals aus, \lstinline{func} durch \lstinline{$.func} zu ersetzen. Diverse in jQuery nicht
 vorhandenen Funktionen müssen dabei neu implementiert werden, sofern sie nicht unabhängig vom
 restlichen Indico-Framework funktionsfähig sind. jQuery unterstützt genau wie Prototype kein
 \emph{Data Binding}, weshalb dort eine Eigenentwicklung notwendig ist. Allerdings bietet jQuery
 durch \lstinline{val([newValue])} eine Methode um den Wert eines Formularelements auszulesen und zu
-ändern - an einigen Stellen könnte man diese Funktion an ein bestimmtes Element binden und als
-\emph{Accessor} an eine andere Funktion übergeben - wenn man diese Funktionen in einem Objekt
-speichert, hat man ein sauberes Interface zum Zugriff auf die Werte und Änderungen wirken sich
-logischerweise direkt auf das zugehörige Formularelement aus.
+ändern. An einigen Stellen könnte man diese Funktion an ein bestimmtes Element binden und als
+\emph{Accessor} an eine andere Funktion übergeben. Wenn man diese Funktionen in einem Objekt
+speichert, bietet dieses ein sauberes Interface für den Zugriff auf die Werte. Änderungen dieser
+wirken sich logischerweise direkt auf das zugehörige Formularelement aus.
 
 Der Komplettumstieg auf jQuery ist genau wie der Umstieg auf Prototype sehr aufwändig und
 zeitintensiv, führt aber ebenfalls zu sauberem und gut wartbarem Code. Da jQuery derzeit eines der
@@ -57,125 +58,122 @@ bereits Erfahrung damit hat.
 
 \subsection{Vollständige Migration auf jQuery und Prototype}
 Theoretisch wäre es möglich, sowohl jQuery als auch Prototype einzubinden, wobei in diesem Fall die
-\lstinline{$}-Funktion von jQuery unter einem anderen Namen - beispielsweise \lstinline{$j} -
+\lstinline{$}-Funktion von jQuery unter einem anderen Namen - z.B. \lstinline{$j} -
 aufgerufen werden müsste, da Prototype ebenfalls \lstinline{$} nutzt. Da beide Frameworks einen
-ähnlichen Funktionsumfang besitzen gibt es keinen sinnvollen Grund, beide zu benutzen.
+ähnlichen Funktionsumfang besitzen, gibt es keinen sinnvollen Grund, beide zu benutzen.
 
 
 \subsection{Teilweise Migration auf Prototype}
 Neben der vollständigen Migration auf ein Framework besteht auch die Möglichkeit, das bestehende
 Framework vorerst beizubehalten und nur durch Prototype zu erweitern, was ja dadurch, dass einige
 Seiten teilweise Prototype nutzen, bereits der Fall ist. Neben der globalen Einbindung von Prototype
-werden dabei Teile von Indico auf Prototype umgestellt, bei denen es sich besonders anbietet. Ein
-solcher Teil ist das Eventsystem - für die Umstellung muss lediglich der Code des Indico-Frameworks
-bearbeitet werden; daneben bietet es sich an, die Hilfsmethoden zum browserunabhängigen Zugriff auf
+werden dabei die Teile von Indico auf Prototype umgestellt, bei denen es sich besonders anbietet. Ein
+solcher Teil ist das Eventsystem. Für die Umstellung muss lediglich der Code des Indico-Frameworks
+bearbeitet werden. Daneben bietet es sich an, die Hilfsmethoden zum browserunabhängigen Zugriff auf
 bestimmte Eigenschaften des Event-Objekts zu entfernen, sofern Prototype diese bereits normalisiert.
-Ein weiterer Bereich, in dem die Umstellung auf Prototype sinnvoll ist, ist Drag\&Drop - teilweise
+Ein weiterer Bereich, in dem die Umstellung auf Prototype sinnvoll ist, ist Drag\&Drop; teilweise
 wird dort sogar schon Prototype genutzt. Bei Hilfsfunktionen, die sowohl im Indico-Framework als
 auch in Prototype mit derselben \emph{Signatur}, d.h. denselben Aufrufparametern und demselben
 Rückgabedatentyp, existieren, bietet es sich an, diese Funktionen aus Indico zu entfernen und
-entweder alle Aufrufe selbiger zu ändern, sodass die Prototype-Funktion benutzt wird, oder eine
+entweder alle Aufrufe dieser zu ändern, sodass die Prototype-Funktion benutzt wird, oder eine
 Variable mit demselben Namen wie alten Funktion zu definieren und darin eine Referenz auf die
 Prototype-Funktion zu speichern. DOM-Zugriff bieten sich ebenfalls zum Migrieren an, allerdings muss
-dabei der Aufwand mit dem Nutzen verglichen werden - es gibt über 1200 Aufrufe der
+dabei der Aufwand mit dem Nutzen verglichen werden. Es gibt über 1200 Aufrufe der
 \lstinline{$E}-Funktion, wobei danach oftmals noch \lstinline{XElement}-Methoden verwendet werden.
 Diese müssten alle angepasst werden. Dasselbe gilt für die über 2000 Aufrufe der
 \lstinline{Html.*}-Funktionen zur Erstellung neuer DOM-Elemente. Unabhängig davon, ob man diesen
-Bereich migriert oder nicht sollte neuer Code ausschließlich Prototype nutzen, sodass die Verwendung
+Bereich migriert oder nicht, sollte neuer Code ausschließlich Prototype nutzen, damit die Verwendung
 der alten Funktionen nicht zunimmt. Durch das Beibehalten der alten Funktionen ist es jedoch
-notwendig, dass neuer Code überprüft, ob es sich bei einem Objekt bereits um ein
+notwendig, dass neu geschriebener Code überprüft, ob es sich bei einem Objekt bereits um ein
 (Prototype-erweitertes) DOM-Element handelt oder um ein \lstinline{XElement}-Objekt und in letzterem
 Fall durch \lstinline{$(obj.dom)} das enthaltene DOM-Element mit den Prototype-spezifischen
 Erweiterungen versieht und dieses statt des Wrappers benutzt.
 
 Bei der Erweiterung des bestehenden Frameworks durch Prototype lässt sich viel Entwicklungszeit
-einsparen, da man nicht so gut wie jede Klasse umschreiben muss und bestehenden Code größtenteils
-weiterverwenden kann. Indem man neuen Code ausschließlich auf Prototype aufbauen lässt verbessert
-sich die Codequalität im Laufe der Zeit automatisch; dies lässt sich noch beschleunigen wenn jeder
+einsparen, da man nur wenige Klassen umschreiben muss und bestehenden Code größtenteils
+weiterverwenden kann. Indem man neuen Code ausschließlich auf Prototype aufbaut, verbessert sich die
+Codequalität im Laufe der Zeit automatisch. Dies lässt sich noch beschleunigen, wenn jeder
 Entwickler, der bestehenden Code modifiziert, diesen auf Prototype umstellt. Durch die Mischung von
 altem und neuem Code ist die Gesamtqualität des Codes natürlich schlechter, ermöglicht Entwicklern
-aber dennoch effizient zu arbeiten, da sie bei der Entwicklung neuer Funktionen größtenteils sauber
-dokumentierte Funktionen nutzen können und sich nur in Legacy-Code einlesen müssen sofern keine
+aber dennoch, effizient zu arbeiten, da sie bei der Entwicklung neuer Funktionen größtenteils sauber
+dokumentierte Funktionen nutzen können und sich nur in Legacy-Code einlesen müssen, sofern keine
 Alternative existiert.
 
 
 \subsection{Teilweise Migration auf jQuery}
-Statt das bereits vorhandene Prototype zu nutzen besteht auch die Möglichkeit, jQuery zum
+Statt das bereits vorhandene Prototype-Framework zu nutzen, besteht auch die Möglichkeit, jQuery zum
 bestehenden Code hinzuzufügen und diesen damit zu erweitern. Dabei sollte wie auch bei der
 vollständigen Migration Prototype möglichst früh entfernt werden, um den Konflikt zwischen den
-beiden Frameworks aufzulösen - da Prototype derzeit primär für einige Events und Drag\&Drop genutzt
-wird ist der betroffene Code einfach zu migrieren, da Events durch jQuery selbst und Drag\&Drop
+beiden Frameworks aufzulösen. Da Prototype derzeit primär für einige Events und Drag\&Drop genutzt
+wird, ist der betroffene Code einfach zu migrieren, da Events durch jQuery selbst und Drag\&Drop
 durch jQuery UI unterstützt werden. Danach ist zu überprüfen, welche Teile von Indico auf jQuery
 umgestellt werden sollten und welche nicht. Das Eventsystem kann zwar relativ einfach umgestellt
 werden, allerdings bietet es sich dort an, den bestehenden Code nicht zu verändern sondern nur in
 neuem Code jQuery zur Eventregistrierung zu nutzen, sodass man die Vorteile von jQuery vollständig
 nutzen kann statt die jQuery-Methoden in den vorhandenen Funktionen einzubauen, die beispielsweise
 kein \emph{Chaining} ermöglichen. Da jQuery UI ein Dialog-Widget enthält, sollte die Dialogklasse von
-Indico auf jeden Fall angepasst werden um dieses Widget zu nutzen. Dabei ist es sinnvoll, die
+Indico auf jeden Fall angepasst werden, um dieses Widget zu nutzen. Dabei ist es sinnvoll, die
 Kompatibilität mit bestehendem Code möglichst beizubehalten, da diese Klasse eine der am häufigsten
 genutzen Klassen in ganz Indico ist. Neben den Dialogen ist es auch sinnvoll, das Tab-Widget zu
 nutzen, da Tabs oftmals innerhalb von Dialogen verwendet werden und ein einheitliches Aussehen
-erwünscht ist. Bei der Migration von DOM-Zugriffen ist wie auch beim Umstieg auf Prototype der
+erwünscht ist. Bei der Migration von DOM-Zugriffen ist, wie auch beim Umstieg auf Prototype, der
 Aufwand mit dem Nutzen zu vergleichen. Ebenfalls zu beachten ist die Kompatibilität mit bestehenden
 Funktionen: Eine Funktion, die jQuery nutzt, muss überprüfen, ob es sich bei einem Objekt um ein
 DOM-Element bzw. jQuery-Objeklt handelt oder ob ein \lstinline{XElement}-Wrapper übergeben wurde und
 in diesem Fall mittels \lstinline{$(obj.dom)} das enthaltene Element in ein jQuery-Element
 kopieren. Auch in die andere Richtung muss auf Kompatibilität geachtet werden, indem Funktionen keine
-jQuery-Objekte sondern DOM-Objekte zurückgeben - dies ist dank des Arrayzugriffs auf jQuery-Objekte
+jQuery-Objekte sondern DOM-Objekte zurückgeben. Dank des Arrayzugriffs auf jQuery-Objekte ist dies
 jedoch problemlos möglich.
 
-Indico durch jQuery zu erweitern hat neben dem im Vergleich zum Komplettmigration niedrigen
-Entwicklungsaufawnd verschiedene Vorteile. Mit jeweils einer einzigen Zeile Code lässt sich die
+Indico durch jQuery zu erweitern hat neben dem im Vergleich zur Komplettmigration niedrigen
+Entwicklungsaufwand verschiedene Vorteile. Mit jeweils einer einzigen Zeile Code lässt sich die
 Kompatibilität zwischen jQuery-basiertem Code und Legacy-Code gewährleisten, wodurch neuer Code ohne
-Schwierigkeiten jQuery nutzen und gleichzeitig auf Legacy-Funktionen zugreifen kann - allerdings
-bietet es sich in solchen Fällen an, zu überprüfen wie aufwändig es wäre, die Funktion auf jQuery
+Schwierigkeiten jQuery nutzen und gleichzeitig auf Legacy-Funktionen zugreifen kann. In solchen
+Fällen bietet es sich allerdings an, zu überprüfen, wie aufwändig es wäre, die Funktion auf jQuery
 umzustellen. Ein weiterer Vorteil ist die große Menge an
-jQuery-Plugins\footnote{\href{http://plugins.jquery.com}{http://plugins.jquery.com}} die - meist
-unter einer mit der GPL kompatiblen Open Source-Lizenz - verfügbar sind und ohne ein Konflikt mit
-bestehendem Code zu riskieren eingebunden werden können.
+jQuery-Plugins\footnote{\href{http://plugins.jquery.com}{http://plugins.jquery.com}}, die ohne
+Konflikte mit bestehendem Code zu riskieren eingebunden werden können. In der Regel stehen sie
+unter einer mit der GPL kompatiblen Open Source-Lizenz.
 
 
 
 \subsection{Zusatz: Underscore.js}
-Unabhängig davon, ob man komplett auf ein neues Framework umstellt oder das Indico-Framework
-beibehält und nur durch ein anderes Framework erweitert - es existieren diverse HilfsFunktionen im
-Indico-Framework, die dort unsauber oder unperformant implementiert sind, aber im neuen Framework
-nicht vorhanden sind. Die Chance ist jedoch groß, dass eine äquivalente Funktion in der
-Underscore.js-Bibliothek verfügbar ist. Der Nachteil dabei ist jedoch, dass dadurch einige Funktionen
-mehrfach verfügbar sind - zum einen in Prototype bzw. jQuery, zum anderen in Underscore.js. Daher
-ist in diesem Fall auf eine entsprechende Dokumentation zu achten, sodass Entwickler wissen, welche
-Funktion sie bevorzugen sollen, falls sie mehrfach vorhanden ist.
+Im Indico-Framework existieren diverse unsauber programmierte und/oder fehleranfällig implementierte
+Hilfsfunktionen.  Darunter sind einige, die weder in Prototype noch in jQuery enthalten sind.  Die
+Chance ist jedoch groß, dass eine äquivalente Funktion in der Underscore.js-Bibliothek verfügbar
+ist. Der Nachteil dabei ist jedoch, dass dadurch einige Funktionen mehrfach verfügbar sind, zum
+einen in Prototype bzw. jQuery, zum anderen in Underscore.js. Daher ist in diesem Fall auf eine
+entsprechende Dokumentation zu achten, damit Entwickler wissen, welche Funktion sie bevorzugen
+sollen, falls sie redundant vorhanden ist.
 
 
 \section{Entscheidung für ein Framework}
 
 Nach der Analyse der diversen Frameworks bzw. Bibliotheken und der verschiedenen Migrationspfade
 sind genügend Informationen vorhanden, um eine Entscheidung treffen zu können. Bei dieser
-Entscheidung muss allerdings auch bedacht werden, dass sie, sobald die Migration begonnen hat und
-entsprechend weit fortgeschritten ist, dauerhaft ist, da es nicht wirtschaftlich wäre, nach kurzer
+Entscheidung muss allerdings auch bedacht werden, dass sie dauerhaft ist, sobald die Migration
+begonnen hat und entsprechend weit fortgeschritten ist, da es nicht wirtschaftlich wäre, nach kurzer
 Zeit erneut die Technologie zu wechseln und man damit auch die übrigen Entwickler zwingen würde,
 sich wieder mit einem neuen Framework auseinanderzusetzen.
 
 Die Idee, das Indico-Framework vollständig zu ersetzen, ist zwar diskussionswürdig, kann aber gerade
 bei einem von einer Vielzahl an Benutzern aktiv verwendeten System, bei dem es häufig kleinere
-Fehler-Reports aber auch Feature-Requests gibt, nicht wirklich in die Tat umgesetzt werde, da ein
-Entwickler nicht langfristig ausschließlich an einer solchen Migration arbeiten kann - und die große
+Fehler-Reports, aber auch Feature-Requests gibt, nicht wirklich in die Tat umgesetzt werden, da ein
+Entwickler nicht langfristig ausschließlich an einer solchen Migration arbeiten kann. Die große
 Zahl zu ändernder Klassen und Funktionen würde möglicherweise sogar die Mitarbeit weiterer
 Entwickler benötigen. Daher stellt sich nur die Frage, durch welches Framework Indico erweitert
 werden soll.
 
-Prototype und jQuery - beide Frameworks haben ihre jeweiligen Vor- und Nachteile. Neben der eigenen
-Vorliebe für ein bestimmtes Framework und der Meinung der übrigen Entwickler, die letzendlich damit
-arbeiten müssen, bietet jQuery einige Vorteile gegenüber Prototype - trotz des geringen
-Mehraufwands, da Prototype bereits teilweise integriert ist. Mit den Widgets \emph{Dialog},
-\emph{Tab} und \emph{Datepicker} deckt jQuery UI drei in Indico häufig genutzte Widgets ab und
-weitere UI-Elemente können durch das Widgetsystem von jQuery UI einfach und wiederverwendbar
-entwickelt werden. Durch den komfortablen Zugriff auf die in HTML5 eingeführten
+Nach Abschätzen der Vor- und Nachteile der beiden Frameworks Prototype und jQuery bietet jQuery
+einige Vorteile gegenüber Prototype, obwohl dieses bereits teilweise in Indico integriert ist. Mit
+den Widgets \emph{Dialog}, \emph{Tab} und \emph{Datepicker} deckt jQuery UI drei in Indico häufig
+genutzte Widgets ab und weitere UI-Elemente können durch das Widgetsystem von jQuery UI einfach und
+wiederverwendbar entwickelt werden. Durch den komfortablen Zugriff auf die in HTML5 eingeführten
 \lstinline{data}-Attribute, die unabängig von der Browserunterstützung von HTML5 über jQuery
-zugänglich sind kann auf unübersichtlichen Inline-JavaScript-Code verzichtet werden und die
+zugänglich sind, kann auf unübersichtlichen Inline-JavaScript-Code verzichtet werden. Die
 \lstinline{$}-Funktion ist intuitiver als die drei in Prototype vorhandenen Funktionen zum Zugriff
 bzw. dem Erstellen von Elementen. Daher ist die Entscheidung auf \textbf{jQuery} gefallen.
 
 Zusätzlich zu jQuery wird \textbf{Underscore.js} integriert, da es einige Funktionen implementiert,
 die durch die Entfernung von Prototype verloren gehen und auch davon abgesehen eine nützliche
-Funktionssammlung enthält, die die zukünftige Entwicklung vereinfachen können.
+Funktionssammlung enthält, die die zukünftige Entwicklung vereinfachen kann.
