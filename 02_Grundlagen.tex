@@ -107,7 +107,7 @@ enthaltenen Elemente enthält. Beispielsweise sucht \lstinline{getElementById()}
 einem Element mit einer bestimmten ID und die \lstinline{documentElement}-Eigenschaft eines Elements
 verweist das \lstinline[language=HTML]{<html>}-Element. Neben den Zugriffsmethoden stellt das
 DOM-Interface auch Methoden zur Manipulation des Dokuments zur Verfügung. Diese reichen über das
-simple Erstellen eines neuen Elements über das Entfernen eines Elements samt untergeordneten
+einfache Erstellen eines neuen Elements über das Entfernen eines Elements samt untergeordneten
 Elementen bis zum Einfügen eines Elements an einer bestimmten Position im Dokument.
 
 Da jedes Element (außer dem Dokument selbst) genau ein Elternelement und beliebig viele Kindelemente
@@ -135,7 +135,7 @@ Ab 1996 begann die Standardisierung der Sprache im Rahmen eines ECMA-Standards, 
 erschienen ist. Im April 1998 wurde dieser durch die ISO zum internationalen Standard \emph{ISO/IEC
 16262} zugelassen.
 
-Im Laufe der Jahre wurde der ECMAScript-Standard immer mehr erweitert und beispielsweise reguläre
+Im Laufe der Jahre wurde der ECMAScript-Standard immer mehr erweitert und unter anderem reguläre
 Ausdrücke, Exception-Handling und verbesserte Stringfunktionen hinzugefügt. Die aktuelle Ausgabe 5.1
 des ECMAScript-Standards entspricht dem internationalen Standard \emph{ISO/IEC 16262:2011}.
 \citep{ecmascript}
@@ -161,21 +161,21 @@ benachrichtigt zu werden.
 \citep[Kap. 4.1]{ecmascript}
 
 Ein weiteres Anwendungsgebiet ist \emph{Server-Side JavaScript} (\emph{SSJS}). Dabei wird JavaScript
-direkt auf den (Web-)Server ausgeführt und kann beispielsweise direkt auf Datenbanken und Dateien
+direkt auf den (Web-)Server ausgeführt und kann direkt auf Datenbanken und Dateien
 (des Servers) zugreifen. Während \emph{SSJS} erstmalig 1996 im \emph{Netscape Enterprise HTTP Server}
 zum Einsatz kam, erlebte es erst fast 15 Jahre später seinen Durchbruch. Mit
 \emph{node.js}\footnote{\href{http://nodejs.org}{http://nodejs.org}} existiert ein quelloffenes,
 plattformunabhängiges Framework, welches leichtgewichtig ist und dank einer eventbasierten Architektur
-auch bei einer sehr großen Anzahl gleichzeitiger Clientverbindungen noch performant ist - eine
+auch bei einer sehr großen Anzahl gleichzeitiger Clientverbindungen noch performant ist, eine
 Eigenschaft die in klassischen prozess- oder threadbasierten Webservern wie \emph{Apache} oftmals
 nicht gegeben ist. Die serverseitige Host-Umgebung unterscheidet sich logischerweise stark von der
-eines Browsers, da ein Webserver weder mit Fenstern noch HTML-Dokumenten arbeitet - dafür kennt er
-beispielsweise HTTP-Requests und Formular\emph{daten}. Die Ereignisse, auf die Scripte reagieren
-können, sind dabei primär netzwerkbezogen - zum Beispiel die neue Verbindung eines Clients oder
+eines Browsers, da ein Webserver weder mit Fenstern noch HTML-Dokumenten arbeitet. Dafür kennt er
+u.a. HTTP-Requests und Formular\emph{daten}. Die Ereignisse, auf die Scripte reagieren
+können, sind dabei primär netzwerkbezogen, zum Beispiel die neue Verbindung eines Clients oder
 der vorzeitige Abbruch eines Seitenaufrufs. Es ist allerdings durchaus möglich, dass mit
 entsprechendem Code Teile der Browserumgebung serverseitig nachgebildet werden. So ist es denkbar,
 ein HTML-Dokument nicht als String sondern als DOM-Tree darzustellen. In diesem Fall könnten
-dieselben Methoden wie im Browser zur Verfügung gestellt werden, sodass Teile des Codes sowohl
+dieselben Methoden wie im Browser zur Verfügung gestellt werden, damit Teile des Codes sowohl
 client- als auch serverseitig nutzbar sind.
 
 
@@ -196,12 +196,12 @@ Arrays Objekte sind, lässt sich zwar nicht rein prozedural programmieren, es ka
 auf die Nutzung eigener Objekte verzichtet werden. Da dadurch viel Komfort, wie die Nutzung assoziativer
 Arrays (die in JavaScript simple Objekte sind), verloren geht, ist dieses Paradigma nicht zu
 empfehlen. Es kann aber durchaus sinnvoll sein, Funktionen außerhalb von Objekten zu definieren,
-sofern sie alleinstehend sind und man keine Namespaces nutzen will: JavaScript unterstützt zwar
-keine Namespace, allerdings sind Funktionen sog. \emph{First-Class-Objekte}, d.h. man kann sie in
-Variablen speichern und sie haben noch weitere Eigenschaften, auf die später näher eingegangen
+sofern sie alleinstehend sind und man keine Namespaces verwendet werden: JavaScript unterstützt zwar
+keine Namespaces, allerdings sind Funktionen sog. \emph{First-Class-Objekte}, d.h. sie können in
+Variablen gespeichert werden und haben noch weitere Eigenschaften, auf die später näher eingegangen
 wird. Aufgrund der Möglichkeit, Funktionen in Variablen zu speichern, kann man Namespaces einfach
 durch assoziative Arrays simulieren, indem man die Funktionen in solchen Arrays speichert und sie
-daher nicht mehr im globalen Kontext liegen sondern nur über das Array aufrufbar sind.
+daher nicht mehr im globalen Kontext liegen, sondern nur über das Array aufrufbar sind.
 
 \item[Objektbasierte Programmierung] \hfill \\
 Eine objektbasierte Programmiersprache unterstützt Objekte, kennt im Gegensatz zu einer
@@ -225,8 +225,8 @@ keine rein funktionale Programmiersprache. Dadurch, dass Funktionen \emph{First-
 und sowohl anonyme Funktionen als auch Closures unterstützt werden, kann man in JavaScript sehr
 einfach funktionale Elemente mit objektorientierten bzw. prozeduralen Elementen mischen. Die
 prominentesten aus anderen funktionalen Programmiersprachen bekannten Methoden sind
-\lstinline{forEach()} um eine Funktion alle Elemente einer Liste anzuwenden, \lstinline{map()} um
-eine Liste mittels einer Funktion in eine neue Liste zu transformieren und \lstinline{filter()} um
+\lstinline{forEach()}, um eine Funktion alle Elemente einer Liste anzuwenden, \lstinline{map()}, um
+eine Liste mittels einer Funktion in eine neue Liste zu transformieren und \lstinline{filter()}, um
 nur die Elemente aus einer Liste zu übernehmen, die von der Filter-Funktion durch die Rückgabe von
 \lstinline{true} akzeptiert wurden.
 \end{description}
@@ -441,8 +441,8 @@ Test.prototype.func = function() {
 \end{lstlisting}
 
 Verglichen mit klassenbasierten objektorientierten Sprachen ist das Objektsystem von JavaScript sehr
-flexibel, da alle Operationen - vom Hinzufügen von Methoden zu einer \enquote{Klasse} bis zum Erstellen einer
-neuen \enquote{Klasse} - zur Laufzeit möglich sind. Diese Flexibilität hat jedoch den Nachteil, dass
+flexibel, da alle Operationen, vom Hinzufügen von Methoden zu einer \enquote{Klasse} bis zum Erstellen einer
+neuen \enquote{Klasse}, zur Laufzeit möglich sind. Diese Flexibilität hat jedoch den Nachteil, dass
 statische Analysen und aus IDEs\footnote{Integrated Development Environment; z.B. Eclipse oder
 Visual Studio} bekannte Funktionen wie Autovervollständigung von Methoden und Eigenschaften nicht
 immer möglich sind, da der Code für solche Funktionen in der Regel nicht ausgeführt sondern nur

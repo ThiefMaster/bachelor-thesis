@@ -3,15 +3,15 @@
 
 JavaScript ist aus einer modernen Webanwendung inzwischen aus vielerlei Gründen nicht mehr
 wegzudenken. Es ermöglicht sowohl eine bessere \emph{User Experience} als auch erhöhte Performance.
-Beispielsweise kann ein Formular schon vor dem Abschicken an den Server validiert werden; dies gibt
+So kann ein Formular schon vor dem Abschicken an den Server validiert werden; dies gibt
 dem Benutzer ein sofortiges Feedback - möglicherweise sogar noch während der Eingabe - und
-beansprucht gleichzeitig keine Server-Ressourcen. Darüber hinaus ist es auch möglich Aktionen
+beansprucht gleichzeitig keine Server-Ressourcen. Darüber hinaus ist es auch möglich, Aktionen
 auszuführen, ohne dass die komplette Seite neu geladen werden muss. Dies erhöht zum einen das
 mögliche Arbeitstempo des Benutzers, da er mehrere Aktionen parallel starten kann, ohne jeweils darauf
 warten zu müssen, dass eine Aktion beendet und die Seite neu geladen ist. Zum anderen spart es
 Bandbreite, was insbesondere im Zeitalter des mobilen Internets wichtig ist.
 
-Durch die Vielzahl an verschiedenen Browsern (Firefox, Internet Explorer, Chrome, Safari, \ldots) und ihren
+Durch die Vielzahl an verschiedener Browser (Firefox, Internet Explorer, Chrome, Safari, \ldots) und ihren
 unterschiedlichen JavaScript-Engines gibt es allerdings teilweise deutliche Unterschiede darin, wie
 man bestimmte Aufgaben mittels JavaScript ausführt. Dazu kommen noch die unterschiedlichen Versionen,
 die insbesondere beim Internet Explorer fast schon als verschiedene Browser betrachtet werden
@@ -32,7 +32,7 @@ noch eine in sich schlüssige API besitzt. Dieses Framework soll durch ein verbr
 dokumentiertes OpenSource-Framework ersetzt werden. Sofern das alte Framework nicht vollständig
 ersetzt werden kann, oder der Entwicklungsaufwand dafür zu hoch wäre, ist auf eine möglichst gute
 Integration zu achten, sodass kein Framework Konflikte mit dem jeweils anderen verursacht und
-bestehender Code weiterhin funktioniert und möglichst wenig angepasst werden muss.
+bestehender Code mit möglichst wenigen Modifikationen weiterhin funktioniert.
 
 Dabei muss zuerst analysiert werden, welche Funktionalität das bestehende Framework zur Verfügung
 stellt und welche Probleme es gibt, damit bei der Wahl des neuen Frameworks insbesondere darauf
@@ -58,7 +58,7 @@ man sich einen Überblick darüber verschaffen kann.
 Im Grundlagenkapitel werden die genutzen Technologien und ihre Besonderheiten näher betrachtet und
 erläutert. Nach einem kurzen Überblick über die Scriptsprache JavaScript wird ihr Objektmodell
 vorgestellt und mit dem anderer objektorientierter Sprachen verglichen. Anhand eines Beispiels wird
-demonstriert, inwiefern sich die JavaScript-Programmierung für verschiedene Browser unterscheidet,
+demonstriert, wie sich die JavaScript-Programmierung für verschiedene Browser unterscheidet,
 sofern man kein Framework nutzt.
 
 Auf die Funktionen des bestehenden Frameworks wird im dritten Kapitel kurz eingegangen. Desweiteren
@@ -92,7 +92,7 @@ und Indizierung von Medien entwickelt.
 Die Abteilung \emph{IT-UDS-AVC}\footnote{User and Document Services - Audio Visual \& Conference
 Rooms} am CERN ist zuständig für die Verwaltung und Einrichtung von video- und telefonbasierten
 Konferenzsystemen, Aufzeichnung und Onlinestreaming von Vorträgen, Meetings und Konferenzen und die
-Software zur Planung von selbigen. Ebenfalls im Zuständigkeitsbereich der Abteilung sind
+Software zu deren Planung. Ebenfalls im Zuständigkeitsbereich der Abteilung sind
 die Informationsbildschirme, die in verschiedenen Gebäuden des CERN aufgebaut sind und beispielsweise
 den Status des \emph{LHC}\footnote{Large Hadron Collider, der Teilchenbeschleuniger am CERN} und
 für die Mitarbeiter relevante Neuigkeiten anzeigen.
@@ -110,20 +110,20 @@ Konferenz}, elektronische Sitzungsprotokolle und ein Archiv für die in einer Ko
 Materialien. \citep{indico}
 
 Im Laufe der Zeit wurden immer mehr Funktionen hinzugefügt, sodass diese Featureliste schon lange
-nicht mehr aktuell ist. Inzwischen enthält Indico beispielsweise ein Buchungs- und
+nicht mehr aktuell ist. Inzwischen enthält Indico u.a. ein Buchungs- und
 Reservierungssystem für Konferenzzimmer, sodass beim Erstellen eines Events sichergestellt werden
 kann, dass der gewünschte Raum auch verfügbar ist und nicht gerade anderweitig benutzt wird.
 Ebenfalls in Indico integriert sind die am CERN genutzten Audio- und Videokonferenzsysteme, sodass diese
-vollautomatisch eingerichtet und aktiviert werden können sofern diese Systeme im gewählten Raum
-verfügbar sind. Eins der neuesten Features ist die Möglichkeit, sich die Konferenzzimmer auf einer
-\href{http://maps.google.com/}{\emph{Google Maps}}-basierten Karte anzeigen zu lassen und
-beispielsweise anhand der Nähe zu einem bestimmten Gebäude auszuwählen.
+vollautomatisch eingerichtet und aktiviert werden können, sofern diese Systeme im gewählten Raum
+verfügbar sind. Eines der neuesten Features ist die Möglichkeit, sich die Konferenzzimmer auf einer
+\href{http://maps.google.com/}{\emph{Google Maps}}-basierten Karte anzeigen zu lassen und anhand der
+Nähe zu einem bestimmten Gebäude auszuwählen.
 
 \subsection{Aufbau}
 Events in Indico sind Teil einer Baumstruktur: Auf der Top-Level-Ebene finden sich ausschließlich
 Kategorien, die jeweils wieder Kategorien oder beliebige Events (Konferenzen, Meetings und
-Vorträge) enthalten können. Ein Event wiederum kann diverse Elemente enthalten; welche das sind
-hängt vom Typ des Events ab, so kann beispielsweise nur eine Konferenz ein Registrierungsformular
+Vorträge) enthalten können. Ein Event wiederum kann diverse Elemente enthalten; welche das sind,
+hängt vom Typ des Events ab, so kann z.B. nur eine Konferenz ein Registrierungsformular
 besitzen.
 
 \newpage

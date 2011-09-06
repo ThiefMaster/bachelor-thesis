@@ -360,7 +360,7 @@ Werts.
 \item[Kompatibilität] \hfill \\
 Prototype wird bereits in einigen Teilen von Indico genutzt, daher ist es an sich mit dem übrigen
 Code von Indico kompatibel, obwohl sowohl Indico als auch Prototype einige
-\lstinline{$X}-Funktionen nutzen, wobei \lstinline{$A} sogar in beiden Frameworks definiert wird -
+\lstinline{$X}-Funktionen nutzen, wobei \lstinline{$A} sogar in beiden Frameworks definiert wird,
 allerdings überschreibt die \lstinline{$A}-Funktion von Indico die aus Prototype, wobei es keine
 Konflikte gibt, da beide Funktionen denselben Zweck haben und auch von den Parametern her
 identisch sind. Neben diesem Konflikt gibt es keine weiteren Probleme, obwohl Prototype sehr invasiv
@@ -392,7 +392,7 @@ MIT-Lizenz\footnote{\href{http://www.opensource.org/licenses/mit-license.php}{ht
 Ähnlich wie das Indico-Framework bietet Prototype aus fast jedem Bereich etwas, wobei JSON-RPC und
 \emph{Data Binding} nicht unterstützt werden.
 Die Erstellung und auch der Zugriff auf DOM-Elemente ist in Prototype deutlich sauberer gelöst als in
-Prototype, da nur selten auf native DOM-Eigenschaften und -Methoden zurückgegriffen werden muss und
+Indico, da nur selten auf native DOM-Eigenschaften und -Methoden zurückgegriffen werden muss und
 damit einheitlich Prototype-Code verwendet werden kann statt einer Mischung aus Framework-Funktionen
 und nativen Funktionen. Die Eventsysteme von Indico und Prototype sind relativ ähnlich, allerdings
 bietet Prototype insbesondere durch das auf das Element zeigende \lstinline{this} mehr Komfort.
@@ -537,8 +537,8 @@ man auch alle Events eines Typs löschen kann. Zusätzlich zu diesen Parametern 
 \lstinline{unbind()} und \lstinline{undelegate()} auch \lstinline{'.namespace'} angeben, um alle
 Events aus dem angegebenen Namespace zu löschen.
 
-Um Events manuell auszulösen bietet jQuery genau wie bei der regulären Registrierung von
-Eventhandlern zwei Möglichkeiten. Zum einen kann man die Shortcut-Methode die dem Eventnamen
+Um Events manuell auszulösen bietet jQuery, genau wie bei der regulären Registrierung von
+Eventhandlern, zwei Möglichkeiten. Zum einen kann man die Shortcut-Methode die dem Eventnamen
 entspricht ohne Parameter aufrufen, zum anderen kann man die Methode
 \lstinline{trigger(eventType[, params])} nutzen. Diese erlaubt neben der Möglichkeit, einen Namespace
 anzugeben, die Übergabe weiterer Parameter an den Eventhandler. Durch \lstinline{trigger()}
@@ -646,7 +646,7 @@ DOM-Element.
 Ein anderes Feature von jQuery ist das \lstinline{Deferred}-Objekt. Es ermöglicht die Registrierung
 von Callbacks, wobei diese in drei verschiedenen Kategorien registriert werden können: \emph{done},
 \emph{fail} und \emph{always}. Das Deferred-Objekt kann entweder \emph{fail} oder \emph{done} zu
-einer beliebigen Zeit auslösen - es gilt dann als \emph{resolved}. Nach dem Ausführen der Callbacks
+einer beliebigen Zeit auslösen, es gilt dann als \emph{resolved}. Nach dem Ausführen der Callbacks
 werden automatisch die \emph{always}-Callbacks aufgerufen. Sobald das Objekt \emph{resolved} ist
 kann sich sein Status nicht mehr ändern, d.h. es ist ausgeschlossen, dass sowohl die
 \emph{fail}-Callbacks als auch die \emph{done}-Callbacks ausgeführt werden. Der große Vorteil des
@@ -672,7 +672,7 @@ Funktionsbeschreibung besitzt mindestens ein Codebeispiel; wenn eine Funktion je
 unterschiedliche Aktionen ausführt, gibt es für jede Funktionalität ein eigenes Beispiel. Diese
 Beispiele werden meist beim Laden der Seite automatisch ausgeführt, sodass man direkt sieht, wie
 sich eine Funktion auswirkt. Bei einigen Funktionen wie beispielsweise Animationen und Effekten muss
-der Beispielcode durch einen Klick explizit ausgeführt werden - dies macht Sinn, da bei solchen
+der Beispielcode durch einen Klick explizit ausgeführt werden. Dies macht Sinn, da bei solchen
 Funktionen nicht der Endzustand interessant ist sondern der Übergang. Die komplette Dokumentation
 kann inklusive Beispielcode auch als XML-Datei heruntergeladen werden, sodass man sie beispielsweise
 in einer IDE, die das Format unterstützt, importieren könnte.
@@ -718,7 +718,7 @@ ausgelegt, sowohl Struktur als auch Inhalt selbst zu generieren, während jQuery
 bestehenden HTML-Code zu erweitern. Dies hat den Vorteil, dass auch ohne JavaScript eine
 gewisse Grundfunktionalität vorhanden ist, was in Indico derzeit nicht der Fall ist und auch nicht
 vorgesehen ist. Abgesehen von diesem Nachteil enthält jQuery UI mit den Widgets \emph{Dialog} und
-\emph{Tabs} die beiden Widgets, die für Indico am wichtigsten sind - das in Indico vorhandene
+\emph{Tabs} die beiden Widgets, die für Indico am wichtigsten sind; das in Indico vorhandene
 Dialog-Widget hat insbesondere beim Anzeigen modaler Dialogfenster einige Probleme. Ein weiterer
 Pluspunkt für jQuery bzw. jQuery UI ist die Anpassbarkeit der Widgets. Da das Design von Indico
 einfach gehalten ist, sollten die Widgets nicht durch bunte Balken hervortreten sondern sich
