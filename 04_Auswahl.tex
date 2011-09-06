@@ -28,7 +28,7 @@ zeitintensives Unterfangen handelt. Sie führt aber am Ende zu sauberem Code, de
 wartbar ist als auch für neue Entwickler einen einfachen Einstieg ermöglicht.
 
 
-\subsection{Vollständige Migration zu jQuery + Classy}
+\subsection{Vollständige Migration zu jQuery und Classy}
 Um jQuery zu benutzen, muss es zunächst global eingebunden werden und dabei auftretende Konflikte
 behoben werden. Dazu sollte Prototype möglichst früh entfernt und Prototype-basierter Code angepasst
 werden, was aufgrund der ähnlichen Paradigmen der beiden Frameworks relativ einfach möglich ist.
@@ -56,14 +56,14 @@ beliebtesten Frameworks ist, besteht darüber hinaus eine große Chance, dass ei
 bereits Erfahrung damit hat.
 
 
-\subsection{Vollständige Migration auf jQuery und Prototype}
+\subsection{Vollständige Migration zu jQuery und Prototype}
 Theoretisch wäre es möglich, sowohl jQuery als auch Prototype einzubinden, wobei in diesem Fall die
 \lstinline{$}-Funktion von jQuery unter einem anderen Namen - z.B. \lstinline{$j} -
 aufgerufen werden müsste, da Prototype ebenfalls \lstinline{$} nutzt. Da beide Frameworks einen
 ähnlichen Funktionsumfang besitzen, gibt es keinen sinnvollen Grund, beide zu benutzen.
 
 
-\subsection{Teilweise Migration auf Prototype}
+\subsection{Erweiterung durch Prototype}
 Neben der vollständigen Migration auf ein Framework besteht auch die Möglichkeit, das bestehende
 Framework vorerst beizubehalten und nur durch Prototype zu erweitern, was ja dadurch, dass einige
 Seiten teilweise Prototype nutzen, bereits der Fall ist. Neben der globalen Einbindung von Prototype
@@ -100,7 +100,7 @@ dokumentierte Funktionen nutzen können und sich nur in Legacy-Code einlesen mü
 Alternative existiert.
 
 
-\subsection{Teilweise Migration auf jQuery}
+\subsection{Erweiterung durch jQuery}
 Statt das bereits vorhandene Prototype-Framework zu nutzen, besteht auch die Möglichkeit, jQuery zum
 bestehenden Code hinzuzufügen und diesen damit zu erweitern. Dabei sollte wie auch bei der
 vollständigen Migration Prototype möglichst früh entfernt werden, um den Konflikt zwischen den
