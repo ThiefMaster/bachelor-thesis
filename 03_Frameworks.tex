@@ -659,9 +659,9 @@ niemals den Sichtbarkeitsbereich der erstellenden Funktion verlassen muss. Diese
 beispielsweise von den AJAX-Funktionen von jQuery genutzt; sie geben ein solches
 \emph{Promise}-Objekt zurück.
 
-jQuery kann einfach mit eigenen Funktionen erweitert werden. Über \lstinline{jQuery.fn} kann auf den
-Prototypen der jQuery-Objekte zugegriffen werden, sodass man diesem einfach eine eigene Funktion
-hinzufügen kann. Um jQuery uanbhängig von einem bestimmten jQuery-Objekt zu erweitern -
+jQuery kann einfach mit eigenen Funktionen erweitert werden. Dazu ist der Prototype der
+jQuery-Objekte über \lstinline{jQuery.fn} erreichbar, sodass man diesem eigene Funktionen
+hinzufügen kann. Um jQuery unabhängig von einem bestimmten jQuery-Objekt zu erweitern -
 beispielsweise um eine Funktion hinzuzufügen, die keine HTML-Elemente verwendet - kann man eine
 Funktion auch direkt dem globalen \lstinline{jQuery}-Objekt hinzufügen.
 
