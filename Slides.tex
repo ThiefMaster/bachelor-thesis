@@ -6,6 +6,7 @@
 
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
+\usepackage{listings}
 
 \hypersetup{pdfpagemode=FullScreen}
 
@@ -31,13 +32,46 @@
 \section{Introduction}
 \begin{frame}
   \frametitle{Introduction}
-  TODO
+  \begin{itemize}
+    \item Indico makes heavy use of JavaScript
+    \item Used for AJAX, form validation, conference timetables, \ldots
+    \item All JS code has about 37000 LOC
+    \item 8000 LOC used by the \emph{Presentation} framework
+    \item Almost no existing third-party code is used
+  \end{itemize}
 \end{frame}
 
 \section{The Presentation Framework}
 \begin{frame}
-  \frametitle{The Presentation Framework}
-  TODO
+  \frametitle{What is it?}
+  \begin{itemize}
+    \item \emph{Presentation} is the Indico-specific JavaScript framework
+    \item It is not specialized to a single use case such as AJAX or DOM handling
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why do we need to improve or even replace it?}
+  \begin{itemize}
+    \item It's hard for new developers to get used to it
+      \begin{itemize}
+        \item Many different developers worked on it without a common coding style
+        \item There is no documentation except a few comments in the code
+        \item Inconsistent API
+      \end{itemize}
+    \item It has some issues which might easily result in actual bugs
+      \begin{itemize}
+        \item Contains dead/unfinished code
+        \item Developers have to take care of browser-specific differences
+        \item Global variable leaking
+      \end{itemize}
+    \item Parts of the framework are mixed with the Indico code and thus not in the appropriate
+      folder
+  \end{itemize}
+  \begin{alertblock}{Global variable leaking}
+    \lstinline{for(i in parts)}\\
+    The loop variable should be prefixed with \lstinline{var}
+  \end{alertblock}
 \end{frame}
 
 \section{Modern Frameworks}
