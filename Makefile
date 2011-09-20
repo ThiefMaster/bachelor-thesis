@@ -1,4 +1,5 @@
 NAME=Thesis
+SLIDES=Slides
 ARGS=-shell-escape -interaction=nonstopmode
 VIEWER="F:/Foxit Reader/Foxit Reader.exe"
 
@@ -10,6 +11,12 @@ pdf:
 	@pdflatex $(ARGS) $(NAME)
 	@start $(VIEWER) $(NAME).pdf
 
+slides:
+	@echo Building slides PDF
+	@pdflatex $(ARGS) -draftmode $(SLIDES)
+	@pdflatex $(ARGS) $(SLIDES)
+	@start $(VIEWER) $(SLIDES).pdf
+
 clean:
 	@echo Cleaning up
-	@rm -f $(NAME).pdf *.aux *.log *.out *.toc *.lof *.lot *.blg *.bbl
+	@rm -f $(NAME).pdf $(SLIDES).pdf *.aux *.log *.out *.toc *.lof *.lot *.blg *.bbl
