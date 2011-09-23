@@ -5,6 +5,7 @@
 \setbeamertemplate{footline}[frame number]
 
 \usepackage[english]{babel}
+\usepackage[babel]{csquotes}
 \usepackage[utf8x]{inputenc}
 \usepackage{listings}
 
@@ -43,10 +44,22 @@
 
 \section{The Presentation Framework}
 \begin{frame}
-  \frametitle{What is it?}
+  \frametitle{What is the \enquote{Presentation Framework}?}
   \begin{itemize}
     \item \emph{Presentation} is the Indico-specific JavaScript framework
     \item It is not specialized to a single use case such as AJAX or DOM handling
+    \item It consists of several modules:
+    \begin{itemize}
+      \item Core: object system, iterators, utility functions
+      \item Data: data binding, JSON RPC, Date utilities
+      \item UI: DOM access/manipulation
+      \begin{itemize}
+        \item Draw: SVG/VRML generation
+        \item Extensions: some additional DOM methods
+        \item Style: additional CSS-related DOM methods
+        \item Widgets: functions to combine elements into widgets
+      \end{itemize}
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -77,7 +90,38 @@
 \section{Modern Frameworks}
 \begin{frame}
   \frametitle{Modern Frameworks}
-  TODO
+  \begin{itemize}
+    \item There are \textbf{many} frameworks available:
+    \begin{itemize}
+      \item Prototype/Scriptaculous
+      \item jQuery/jQuery UI
+      \item ExtJS
+      \item Dojo
+      \item qooxdoo
+      \item \ldots
+    \end{itemize}
+    \item While having some differences \ldots
+    \item \ldots they do share some common goals
+    \begin{itemize}
+      \item Provide an easy way to access the DOM
+      \item Eliminate or reduce the need for browser-specific code
+      \item Provide wrappers to make the use of AJAX easy and comfortable
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Advanced Features}
+  Besides the common goals, each framework primarily focuses on certain areas and provide additional
+  features
+  \begin{itemize}
+    \item jQuery: simple, intuitive functions; method chaining; \enquote{write less, do more}
+    \item Prototype: class-based toolkit; extending prototypes; \enquote{ease development of
+      dynamic web applications}
+    \item ExtJS: rich webapps; \enquote{amazing apps built on web standards}
+    \item Dojo: general-purpose toolkit; UI widgets
+    \item qooxdoo: rich webapps
+  \end{itemize}
 \end{frame}
 
 \section{jQuery}
