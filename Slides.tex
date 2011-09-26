@@ -213,8 +213,44 @@
 
 \section{Current State}
 \begin{frame}
-  \frametitle{Current State}
-  TODO
+  \frametitle{What do we have now?}
+  \begin{itemize}
+    \item jQuery and jQuery UI have been added to Indico
+    \item The Presentation framework has not been replaced but rather extended with jQuery (large
+      amounts of code would have required redesigning and rewriting otherwise)
+    \item Prototype has been removed; it was only used on a few pages
+    \item Underscore.js has been added; it provides utility functions (replaced custom
+      implementations and some Prototype functions)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Where is jQuery currently used?}
+  \begin{itemize}
+    \item jQuery is available in Indico since 0.98b2 (currently in production)
+    \item Prototype code in the room booking module has been migrated to jQuery
+    \item Custom code in some legacy widgets has been replaced with jQuery calls (e.g. size calculations)
+    \item The Badge/Poster editor for conferences uses jQuery for Drag\&Drop (replaced Prototype and
+      legacy code)
+    \item Custom widget: DateRange (based on the jQuery UI Datepicker)
+  \end{itemize}
+
+  \begin{center}
+    \pgfimage[width=0.5\textwidth]{images/indico-daterange.png}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What can be expected in the future?}
+  \begin{itemize}
+    \item Dialogs and tabs being replaced with jQuery UI widgets (fixing various issues, improving
+      code readability)
+    \item Custom code being replaced with jQuery plugins if it makes sense (e.g. background file
+      uploads)
+    \item New code using only jQuery for DOM-related things
+    \item Progressively reducing the amount of legacy code by migrating it to jQuery when modifying
+      it for some reason
+  \end{itemize}
 \end{frame}
 
 \section{Conclusion}
