@@ -183,15 +183,28 @@
 \section{jQuery}
 \begin{frame}
   \frametitle{Why did we choose jQuery?}
-  It has various advantages:
+  It has various advantages and nice features:
   \begin{itemize}
     \item Most comfortable DOM access via \lstinline{$('selector')}
+    \item High performance (especially when performing selector-based element matching)
     \item Easy access to HTML5 \emph{data} attributes: reduces the need for inline JavaScript
     \item jQuery UI contains important widgets such as \emph{Dialog}, \emph{Tab} and \emph{Datepicker}
-    \item Its UI widget system can be easily used for custom widgets
+    \item There is detailed documentation and example code for all functions
   \end{itemize}
 
   Additionally, it's the favoured framework of the core Indico developers.
+\end{frame}
+
+\begin{frame}
+  \frametitle{What else does jQuery provide?}
+  \begin{itemize}
+    \item \emph{Deferred} object (implementing Promise/Futures)
+    \item Sophisticated AJAX handling (providing a Promise interface for success/error)
+    \item Method chaining: \lstinline{$(elem).show().siblings().hide()}
+    \item Easy way to add custom functions which can be used in the call chain
+    \item Widget system that can be easily used for custom widgets
+    \item Attributes, values, etc. can be changed through callback functions
+  \end{itemize}
 
   \begin{center}
     \pgfimage[width=0.5\textwidth]{images/jQuery.pdf}
