@@ -124,10 +124,29 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Problems}
+  Some of those frameworks have problems which make them undesirable for integration in Indico
+  \begin{itemize}
+    \item Naming conflicts with existing code - easy to fix but still annoying
+    \item Invasive, e.g. by modifying prototypes (Prototype) - may cause issues with existing code,
+      hard to maintain
+    \item Hard to integrate into existing code (qooxdoo, ExtJS) - these frameworks are usually easy
+      to use when developing something from scratch but hard to combine with existing code
+    \item Need for generated code (qooxdoo) - makes development more complicated than necessary and
+      with a dynamic language such as JavaScript there should be no need for generated code
+  \end{itemize}
+\end{frame}
+
 \section{jQuery}
 \begin{frame}
-  \frametitle{jQuery}
-  TODO
+  \frametitle{Why did we choose jQuery?}
+  It has various advantages over different frameworks/libraries:
+  \begin{itemize}
+    \item Most comfortable DOM access via \lstinline{$('selector')}
+    \item Contains important widgets such as \emph{Dialog}, \emph{Tab} and \emph{Datepicker}
+    \item Easy access to HTML5 \emph{data} attributes: reduces the need for inline JavaScript
+  \end{itemize}
 \end{frame}
 
 \section{Current State}
